@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="PlayerList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Player">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element type="xs:string" name="FirstName"/>
+							<xs:element type="xs:string" name="LastName"/>
+							<xs:element type="xs:short" name="MembershipNo"/>
+							<xs:element type="xs:string" name="MembershipName"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
