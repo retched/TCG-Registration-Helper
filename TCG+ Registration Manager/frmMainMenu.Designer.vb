@@ -56,6 +56,9 @@ Partial Class frmMainMenu
         Me.TileHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArrangeIconsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BandaiTCGTournamentPolicyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SoftwareOperatingManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialogCSV = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogXML = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip1.SuspendLayout()
@@ -63,7 +66,7 @@ Partial Class frmMainMenu
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.TournamentToolStripMenuItem, Me.WindowToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.TournamentToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -123,7 +126,6 @@ Partial Class frmMainMenu
         Me.TournamentXMLxmlToolStripMenuItem.Name = "TournamentXMLxmlToolStripMenuItem"
         Me.TournamentXMLxmlToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.TournamentXMLxmlToolStripMenuItem.Text = "&Tournament XML (.xml)"
-        Me.TournamentXMLxmlToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator2
         '
@@ -236,31 +238,50 @@ Partial Class frmMainMenu
         'CascadeToolStripMenuItem
         '
         Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CascadeToolStripMenuItem.Text = "&Cascade"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileVerticalToolStripMenuItem.Text = "Tile &Vertical"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "Tile &Horizontal"
         '
         'ArrangeIconsToolStripMenuItem
         '
         Me.ArrangeIconsToolStripMenuItem.Name = "ArrangeIconsToolStripMenuItem"
-        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ArrangeIconsToolStripMenuItem.Text = "&Arrange Icons"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(147, 6)
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BandaiTCGTournamentPolicyToolStripMenuItem, Me.SoftwareOperatingManualToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "&Help"
+        '
+        'BandaiTCGTournamentPolicyToolStripMenuItem
+        '
+        Me.BandaiTCGTournamentPolicyToolStripMenuItem.Name = "BandaiTCGTournamentPolicyToolStripMenuItem"
+        Me.BandaiTCGTournamentPolicyToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.BandaiTCGTournamentPolicyToolStripMenuItem.Text = "&Bandai TCG Tournament Policy"
+        '
+        'SoftwareOperatingManualToolStripMenuItem
+        '
+        Me.SoftwareOperatingManualToolStripMenuItem.Name = "SoftwareOperatingManualToolStripMenuItem"
+        Me.SoftwareOperatingManualToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.SoftwareOperatingManualToolStripMenuItem.Text = "&Software Operating Manual"
         '
         'OpenFileDialogCSV
         '
@@ -325,4 +346,7 @@ Partial Class frmMainMenu
     Friend WithEvents PrintTournamentRosterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PageSetupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BandaiTCGTournamentPolicyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SoftwareOperatingManualToolStripMenuItem As ToolStripMenuItem
 End Class

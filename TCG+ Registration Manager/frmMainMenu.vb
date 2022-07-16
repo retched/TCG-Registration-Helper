@@ -1,6 +1,4 @@
-﻿Imports System.Xml
-
-Public Class frmMainMenu
+﻿Public Class frmMainMenu
     Private m_ChildFormNumber As Integer
 
     Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click
@@ -71,20 +69,50 @@ Public Class frmMainMenu
         If (OpenFileDialogXML.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogXML.FileName
             ' TODO: Add code here to open the file.
+            Dim intExpectedPlayers As Integer
 
-            ' This should create a copy of frmIndividual
-            Dim ChildForm As New frmIndividual
-            ' Make it a child of this MDI form before showing it.
-            ChildForm.MdiParent = Me
+            ' Open the file and find out what kind of event is it
+            Dim xDoc As XDocument = XDocument.Load(FileName)
+            intExpectedPlayers = xDoc.Root.Attribute("TeamPlayers").Value
 
-            ' Set the name of the CSV File.
-            ChildForm.txtCSVFileName = FileName
+            Select Case intExpectedPlayers
+                Case 3
+                    ' TODO: Fix for three players
+                    Throw New NotImplementedException
+                Case 2
+                    ' TODO: Fix for Two Players
+                    Throw New NotImplementedException
+                Case Else ' Think it should be ONE
+                    ' This should open as a single player event.
 
-            m_ChildFormNumber += 1
-            ChildForm.Text = ChildForm.Text & "-" & FileName
+                    ' This should create a copy of frmIndividual
+                    Dim ChildForm As New frmIndividual
+                    ' Make it a child of this MDI form before showing it.
+                    ChildForm.MdiParent = Me
 
-            ChildForm.Show()
+                    ' Set the name of the CSV File.
+                    ChildForm.txtXMLFileName = FileName
+
+                    m_ChildFormNumber += 1
+                    ChildForm.Text = ChildForm.Text & "-" & FileName
+
+                    ChildForm.Show()
+
+            End Select
 
         End If
+    End Sub
+
+    Private Sub BandaiTCGTournamentPolicyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BandaiTCGTournamentPolicyToolStripMenuItem.Click
+        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
+            LaunchWebsite("https://world.digimoncard.com/event/online_event/pdf/tournament_rules.pdf?210604")
+        End If
+    End Sub
+
+    Sub LaunchWebsite(strWebpageURL As String)
+
+        Using Process.Start(New ProcessStartInfo(strWebpageURL) With {.UseShellExecute = True})
+        End Using
+
     End Sub
 End Class

@@ -13,7 +13,7 @@ Public Class frmIndividual
     ''' <summary>
     ''' Holds the list of Players that are Registered.
     ''' </summary>
-    Dim lstTournPlayers As New List(Of TournamentPlayer)
+    Dim lstTournTeams As New List(Of TournamentTeam)
 
     Dim lstStaff As New List(Of TournamentStaff)
 
@@ -27,7 +27,7 @@ Public Class frmIndividual
             txtMemberNo.Enabled = False
             txtMemberNo.Text = "GUEST99999"
 
-            ' Reset all to default (MINUS the player number)
+            ' Reset all to default (MINUS the team number)
             txtPlayerFirstName.Clear()
             txtPlayerLastName.Clear()
             txtPlayerNickname.Clear()
@@ -37,7 +37,7 @@ Public Class frmIndividual
             lbSearchResults.ClearSelected()
             dgvPlayers.ClearSelection()
 
-            ' Move the focus to the player's name
+            ' Move the focus to the team's name
             txtPlayerFirstName.Focus()
 
         Else
@@ -78,22 +78,22 @@ Public Class frmIndividual
 
         If Not String.IsNullOrEmpty(txtCSVFileName) Then
             ' If CSV Name is set, process the CSV file.
-            Dim lstFileData As List(Of TournamentPlayer) = csvSinglePlayerReadOut(txtCSVFileName)
+            Dim lstFileData As List(Of TournamentTeam) = csvSinglePlayerReadOut(txtCSVFileName)
 
-            lstTournPlayers = lstFileData.ToList()
+            lstTournTeams = lstFileData.ToList()
 
             ' Add New Players to Global Player List 
-            AddNewPlayersFromImport(lstFileData)
+            AddNewPlayersFromImport()
         ElseIf Not String.IsNullOrEmpty(txtXMLFileName) Then
             ' If the XML Name is set, process the XML File.
-            Dim lstFileData As List(Of Object) = xmlSinglePlayerReadOut(txtXMLFileName)
+            Dim lstFileData As List(Of Object) = xmlSinglePlayerReadOut(txtXMLFileName).ToList()
 
-            lstTournPlayers = lstFileData(0).ToList
-            lstStaff = lstFileData(1).ToList
-            lstPenalties = lstFileData(2).ToList
+            lstTournTeams = lstFileData(0)
+            lstStaff = lstFileData(1)
+            lstPenalties = lstFileData(2)
 
             ' Add New Players to Global Player List 
-            AddNewPlayersFromImport(lstTournPlayers)
+            AddNewPlayersFromImport()
         End If
 
         ' Load from XML and put names into Datatable
@@ -106,11 +106,19 @@ Public Class frmIndividual
 
     End Sub
 
-    Private Sub AddNewPlayersFromImport(lstFileData As List(Of TournamentPlayer))
+    Private Sub AddNewPlayersFromImport()
         ' Gist: Comb through the imported players and add them (or update them) to the Global Player XML.
 
-        For Each player In lstFileData
-            UpdateAllPlayerXML(player.strMembershipNo, player.strMembershipName)
+        For Each team In lstTournTeams
+            team.PlayerA.FormatNumber()
+            ' We only have a SINGLE team in this list, so we only need PlayerA from lstTournTeams
+            UpdateAllPlayerXML(team.PlayerA.MembershipNumber, team.PlayerA.MembershipName, team.PlayerA.FirstName, team.PlayerA.LastName)
+        Next
+
+        For Each staff In lstStaff
+            staff.FormatNumber()
+            ' We also have to loop through and add all staff members to the master list of players.
+            UpdateAllPlayerXML(staff.MembershipNumber, staff.MembershipName, staff.FirstName, staff.LastName)
         Next
 
     End Sub
@@ -121,39 +129,49 @@ Public Class frmIndividual
             MessageBox.Show("You must enter at LEAST a Membership Number and a Nickname.", "Invalid Entrant", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             ' Add Player to Tournament List, check to make sure they AREN'T in the list already
-            Dim result As TournamentPlayer = lstTournPlayers.Find(Function(x) x.strMembershipNo = txtMemberNo.Text.Trim())
+            ' Again we're only working with Player A as this is a solo event.
+            Dim resultPlayer As TournamentPlayer = lstTournTeams.Find(Function(x) x.PlayerA.MembershipNumber = txtMemberNo.Text.Trim())
+            Dim resultStaff As TournamentStaff = lstStaff.Find(Function(x) x.MembershipNumber = txtMemberNo.Text.Trim())
 
-            If IsNothing(result) Then
-                lstTournPlayers.Add(New TournamentPlayer() With {
-                                    .strPlayerFirstName = txtPlayerFirstName.Text.Trim(),
-                                    .strPlayerLastName = txtPlayerLastName.Text.Trim(),
-                                    .strMembershipName = txtPlayerNickname.Text.Trim(),
-                                    .strMembershipNo = txtMemberNo.Text.Trim(),
-                                    .intByeRounds = IIf(rbByes_0.Checked, 0, 1),
-                                    .intStatus = cboStatus.SelectedValue,
-                                    .strSeatOrder = "A"
-                                })
+            If IsNothing(resultPlayer) And IsNothing(resultStaff) Then
+                lstTournTeams.Add(New TournamentTeam() With {
+                                    .PlayerA = New PlayerInfo() With {
+                                        .FirstName = txtPlayerFirstName.Text.Trim(),
+                                        .LastName = txtPlayerLastName.Text.Trim(),
+                                        .MembershipName = txtPlayerNickname.Text.Trim(),
+                                        .MembershipNumber = txtMemberNo.Text.Trim(),
+                                        .SeatOrder = "A"},
+                                    .ByeRounds = IIf(rbByes_0.Checked, 0, 1),
+                                    .Status = cboStatus.SelectedValue
+                                  })
 
+            ElseIf Not IsNothing(resultStaff) Then
+                ' This player should NOT be added as they are staff. Tournament Staff CANNOT be a player in the tournament.
+                MessageBox.Show("This player is listed as a member of the event staff and is therefore INELIGIBLE to be added as a tournament player.", "Cannot Add Event Staff", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                ' Clear the player info
+                ClearPlayer()
             Else
-                ' This player should not be ADDED but rather UPDATED to the new information.
-                ' MessageBox.Show("Player No. " & txtMemberNo.Text.Trim() & " already exists in the Player List. This player will be updated instead.")
 
-                Dim index As Integer = lstTournPlayers.IndexOf(result)
-                lstTournPlayers(index) = New TournamentPlayer() With {
-                                    .strPlayerFirstName = txtPlayerFirstName.Text.Trim(),
-                                    .strPlayerLastName = txtPlayerLastName.Text.Trim(),
-                                    .strMembershipName = txtPlayerNickname.Text.Trim(),
-                                    .strMembershipNo = txtMemberNo.Text.Trim(),
-                                    .intByeRounds = IIf(rbByes_0.Checked, 0, 1),
-                                    .intStatus = cboStatus.SelectedValue,
-                                    .strSeatOrder = "A",
-                                    .intTeamID = lstTournPlayers(index).intTeamID
-                    }
+                ' This team should not be ADDED but rather UPDATED to the new information.
+                ' MessageBox.Show("Player No. " & txtMemberNo.Text.Trim() & " already exists in the Player List. This team will be updated instead.")
+
+                Dim index As Integer = lstTournTeams.IndexOf(resultPlayer)
+                lstTournTeams(index) = New TournamentTeam() With {
+                                            .PlayerA = New PlayerInfo() With {
+                                                .FirstName = txtPlayerFirstName.Text.Trim(),
+                                                .LastName = txtPlayerLastName.Text.Trim(),
+                                                .MembershipName = txtPlayerNickname.Text.Trim(),
+                                                .MembershipNumber = txtMemberNo.Text.Trim(),
+                                                .SeatOrder = "A"},
+                                            .ByeRounds = IIf(rbByes_0.Checked, 0, 1),
+                                            .Status = cboStatus.SelectedValue
+                                            }
 
             End If
 
-            ' Should also add this player to the XML file of AllPlayers too and reload the XMLFile.
-            ' Does this player ID (non-guest exist within the AllPlayers XML?)
+            ' Should also add this team to the XML file of AllPlayers too and reload the XMLFile.
+            ' Does this team ID (non-guest exist within the AllPlayers XML?)
             UpdateAllPlayerXML(txtMemberNo.Text, txtPlayerNickname.Text, txtPlayerFirstName.Text, txtPlayerLastName.Text)
 
             ' Clear and reset all the fields
@@ -179,7 +197,7 @@ Public Class frmIndividual
 
         Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
 
-        If strMemberID <> "GUEST99999" Then
+        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
             If IsNothing(target) Then
                 ' This should mean we have a NEW element.
                 Dim newPlayer As XElement = New XElement("Player")
@@ -198,10 +216,14 @@ Public Class frmIndividual
 
                 If String.IsNullOrWhiteSpace(target.Element("FirstName").Value) And Not String.IsNullOrWhiteSpace(strPlayerFirstName) Then
                     target.SetElementValue("FirstName", strPlayerFirstName)
+                Else
+                    target.SetElementValue("FirstName", "")
                 End If
 
                 If String.IsNullOrWhiteSpace(target.Element("LastName").Value) And Not String.IsNullOrWhiteSpace(strPlayerLastName) Then
                     target.SetElementValue("LastName", strPlayerLastName)
+                Else
+                    target.SetElementValue("LastName", "")
                 End If
 
 
@@ -211,7 +233,7 @@ Public Class frmIndividual
 
             xdoc.Save(Application.StartupPath + "AllPlayers.xml")
 
-            ' Since a new player was made, we should update the "Global Player List" on the form.
+            ' Since a new team was made, we should update the "Global Player List" on the form.
             LoadPlayersListFromXML()
             lbSearchResults.ClearSelected()
         End If
@@ -222,25 +244,21 @@ Public Class frmIndividual
         ' Clear the rows already there.
         dgvPlayers.Rows.Clear()
 
-        For Each player In lstTournPlayers
+        For Each team In lstTournTeams
+            ' Find each team in the master list of players and add change the data as needed
 
-            If player.intStatus <> 9999 Then
-                ' Find each player in the master list of players and add change the data as needed
-
-                Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.strMembershipNo = player.strMembershipNo)
-                If IsNothing(result) Then
-                    dgvPlayers.Rows.Add(lstTournPlayers.IndexOf(player), False, player.strMembershipNo, player.strSummaryName, IIf(player.intByeRounds, "Yes", "No"), _status.Item(player.intStatus))
-                Else
-                    ' We found a matching player
-                    ' That means we copy that player's info over to the tournament player info
-                    player.strPlayerLastName = result.strPlayerLastName
-                    player.strPlayerFirstName = result.strPlayerFirstName
-                    player.strMembershipName = result.strMembershipName
+            Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.MembershipNumber = team.PlayerA.MembershipNumber)
+            If IsNothing(result) Then
+                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
+            Else
+                ' We found a matching team
+                ' That means we copy that team's info over to the tournament team info
+                team.PlayerA.LastName = result.LastName
+                team.PlayerA.FirstName = result.FirstName
+                team.PlayerA.MembershipName = result.MembershipName
 
 
-                    dgvPlayers.Rows.Add(lstTournPlayers.IndexOf(player), False, player.strMembershipNo, player.strSummaryName, IIf(player.intByeRounds, "Yes", "No"), _status.Item(player.intStatus))
-                End If
-
+                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
             End If
 
         Next
@@ -258,6 +276,8 @@ Public Class frmIndividual
         txtPlayerNickname.Clear()
         cboStatus.SelectedValue = 10
         rbByes_0.Checked = True
+        txtMemberNo.Clear()
+
     End Sub
 
     Sub LoadPlayersListFromXML()
@@ -267,15 +287,15 @@ Public Class frmIndividual
         ' Load XML Document into a list.
 
         lstPlayers = xdoc.Root.Elements("Player").[Select](Function(st) New PlayerInfo With {
-                                                      .strMembershipName = st.Element("MembershipName"),
-                                                      .strPlayerFirstName = st.Element("FirstName"),
-                                                      .strPlayerLastName = st.Element("LastName"),
-                                                      .strMembershipNo = st.Element("MembershipNo")}).ToList()
+                                                      .MembershipName = st.Element("MembershipName"),
+                                                      .FirstName = st.Element("FirstName"),
+                                                      .LastName = st.Element("LastName"),
+                                                      .MembershipNumber = st.Element("MembershipNo")}).ToList()
 
         blnSearch = False
         FillListBox()
 
-        ' Clear the Search box since we added a player.
+        ' Clear the Search box since we added a team.
         txtSearchPlayer.Clear()
 
     End Sub
@@ -284,32 +304,32 @@ Public Class frmIndividual
 
         If blnSearch Then
             ' Make a copy of the list of TournPlayers (we don't want to overwrite)
-            Dim lstSearch As List(Of PlayerInfo) = lstPlayers.FindAll(Function(x) x.strSearchHelper.ToLower.Contains(txtSearchPlayer.Text.ToLower.Trim)).ToList
+            Dim lstSearch As List(Of PlayerInfo) = lstPlayers.FindAll(Function(x) x.SearchHelper.ToLower.Contains(txtSearchPlayer.Text.ToLower.Trim)).ToList
 
             If rbMemberName.Checked Then
-                lstSearch = lstSearch.OrderBy(Function(x) x.strMembershipName).ToList()
+                lstSearch = lstSearch.OrderBy(Function(x) x.MembershipName).ToList()
             ElseIf rbMembershipID.Checked Then
-                lstSearch = lstSearch.OrderBy(Function(x) x.strMembershipNo).ToList()
+                lstSearch = lstSearch.OrderBy(Function(x) x.MembershipNumber).ToList()
             Else
                 'rbPlayerName.Checked, Sort by First Name Then Last Name.
-                lstSearch = lstSearch.OrderBy(Function(x) x.strPlayerLastName).ThenBy(Function(x) x.strPlayerFirstName).ToList()
+                lstSearch = lstSearch.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ToList()
             End If
 
             lbSearchResults.DataSource = lstSearch
 
         Else
             If rbMemberName.Checked Then
-                lstPlayers = lstPlayers.OrderBy(Function(x) x.strMembershipName).ToList()
+                lstPlayers = lstPlayers.OrderBy(Function(x) x.MembershipName).ToList()
             ElseIf rbMembershipID.Checked Then
-                lstPlayers = lstPlayers.OrderBy(Function(x) x.strMembershipNo).ToList()
+                lstPlayers = lstPlayers.OrderBy(Function(x) x.MembershipNumber).ToList()
             Else
                 'rbPlayerName.Checked, Sort by First Name Then Last Name.
-                lstPlayers = lstPlayers.OrderBy(Function(x) x.strPlayerLastName).ThenBy(Function(x) x.strPlayerFirstName).ToList()
+                lstPlayers = lstPlayers.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ToList()
             End If
 
             ' Fill listbox from dataset. (Format: "GUEST99999 - SomeNickname (PlayerFirst PlayerLast)" )
-            lbSearchResults.DisplayMember = "strSummary"
-            lbSearchResults.ValueMember = "strMembershipNo"
+            lbSearchResults.DisplayMember = "ListSummary"
+            lbSearchResults.ValueMember = "MembershipNumber"
             lbSearchResults.DataSource = lstPlayers
 
         End If
@@ -324,12 +344,12 @@ Public Class frmIndividual
         ClearPlayer()
 
         If lbSearchResults.SelectedItems.Count > 0 Then
-            ' MessageBox.Show("Selected Row was: " & lbSearchResults.SelectedItem.strMembershipNo)
+            ' MessageBox.Show("Selected Row was: " & lbSearchResults.SelectedItem.MembershipNumber)
 
-            txtMemberNo.Text = lbSearchResults.SelectedItem.strMembershipNo.ToString
-            txtPlayerFirstName.Text = lbSearchResults.SelectedItem.strPlayerFirstName.ToString
-            txtPlayerLastName.Text = lbSearchResults.SelectedItem.strPlayerLastName.ToString
-            txtPlayerNickname.Text = lbSearchResults.SelectedItem.strMembershipName.ToString
+            txtMemberNo.Text = lbSearchResults.SelectedItem.MembershipNumber.ToString
+            txtPlayerFirstName.Text = lbSearchResults.SelectedItem.FirstName.ToString
+            txtPlayerLastName.Text = lbSearchResults.SelectedItem.LastName.ToString
+            txtPlayerNickname.Text = lbSearchResults.SelectedItem.MembershipName.ToString
         Else
             ClearPlayer()
         End If
@@ -343,22 +363,22 @@ Public Class frmIndividual
 
             txtMemberNo.Text = txtMemberNo.Text.ToString.PadLeft(10, "0")
 
-            ' Find the player whose info matches
+            ' Find the team whose info matches
             FindPlayerFromList(txtMemberNo.Text)
         End If
 
     End Sub
 
     Private Sub FindPlayerFromList(strPlayerNo As String)
-        ' Find a player within the AllPlayers list whose number matches and fill it in.
-        Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.strMembershipNo = strPlayerNo)
+        ' Find a team within the AllPlayers list whose number matches and fill it in.
+        Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.MembershipNumber = strPlayerNo)
 
         If Not IsNothing(result) Then
-            ' If there was a player... Then change stuff as Needed
+            ' If there was a team... Then change stuff as Needed
 
-            txtPlayerFirstName.Text = result.strPlayerFirstName
-            txtPlayerLastName.Text = result.strPlayerLastName
-            txtPlayerNickname.Text = result.strMembershipName
+            txtPlayerFirstName.Text = result.FirstName
+            txtPlayerLastName.Text = result.LastName
+            txtPlayerNickname.Text = result.MembershipName
         Else
             ' Clear the fields, but do NOT change the bye setting(?)
             cbGuest.Checked = False
@@ -374,7 +394,6 @@ Public Class frmIndividual
         'FindPlayerFromList(txtMemberNo.Text.Trim.PadLeft(10, "0"))
 
         ' If the Enter key is struck, format the number as needed.
-
         If e.KeyCode = Keys.Enter Then
 
             e.SuppressKeyPress = True
@@ -382,6 +401,11 @@ Public Class frmIndividual
             txtMemberNo.Text = txtMemberNo.Text.Trim.PadLeft(10, "0")
 
             txtPlayerFirstName.Focus()
+
+        End If
+
+        If String.IsNullOrEmpty(txtMemberNo.Text) Then
+            ClearPlayer()
 
         End If
     End Sub
@@ -401,7 +425,7 @@ Public Class frmIndividual
                 tourn.Cells("dgcStatus").Value = _status.Item(cboChangeStatus.SelectedValue)
 
                 ' Change the matching lstTournPlayers to match
-                lstTournPlayers(tourn.Cells("dgcListIndex").Value).intStatus = cboChangeStatus.SelectedValue
+                lstTournTeams(tourn.Cells("dgcListIndex").Value).Status = cboChangeStatus.SelectedValue
 
                 ' Turn off the check box since we're done
                 tourn.Cells("dgcSelect").Value = 0
@@ -432,19 +456,19 @@ Public Class frmIndividual
 
             ' A row was selected, take that row and preload all the info back into entry field
 
-            txtMemberNo.Text = lstTournPlayers(intSelected).strMembershipNo
-            txtPlayerFirstName.Text = lstTournPlayers(intSelected).strPlayerFirstName
-            txtPlayerLastName.Text = lstTournPlayers(intSelected).strPlayerLastName
-            txtPlayerNickname.Text = lstTournPlayers(intSelected).strMembershipName
+            txtMemberNo.Text = lstTournTeams(intSelected).PlayerA.MembershipNumber
+            txtPlayerFirstName.Text = lstTournTeams(intSelected).PlayerA.FirstName
+            txtPlayerLastName.Text = lstTournTeams(intSelected).PlayerA.LastName
+            txtPlayerNickname.Text = lstTournTeams(intSelected).PlayerA.MembershipName
 
-            Select Case lstTournPlayers(intSelected).intByeRounds
+            Select Case lstTournTeams(intSelected).ByeRounds
                 Case 0
                     rbByes_0.Checked = True
                 Case 1
                     rbByes_1.Checked = True
             End Select
 
-            cboStatus.SelectedValue = lstTournPlayers(intSelected).intStatus
+            cboStatus.SelectedValue = lstTournTeams(intSelected).Status
 
             ' Uncheck Guest Box and Re-Enable Membershhp
             cbGuest.Checked = False
@@ -465,7 +489,7 @@ Public Class frmIndividual
             If lbSearchResults.SelectedIndex <> -1 Then cmsPlayerList.Show()
 
             ' Change the first item in the CMS to what is needed.
-            ChangePlayerDetails0ToolStripMenuItem.Text = String.Format(ChangePlayerDetails0ToolStripMenuItem.Text, lstPlayers.Find(Function(x) x.strMembershipNo = lbSearchResults.SelectedValue).strSummaryName)
+            ChangePlayerDetails0ToolStripMenuItem.Text = String.Format(ChangePlayerDetails0ToolStripMenuItem.Text, lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).SummaryName)
         End If
     End Sub
 
@@ -474,7 +498,7 @@ Public Class frmIndividual
 
             Dim strMemberToDelete As String = lbSearchResults.SelectedValue
 
-            ' We have confirmed that we are DELETING this player from the XML Database
+            ' We have confirmed that we are DELETING this team from the XML Database
             ' Load the XML Database 
             Dim xdoc As New XDocument
             xdoc = XDocument.Load(Application.StartupPath + "AllPlayers.xml")
@@ -494,14 +518,14 @@ Public Class frmIndividual
             lbSearchResults.ClearSelected()
 
             ' Also we should delete them from the current OPEN tournament too.
-            Dim intIndex As Integer = lstTournPlayers.FindIndex(Function(x) x.strMembershipNo = strMemberToDelete)
+            Dim intIndex As Integer = lstTournTeams.FindIndex(Function(x) x.PlayerA.MembershipNumber = strMemberToDelete)
 
-            If lstTournPlayers(intIndex).intTeamID = 0 Then
+            If lstTournTeams(intIndex).TeamID = 0 Then
 
                 If intIndex <> -1 Then
-                    ' If it's not -1 then we find something and should delete that player on sight.
+                    ' If it's not -1 then we find something and should delete that team on sight.
 
-                    lstTournPlayers.RemoveAt(intIndex)
+                    lstTournTeams.RemoveAt(intIndex)
 
                     ' Rebuild the list 
                     BuildTournamentList()
@@ -515,10 +539,10 @@ Public Class frmIndividual
     End Sub
 
     Private Sub btnDeletePlayer_Click(sender As Object, e As EventArgs) Handles btnDeletePlayer.Click
-        ' This can ONLY be done if the player does NOT have a "TeamID" loaded in from the Tournament file.
-        ' If the player has a TeamID, do NOT delete the player.
+        ' This can ONLY be done if the team does NOT have a "TeamID" loaded in from the Tournament file.
+        ' If the team has a TeamID, do NOT delete the team.
 
-        Dim lstErrors As New List(Of TournamentPlayer)
+        Dim lstErrors As New List(Of TournamentTeam)
 
         Dim intCount As Integer = 0
         For Each row In dgvPlayers.Rows
@@ -531,15 +555,15 @@ Public Class frmIndividual
                     If row.Cells(1).Value = True Then
                         Dim intListIndex As Integer = row.Cells(0).Value
 
-                        If lstTournPlayers(intListIndex).intTeamID = 0 Then
-                            ' Remove the player from the list.
-                            lstTournPlayers.RemoveAt(intListIndex)
+                        If lstTournTeams(intListIndex).TeamID = 0 Then
+                            ' Remove the team from the list.
+                            lstTournTeams.RemoveAt(intListIndex)
 
                             ' Rebuild the DGV.
                             BuildTournamentList()
                         Else
-                            ' Can't delete the player, make an error
-                            lstErrors.Add(lstTournPlayers(intListIndex))
+                            ' Can't delete the team, make an error
+                            lstErrors.Add(lstTournTeams(intListIndex))
                         End If
 
                         row.Cells(1).Value = False
@@ -551,7 +575,7 @@ Public Class frmIndividual
                     Dim strErrors As String = ""
 
                     For Each [error] In lstErrors
-                        strErrors &= "•  " & [error].strSummaryName & Environment.NewLine
+                        strErrors &= "•  " & [error].PlayerA.SummaryName & Environment.NewLine
                     Next
 
 
@@ -563,10 +587,10 @@ Public Class frmIndividual
         ElseIf dgvPlayers.SelectedRows.Count = 1 Then
             Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
 
-            If lstTournPlayers(intLstID).intTeamID <> 0 Then
+            If lstTournTeams(intLstID).TeamID <> 0 Then
                 MessageBox.Show("Cannot delete this player." & Environment.NewLine & Environment.NewLine & "Either the player pre-registered or was enrolled through the TCG+ app. To remove this player from the pairings, set their status to ANYTHING but ""Participating in Tournament"".", "Cannot delete pre-registered player", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                lstTournPlayers.RemoveAt(intLstID)
+                lstTournTeams.RemoveAt(intLstID)
 
                 BuildTournamentList()
             End If
@@ -620,17 +644,17 @@ Optional
 ※When not entered"",""Required"",""Uneditable
 No change in value will have any effect."",""Required""")
 
-                For Each player In lstTournPlayers
-                    If player.intStatus <> 9999 Then
-                        csvDoc.Write("""" & player.intTeamID & """,")
-                        csvDoc.Write("""" & player.strTeamName & """,")
+                For Each team In lstTournTeams
+                    If team.Status <> 9999 Then
+                        csvDoc.Write("""" & team.TeamID & """,")
+                        csvDoc.Write("""" & team.TeamName & """,")
                         csvDoc.Write("""" & 0 & """,")
-                        csvDoc.Write("""" & player.intStatus & """,")
-                        csvDoc.Write("""" & player.intByeRounds & """,")
-                        csvDoc.Write("""" & player.strMembershipNo & """,")
-                        csvDoc.Write("""" & player.strMembershipName & """,")
-                        csvDoc.Write("""" & player.strSeatOrder & """,")
-                        csvDoc.Write("""" & player.strMemo & """,")
+                        csvDoc.Write("""" & team.Status & """,")
+                        csvDoc.Write("""" & team.ByeRounds & """,")
+                        csvDoc.Write("""" & team.PlayerA.MembershipNumber & """,")
+                        csvDoc.Write("""" & team.PlayerA.MembershipName & """,")
+                        csvDoc.Write("""" & team.PlayerA.SeatOrder & """,")
+                        csvDoc.Write("""" & team.Memo & """,")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -674,17 +698,17 @@ Optional
 ※When not entered"",""Required"",""Uneditable
 No change in value will have any effect."",""Required""")
 
-                For Each player In lstTournPlayers
-                    If player.intStatus <> 9999 Then
-                        csvDoc.Write("""" & player.intTeamID & """,")
-                        csvDoc.Write("""" & player.strTeamName & """,")
+                For Each player In lstTournTeams
+                    If player.Status <> 9999 Then
+                        csvDoc.Write("""" & player.TeamID & """,")
+                        csvDoc.Write("""" & player.TeamName & """,")
                         csvDoc.Write("""" & 0 & """,")
-                        csvDoc.Write("""" & player.intStatus & """,")
-                        csvDoc.Write("""" & player.intByeRounds & """,")
-                        csvDoc.Write("""" & player.strMembershipNo & """,")
-                        csvDoc.Write("""" & player.strMembershipName & """,")
-                        csvDoc.Write("""" & player.strSeatOrder & """,")
-                        csvDoc.Write("""" & player.strMemo & """,")
+                        csvDoc.Write("""" & player.Status & """,")
+                        csvDoc.Write("""" & player.ByeRounds & """,")
+                        csvDoc.Write("""" & player.PlayerA.MembershipNumber & """,")
+                        csvDoc.Write("""" & player.PlayerA.MembershipName & """,")
+                        csvDoc.Write("""" & player.PlayerA.SeatOrder & """,")
+                        csvDoc.Write("""" & player.Memo & """,")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -698,4 +722,190 @@ No change in value will have any effect."",""Required""")
 
     End Sub
 
+    Private Sub TournamentXMLxmlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TournamentXMLxmlToolStripMenuItem.Click
+
+        Dim FileName As String
+
+        If Not String.IsNullOrWhiteSpace(txtXMLFileName) AndAlso My.Computer.FileSystem.FileExists(txtXMLFileName) Then
+            FileName = txtXMLFileName
+        Else
+            SaveFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+            SaveFileDialogXML.ShowDialog(Me)
+            FileName = SaveFileDialogXML.FileName
+        End If
+
+        If Not String.IsNullOrWhiteSpace(FileName) Then
+            ' Set this file name as the NEW saved file name.
+            txtXMLFileName = FileName
+
+            ' Write the actual XML File.
+            ' Format should be:
+            ' <Tournament TeamPlayers="1">
+            '   <Teams></Teams>
+            '   <Staff></Staff>
+            '   <Penalty></Penalty>
+            ' </Tournament>
+
+            Dim xDoc As New XDocument
+
+            Dim tournament As XElement = New XElement("Tournament")
+            tournament.SetAttributeValue("TeamPlayers", 1) ' One player tournament.
+
+            ' List of TournamentPlayers
+            tournament.Add(New XElement("Teams"))
+
+            Dim playerNode As XElement = tournament.Descendants("Teams").FirstOrDefault()
+
+            For Each team In lstTournTeams
+                playerNode.Add(New XElement("Team", New XElement("TeamID", team.TeamID),
+                                                    New XElement("TeamName", team.TeamName),
+                                                    New XElement("Status", team.Status),
+                                                    New XElement("Memo", team.Memo),
+                                                    New XElement("ByeRounds", team.ByeRounds),
+                                                    New XElement("Players", New XElement("Player",
+                                                                                         New XElement("MemberNumber", team.PlayerA.MembershipNumber),
+                                                                                         New XElement("MemberName", team.PlayerA.MembershipName),
+                                                                                         New XElement("PlayerFirstName", team.PlayerA.FirstName),
+                                                                                         New XElement("PlayerLastName", team.PlayerA.LastName),
+                                                                                         New XElement("SeatOrder", "A")))))
+            Next
+            'tournament.Add(playerNode)
+
+            ' List of TournamentStaff
+            tournament.Add(New XElement("Staff"))
+            Dim staffNode As XElement = tournament.Descendants("Staff").FirstOrDefault()
+
+            For Each staff In lstStaff
+                staffNode.Add(New XElement("Player", New XElement("MembershipNo", staff.MembershipNumber),
+                                                     New XElement("PlayerFirstName", staff.FirstName),
+                                                     New XElement("PlayerLastName", staff.LastName),
+                                                     New XElement("MembershipName", staff.MembershipName),
+                                                     New XElement("StaffPosition", staff.StaffPosition)))
+            Next
+            'tournament.Add(staffNode)
+
+            ' List of Penalties
+            tournament.Add(New XElement("Penalties"))
+            Dim penaltyNode As XElement = tournament.Descendants("Penalties").FirstOrDefault()
+
+            For Each penalty In lstPenalties
+                penaltyNode.Add(New XElement("Penalty", New XElement("Judge", penalty.JudgeNumber),
+                                                        New XElement("Player", penalty.PlayerNumber),
+                                                        New XElement("InfractionType", penalty.InfractionType),
+                                                        New XElement("PenaltyType", penalty.PenaltyType),
+                                                        New XElement("RoundNumber", penalty.RoundNumber),
+                                                        New XElement("Notes", penalty.Notes)))
+            Next
+            'tournament.Add(penaltyNode)
+
+            xDoc.Add(tournament)
+
+            xDoc.Save(txtXMLFileName)
+
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        ' This is to save a copy as. So there will always be a prompt.
+
+        SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+
+        If SaveFileDialogXML.ShowDialog(Me) = DialogResult.OK Then
+            ' Set this file name as the NEW saved file name.
+            txtXMLFileName = SaveFileDialogXML.FileName
+
+            ' Write the actual XML File.
+            ' Format should be:
+            ' <Tournament TeamPlayers="1">
+            '   <Teams></Teams>
+            '   <Staff></Staff>
+            '   <Penalty></Penalty>
+            ' </Tournament>
+
+            Dim xDoc As New XDocument
+            xDoc.Add(New XComment("DO NOT EDIT ANY DETAILS IN THIS FILE! UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!!!"))
+            Dim tournament As XElement = New XElement("Tournament")
+            tournament.SetAttributeValue("TeamPlayers", 1) ' One player tournament.
+
+            ' List of TournamentPlayers
+            tournament.Add(New XElement("Teams"))
+
+            Dim playerNode As XElement = tournament.Descendants("Teams").FirstOrDefault()
+
+            For Each team In lstTournTeams
+                playerNode.Add(New XElement("Team", New XElement("TeamID", team.TeamID),
+                                                    New XElement("TeamName", team.TeamName),
+                                                    New XElement("Status", team.Status),
+                                                    New XElement("Memo", team.Memo),
+                                                    New XElement("ByeRounds", team.ByeRounds),
+                                                    New XElement("Players", New XElement("Player",
+                                                                                         New XElement("MemberNumber", team.PlayerA.MembershipNumber),
+                                                                                         New XElement("MemberName", team.PlayerA.MembershipName),
+                                                                                         New XElement("PlayerFirstName", team.PlayerA.FirstName),
+                                                                                         New XElement("PlayerLastName", team.PlayerA.LastName),
+                                                                                         New XElement("SeatOrder", "A")))))
+            Next
+            'tournament.Add(playerNode)
+
+            ' List of TournamentStaff
+            tournament.Add(New XElement("Staff"))
+            Dim staffNode As XElement = tournament.Descendants("Staff").FirstOrDefault()
+
+            For Each staff In lstStaff
+                staffNode.Add(New XElement("Player", New XElement("MembershipNo", staff.MembershipNumber),
+                                                     New XElement("PlayerFirstName", staff.FirstName),
+                                                     New XElement("PlayerLastName", staff.LastName),
+                                                     New XElement("MembershipName", staff.MembershipName),
+                                                     New XElement("StaffPosition", staff.StaffPosition)))
+            Next
+            'tournament.Add(staffNode)
+
+            ' List of Penalties
+            tournament.Add(New XElement("Penalties"))
+            Dim penaltyNode As XElement = tournament.Descendants("Penalties").FirstOrDefault()
+
+            For Each penalty In lstPenalties
+                penaltyNode.Add(New XElement("Penalty", New XElement("Judge", penalty.JudgeNumber),
+                                                        New XElement("Player", penalty.PlayerNumber),
+                                                        New XElement("InfractionType", penalty.InfractionType),
+                                                        New XElement("PenaltyType", penalty.PenaltyType),
+                                                        New XElement("RoundNumber", penalty.RoundNumber),
+                                                        New XElement("Notes", penalty.Notes)))
+            Next
+            'tournament.Add(penaltyNode)
+
+            xDoc.Add(tournament)
+
+            xDoc.Save(txtXMLFileName)
+        End If
+
+    End Sub
+
+    Private Sub PenaltiesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PenaltiesToolStripMenuItem.Click
+        ' Call up the frmPenalties
+        Using frmPenaltyList As New frmPenalties
+
+            ' New field since we have to cycle through EACH team to extra the tournament players.
+            Dim lstPlayers As New List(Of PlayerInfo)
+
+            For Each team In lstTournTeams
+                ' There is only a PlayerA field since this is Individual registration. 
+                lstPlayers.Add(team.PlayerA)
+            Next
+
+            ' Copy all the "major" details from this form and assign them to the sub form.
+            frmPenaltyList.lstPenalties = lstPenalties
+            frmPenaltyList.lstTournPlayers = lstPlayers
+            frmPenaltyList.lstStaff = lstStaff
+
+            frmPenaltyList.ShowDialog()
+
+        End Using
+    End Sub
+
+    Private Sub StaffJudgesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StaffJudgesToolStripMenuItem.Click
+        Using frmStaff As New frmStaffList
+            ' Assign the staff list to a local variable for manipulating
+        End Using
+    End Sub
 End Class

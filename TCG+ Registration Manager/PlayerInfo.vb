@@ -1,67 +1,77 @@
 ﻿Public Class PlayerInfo
-    Public Property strPlayerFirstName As String
-    Public Property strPlayerLastName As String
-    Public Property strMembershipNo As String
-    Public Property strMembershipName As String
+    Public Property FirstName As String
+    Public Property LastName As String
+    Public Property MembershipNumber As String
+    Public Property MembershipName As String
+    Public Property SeatOrder As String = "A"
 
-    Public Property strSearchHelper As String
+    Public Property SearchHelper As String
         Get
-            Return strPlayerLastName & ", " & strPlayerFirstName & ", " & strMembershipName
+            Return LastName & ", " & FirstName & ", " & MembershipName
         End Get
         Set(value As String)
 
         End Set
     End Property
 
-    Public Property strSummary As String
+    Public Property ListSummary As String
         Get
             ' Full format: GUEST99999 - SomeNickname (PlayerFirst PlayerLast)
-            Return strMembershipNo & " - " & strMembershipName & IIf(String.IsNullOrWhiteSpace(strPlayerFirstName) Or String.IsNullOrWhiteSpace(strPlayerLastName), "", " (" & strPlayerLastName & ", " & strPlayerFirstName & ")")
+            Return MembershipNumber & " - " & MembershipName & IIf(String.IsNullOrWhiteSpace(FirstName) Or String.IsNullOrWhiteSpace(LastName), "", " (" & LastName & ", " & FirstName & ")")
         End Get
         Set(value As String)
 
         End Set
     End Property
 
-    Public Property strSummaryName As String
+    Public Property SummaryName As String
         Get
-            Return strMembershipName & IIf(String.IsNullOrWhiteSpace(strPlayerFirstName) And String.IsNullOrWhiteSpace(strPlayerLastName), "", " (" & strPlayerLastName & ", " & strPlayerFirstName & ")")
+            Return MembershipName & IIf(String.IsNullOrWhiteSpace(FirstName) And String.IsNullOrWhiteSpace(LastName), "", " (" & LastName & ", " & FirstName & ")")
         End Get
         Set(value As String)
 
         End Set
     End Property
 
-    Public Sub FormatNumber(MemberNo As Integer)
-        If IsNumeric(MemberNo) Then strMembershipNo = MemberNo.ToString.PadLeft(10, "0")
+    Public Sub FormatNumber()
+        If IsNumeric(MembershipNumber) Then MembershipNumber = MembershipNumber.ToString.PadLeft(10, "0")
     End Sub
 End Class
 
-Public Class TournamentPlayer : Inherits PlayerInfo
-    Public Property intStatus As Integer = 0
-    Public Property intByeRounds As Integer
-    Public Property intTeamID As Integer = 0
-    Public Property strTeamName As String
-    Public Property strSeatOrder As String = "A"
-    Public Property strMemo As String
+Public Class TournamentPlayer
+    Public Property Status As Integer = 0
+    Public Property ByeRounds As Integer
+    Public Property TeamID As Integer = 0
+    Public Property TeamName As String
+    Public Property Memo As String
+End Class
+
+Public Class TournamentTeam : Inherits TournamentPlayer
+    Public PlayerA As PlayerInfo
+    Public PlayerB As PlayerInfo
+    Public PlayerC As PlayerInfo
 End Class
 
 Public Class TournamentStaff : Inherits PlayerInfo
-    Public Property intPosition As Integer
+    Public Property StaffPosition As Integer
+
+    Public Property StaffListString As String
+        Get
+            Return ListSummary & "(" & _status.Item(StaffPosition) & ")"
+        End Get
+        Set(value As String)
+
+        End Set
+    End Property
 
 End Class
 
 Public Class TournamentPenalty
-    Public strPlayerNumber As String
-    Public strJudgeNumber As String
-    Public intInfractionType As Integer
-    Public intPenaltyType As Integer
-    Public strNotes As String
-    Public intRoundNumber As Integer
+    Public PlayerNumber As String
+    Public JudgeNumber As String
+    Public InfractionType As Integer
+    Public PenaltyType As Integer
+    Public Notes As String
+    Public RoundNumber As Integer
 End Class
 
-Public Class Teams : Inherits TournamentPlayer
-    Public tpPlayerA As TournamentPlayer
-    Public tpPlayerB As TournamentPlayer
-    Public tpPlayerC As TournamentPlayer
-End Class

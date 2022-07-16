@@ -71,7 +71,7 @@ Partial Class frmIndividual
         Me.cboChangeStatus = New System.Windows.Forms.ComboBox()
         Me.btnChangeChecked = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsl = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -129,7 +129,7 @@ Partial Class frmIndividual
         '
         'btnAddPlayer
         '
-        Me.btnAddPlayer.Location = New System.Drawing.Point(169, 242)
+        Me.btnAddPlayer.Location = New System.Drawing.Point(165, 241)
         Me.btnAddPlayer.Name = "btnAddPlayer"
         Me.btnAddPlayer.Size = New System.Drawing.Size(159, 29)
         Me.btnAddPlayer.TabIndex = 7
@@ -565,18 +565,18 @@ Partial Class frmIndividual
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsl})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 614)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1252, 22)
         Me.StatusStrip1.TabIndex = 6
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatusLabel1
+        'tsl
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        Me.tsl.Name = "tsl"
+        Me.tsl.Size = New System.Drawing.Size(119, 17)
+        Me.tsl.Text = "ToolStripStatusLabel1"
         '
         'MenuStrip1
         '
@@ -586,7 +586,6 @@ Partial Class frmIndividual
         Me.MenuStrip1.Size = New System.Drawing.Size(1252, 24)
         Me.MenuStrip1.TabIndex = 7
         Me.MenuStrip1.Text = "MenuStrip1"
-        Me.MenuStrip1.Visible = False
         '
         'FileToolStripMenuItem
         '
@@ -628,7 +627,6 @@ Partial Class frmIndividual
         Me.TournamentXMLxmlToolStripMenuItem.Name = "TournamentXMLxmlToolStripMenuItem"
         Me.TournamentXMLxmlToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
         Me.TournamentXMLxmlToolStripMenuItem.Text = "Tournament XML (.xml)"
-        Me.TournamentXMLxmlToolStripMenuItem.Visible = False
         '
         'ToolStripMenuItem1
         '
@@ -649,7 +647,6 @@ Partial Class frmIndividual
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(262, 22)
         Me.ToolStripMenuItem3.Text = "Tournament XML (.xml)"
-        Me.ToolStripMenuItem3.Visible = False
         '
         'ToolStripSeparator1
         '
@@ -686,18 +683,17 @@ Partial Class frmIndividual
         Me.TournamentToolStripMenuItem.Name = "TournamentToolStripMenuItem"
         Me.TournamentToolStripMenuItem.Size = New System.Drawing.Size(83, 20)
         Me.TournamentToolStripMenuItem.Text = "&Tournament"
-        Me.TournamentToolStripMenuItem.Visible = False
         '
         'PenaltiesToolStripMenuItem
         '
         Me.PenaltiesToolStripMenuItem.Name = "PenaltiesToolStripMenuItem"
-        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PenaltiesToolStripMenuItem.Text = "&Penalties"
         '
         'StaffJudgesToolStripMenuItem
         '
         Me.StaffJudgesToolStripMenuItem.Name = "StaffJudgesToolStripMenuItem"
-        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.StaffJudgesToolStripMenuItem.Text = "&Staff/Judges"
         '
         'SaveFileDialogCSV
@@ -789,7 +785,7 @@ Partial Class frmIndividual
     Friend WithEvents ChangePlayerDetails0ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DeletePlayerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents tsl As ToolStripStatusLabel
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveTournamentToolStripMenuItem As ToolStripMenuItem

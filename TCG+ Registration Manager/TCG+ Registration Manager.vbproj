@@ -13,6 +13,7 @@
     <PackageIcon>bandai TCG+.png</PackageIcon>
     <PackageIconUrl />
     <ApplicationIcon>bandai TCG+.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
