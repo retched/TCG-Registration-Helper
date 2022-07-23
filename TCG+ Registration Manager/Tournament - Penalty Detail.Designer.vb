@@ -43,113 +43,113 @@ Partial Class frmPenaltyDetail
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 20)
+        Me.Label1.Location = New System.Drawing.Point(10, 17)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 15)
+        Me.Label1.Size = New System.Drawing.Size(36, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Player"
         '
         'cboPlayer
         '
         Me.cboPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboPlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboPlayer.FormattingEnabled = True
-        Me.cboPlayer.Location = New System.Drawing.Point(132, 12)
+        Me.cboPlayer.Location = New System.Drawing.Point(113, 10)
         Me.cboPlayer.Name = "cboPlayer"
-        Me.cboPlayer.Size = New System.Drawing.Size(481, 29)
+        Me.cboPlayer.Size = New System.Drawing.Size(413, 29)
         Me.cboPlayer.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 76)
+        Me.Label2.Location = New System.Drawing.Point(10, 66)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 15)
+        Me.Label2.Size = New System.Drawing.Size(36, 13)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Judge"
         '
         'cboJudge
         '
         Me.cboJudge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboJudge.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboJudge.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboJudge.FormattingEnabled = True
-        Me.cboJudge.Location = New System.Drawing.Point(132, 68)
+        Me.cboJudge.Location = New System.Drawing.Point(113, 59)
         Me.cboJudge.Name = "cboJudge"
-        Me.cboJudge.Size = New System.Drawing.Size(481, 29)
+        Me.cboJudge.Size = New System.Drawing.Size(413, 29)
         Me.cboJudge.TabIndex = 3
         '
         'cboInfraction
         '
         Me.cboInfraction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboInfraction.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboInfraction.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboInfraction.FormattingEnabled = True
-        Me.cboInfraction.Location = New System.Drawing.Point(132, 124)
+        Me.cboInfraction.Location = New System.Drawing.Point(113, 107)
         Me.cboInfraction.Name = "cboInfraction"
-        Me.cboInfraction.Size = New System.Drawing.Size(481, 29)
+        Me.cboInfraction.Size = New System.Drawing.Size(413, 29)
         Me.cboInfraction.TabIndex = 5
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 132)
+        Me.Label3.Location = New System.Drawing.Point(10, 114)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 15)
+        Me.Label3.Size = New System.Drawing.Size(51, 13)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "Infraction"
         '
         'cboPenalty
         '
         Me.cboPenalty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPenalty.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboPenalty.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboPenalty.FormattingEnabled = True
-        Me.cboPenalty.Location = New System.Drawing.Point(132, 180)
+        Me.cboPenalty.Location = New System.Drawing.Point(113, 156)
         Me.cboPenalty.Name = "cboPenalty"
-        Me.cboPenalty.Size = New System.Drawing.Size(481, 29)
+        Me.cboPenalty.Size = New System.Drawing.Size(413, 29)
         Me.cboPenalty.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 188)
+        Me.Label4.Location = New System.Drawing.Point(10, 163)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 15)
+        Me.Label4.Size = New System.Drawing.Size(76, 13)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Penalty Issued"
         '
         'nudRound
         '
-        Me.nudRound.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.nudRound.Location = New System.Drawing.Point(132, 231)
+        Me.nudRound.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.nudRound.Location = New System.Drawing.Point(113, 200)
         Me.nudRound.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
         Me.nudRound.Name = "nudRound"
-        Me.nudRound.Size = New System.Drawing.Size(78, 29)
+        Me.nudRound.Size = New System.Drawing.Size(67, 29)
         Me.nudRound.TabIndex = 9
         Me.nudRound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 238)
+        Me.Label5.Location = New System.Drawing.Point(10, 206)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(52, 15)
+        Me.Label5.Size = New System.Drawing.Size(49, 13)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Round #"
         '
         'txtPenaltyNotes
         '
-        Me.txtPenaltyNotes.Location = New System.Drawing.Point(132, 286)
+        Me.txtPenaltyNotes.Location = New System.Drawing.Point(113, 248)
         Me.txtPenaltyNotes.Multiline = True
         Me.txtPenaltyNotes.Name = "txtPenaltyNotes"
         Me.txtPenaltyNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtPenaltyNotes.Size = New System.Drawing.Size(481, 92)
+        Me.txtPenaltyNotes.Size = New System.Drawing.Size(413, 107)
         Me.txtPenaltyNotes.TabIndex = 11
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 286)
+        Me.Label6.Location = New System.Drawing.Point(10, 248)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 15)
+        Me.Label6.Size = New System.Drawing.Size(73, 13)
         Me.Label6.TabIndex = 10
         Me.Label6.Text = "Penalty Notes"
         '
@@ -157,9 +157,9 @@ Partial Class frmPenaltyDetail
         '
         Me.btnAddPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnAddPenalty.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnAddPenalty.Location = New System.Drawing.Point(182, 388)
+        Me.btnAddPenalty.Location = New System.Drawing.Point(156, 361)
         Me.btnAddPenalty.Name = "btnAddPenalty"
-        Me.btnAddPenalty.Size = New System.Drawing.Size(127, 29)
+        Me.btnAddPenalty.Size = New System.Drawing.Size(109, 25)
         Me.btnAddPenalty.TabIndex = 12
         Me.btnAddPenalty.Text = "&OK"
         Me.btnAddPenalty.UseVisualStyleBackColor = True
@@ -168,26 +168,27 @@ Partial Class frmPenaltyDetail
         '
         Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.Button1.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Button1.Location = New System.Drawing.Point(315, 388)
+        Me.Button1.Location = New System.Drawing.Point(270, 361)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(127, 29)
+        Me.Button1.Size = New System.Drawing.Size(109, 25)
         Me.Button1.TabIndex = 13
         Me.Button1.Text = "&Cancel"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(216, 231)
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(186, 195)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(241, 39)
+        Me.Label7.Size = New System.Drawing.Size(274, 45)
         Me.Label7.TabIndex = 14
         Me.Label7.Text = "Round 0 = Before the official start of the event"
         '
         'frmPenaltyDetail
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(625, 429)
+        Me.ClientSize = New System.Drawing.Size(536, 397)
         Me.ControlBox = False
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Button1)

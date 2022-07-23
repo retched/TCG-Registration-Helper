@@ -23,10 +23,56 @@
 
         End Set
     End Property
+    Public Property PlayerFullName As String
+        Get
+            Dim output As String = ""
 
+            If String.IsNullOrWhiteSpace(FirstName) Or String.IsNullOrWhiteSpace(LastName) Then
+                ' Only add the non-blank name
+
+                If Not String.IsNullOrWhiteSpace(LastName) Then
+                    output &= LastName.Trim
+                End If
+
+                If Not String.IsNullOrWhiteSpace(FirstName) Then
+                    output &= FirstName.Trim
+                End If
+            ElseIf Not String.IsNullOrWhiteSpace(FirstName) And Not String.IsNullOrWhiteSpace(LastName) Then
+                output &= LastName.Trim & ", " & FirstName.Trim
+            Else
+                output = ""
+            End If
+
+
+            Return output
+        End Get
+        Set(value As String)
+
+        End Set
+    End Property
     Public Property SummaryName As String
         Get
-            Return MembershipName & IIf(String.IsNullOrWhiteSpace(FirstName) And String.IsNullOrWhiteSpace(LastName), "", " (" & LastName & ", " & FirstName & ")")
+            Dim output As String = ""
+
+            output &= MembershipName
+
+            If String.IsNullOrWhiteSpace(FirstName) Or String.IsNullOrWhiteSpace(LastName) Then
+                ' Only add the non-blank name
+
+                If Not String.IsNullOrWhiteSpace(LastName) Then
+                    output &= " (" & LastName & ")"
+                End If
+
+                If Not String.IsNullOrWhiteSpace(FirstName) Then
+                    output &= " (" & FirstName & ")"
+                End If
+            ElseIf Not String.IsNullOrWhiteSpace(FirstName) And Not String.IsNullOrWhiteSpace(LastName) Then
+                output &= " (" & LastName & ", " & FirstName & ")"
+
+            End If
+
+
+            Return output
         End Get
         Set(value As String)
 
@@ -57,7 +103,7 @@ Public Class TournamentStaff : Inherits PlayerInfo
 
     Public Property StaffListString As String
         Get
-            Return ListSummary & "(" & _status.Item(StaffPosition) & ")"
+            Return ListSummary & " (" & _position.Item(StaffPosition) & ")"
         End Get
         Set(value As String)
 

@@ -23,14 +23,14 @@ Partial Class frmIndividual
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmIndividual))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnNoNumber = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.btnAddPlayer = New System.Windows.Forms.Button()
-        Me.cbGuest = New System.Windows.Forms.CheckBox()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -71,7 +71,11 @@ Partial Class frmIndividual
         Me.cboChangeStatus = New System.Windows.Forms.ComboBox()
         Me.btnChangeChecked = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.tsl = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslPlayerPreReg = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslBorder = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslActivePlayer = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslSpacer = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslFileName = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -104,8 +108,9 @@ Partial Class frmIndividual
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnNoNumber)
+        Me.GroupBox1.Controls.Add(Me.CheckBox1)
         Me.GroupBox1.Controls.Add(Me.btnAddPlayer)
-        Me.GroupBox1.Controls.Add(Me.cbGuest)
         Me.GroupBox1.Controls.Add(Me.cboStatus)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Panel1)
@@ -127,6 +132,25 @@ Partial Class frmIndividual
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Register Player"
         '
+        'btnNoNumber
+        '
+        Me.btnNoNumber.Location = New System.Drawing.Point(397, 21)
+        Me.btnNoNumber.Name = "btnNoNumber"
+        Me.btnNoNumber.Size = New System.Drawing.Size(92, 29)
+        Me.btnNoNumber.TabIndex = 15
+        Me.btnNoNumber.Text = "No Number?"
+        Me.btnNoNumber.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(397, 141)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(77, 19)
+        Me.CheckBox1.TabIndex = 14
+        Me.CheckBox1.Text = "Unknown"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'btnAddPlayer
         '
         Me.btnAddPlayer.Location = New System.Drawing.Point(165, 241)
@@ -136,32 +160,20 @@ Partial Class frmIndividual
         Me.btnAddPlayer.Text = "Add Player to Tournament"
         Me.btnAddPlayer.UseVisualStyleBackColor = True
         '
-        'cbGuest
-        '
-        Me.cbGuest.AutoSize = True
-        Me.cbGuest.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.cbGuest.Location = New System.Drawing.Point(413, 24)
-        Me.cbGuest.Name = "cbGuest"
-        Me.cbGuest.Size = New System.Drawing.Size(70, 23)
-        Me.cbGuest.TabIndex = 0
-        Me.cbGuest.Text = "Guest?"
-        Me.ToolTip1.SetToolTip(Me.cbGuest, resources.GetString("cbGuest.ToolTip"))
-        Me.cbGuest.UseVisualStyleBackColor = True
-        '
         'cboStatus
         '
         Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cboStatus.FormattingEnabled = True
         Me.cboStatus.Location = New System.Drawing.Point(213, 207)
         Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(277, 28)
+        Me.cboStatus.Size = New System.Drawing.Size(276, 28)
         Me.cboStatus.TabIndex = 6
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label6.Location = New System.Drawing.Point(20, 212)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
@@ -176,7 +188,7 @@ Partial Class frmIndividual
         Me.Panel1.Controls.Add(Me.rbByes_0)
         Me.Panel1.Location = New System.Drawing.Point(213, 172)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(277, 29)
+        Me.Panel1.Size = New System.Drawing.Size(276, 29)
         Me.Panel1.TabIndex = 5
         '
         'rbByes_1
@@ -204,7 +216,7 @@ Partial Class frmIndividual
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label5.Location = New System.Drawing.Point(20, 177)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
@@ -216,28 +228,28 @@ Partial Class frmIndividual
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label4.Location = New System.Drawing.Point(20, 141)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(142, 19)
+        Me.Label4.Size = New System.Drawing.Size(148, 19)
         Me.Label4.TabIndex = 11
-        Me.Label4.Text = "Player Member Name"
+        Me.Label4.Text = "Player Member Name*"
         '
         'txtPlayerNickname
         '
-        Me.txtPlayerNickname.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtPlayerNickname.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.txtPlayerNickname.Location = New System.Drawing.Point(213, 136)
         Me.txtPlayerNickname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerNickname.Name = "txtPlayerNickname"
-        Me.txtPlayerNickname.Size = New System.Drawing.Size(276, 29)
+        Me.txtPlayerNickname.Size = New System.Drawing.Size(177, 29)
         Me.txtPlayerNickname.TabIndex = 4
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label3.Location = New System.Drawing.Point(20, 104)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
@@ -248,7 +260,7 @@ Partial Class frmIndividual
         '
         'txtPlayerLastName
         '
-        Me.txtPlayerLastName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtPlayerLastName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.txtPlayerLastName.Location = New System.Drawing.Point(213, 99)
         Me.txtPlayerLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerLastName.Name = "txtPlayerLastName"
@@ -258,7 +270,7 @@ Partial Class frmIndividual
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Location = New System.Drawing.Point(20, 65)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
@@ -269,7 +281,7 @@ Partial Class frmIndividual
         '
         'txtPlayerFirstName
         '
-        Me.txtPlayerFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtPlayerFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.txtPlayerFirstName.Location = New System.Drawing.Point(213, 60)
         Me.txtPlayerFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerFirstName.Name = "txtPlayerFirstName"
@@ -279,29 +291,25 @@ Partial Class frmIndividual
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(20, 26)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(179, 19)
+        Me.Label1.Size = New System.Drawing.Size(185, 19)
         Me.Label1.TabIndex = 8
-        Me.Label1.Text = "TCG+ Membership Number"
+        Me.Label1.Text = "TCG+ Membership Number*"
         '
         'txtMemberNo
         '
-        Me.txtMemberNo.Font = New System.Drawing.Font("Courier New", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtMemberNo.Font = New System.Drawing.Font("Courier New", 14.0!)
         Me.txtMemberNo.Location = New System.Drawing.Point(213, 21)
         Me.txtMemberNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMemberNo.MaxLength = 10
-        Me.txtMemberNo.Multiline = True
         Me.txtMemberNo.Name = "txtMemberNo"
         Me.txtMemberNo.Size = New System.Drawing.Size(177, 29)
         Me.txtMemberNo.TabIndex = 1
         Me.txtMemberNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ToolTip1.SetToolTip(Me.txtMemberNo, "This NOT the same as the BCC (Budokai Card Club) numbers" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "used before." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The pla" &
-        "yers MUST re-enroll at" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "https://www.bandai-tcg-plus.com/ and use the new Members" &
-        "hip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "No. listed there.")
         '
         'GroupBox2
         '
@@ -332,7 +340,7 @@ Partial Class frmIndividual
         '
         Me.rbMembershipID.AutoSize = True
         Me.rbMembershipID.Checked = True
-        Me.rbMembershipID.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.rbMembershipID.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.rbMembershipID.Location = New System.Drawing.Point(8, 7)
         Me.rbMembershipID.Name = "rbMembershipID"
         Me.rbMembershipID.Size = New System.Drawing.Size(162, 21)
@@ -344,7 +352,7 @@ Partial Class frmIndividual
         'rbPlayerName
         '
         Me.rbPlayerName.AutoSize = True
-        Me.rbPlayerName.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.rbPlayerName.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.rbPlayerName.Location = New System.Drawing.Point(172, 7)
         Me.rbPlayerName.Name = "rbPlayerName"
         Me.rbPlayerName.Size = New System.Drawing.Size(146, 21)
@@ -355,7 +363,7 @@ Partial Class frmIndividual
         'rbMemberName
         '
         Me.rbMemberName.AutoSize = True
-        Me.rbMemberName.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.rbMemberName.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.rbMemberName.Location = New System.Drawing.Point(320, 7)
         Me.rbMemberName.Name = "rbMemberName"
         Me.rbMemberName.Size = New System.Drawing.Size(161, 21)
@@ -374,7 +382,7 @@ Partial Class frmIndividual
         '
         'txtSearchPlayer
         '
-        Me.txtSearchPlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtSearchPlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtSearchPlayer.Location = New System.Drawing.Point(6, 26)
         Me.txtSearchPlayer.Name = "txtSearchPlayer"
         Me.txtSearchPlayer.Size = New System.Drawing.Size(372, 29)
@@ -384,7 +392,7 @@ Partial Class frmIndividual
         '
         Me.lbSearchResults.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.lbSearchResults.ContextMenuStrip = Me.cmsPlayerList
-        Me.lbSearchResults.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.lbSearchResults.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.lbSearchResults.FormattingEnabled = True
         Me.lbSearchResults.ItemHeight = 21
         Me.lbSearchResults.Location = New System.Drawing.Point(6, 100)
@@ -396,7 +404,7 @@ Partial Class frmIndividual
         '
         Me.cmsPlayerList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangePlayerDetails0ToolStripMenuItem, Me.DeletePlayerToolStripMenuItem})
         Me.cmsPlayerList.Name = "cms"
-        Me.cmsPlayerList.Size = New System.Drawing.Size(225, 48)
+        Me.cmsPlayerList.Size = New System.Drawing.Size(225, 70)
         '
         'ChangePlayerDetails0ToolStripMenuItem
         '
@@ -423,7 +431,7 @@ Partial Class frmIndividual
         Me.dgvPlayers.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
@@ -460,7 +468,7 @@ Partial Class frmIndividual
         'dgcMembershipNo
         '
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgcMembershipNo.FillWeight = 80.0!
         Me.dgcMembershipNo.HeaderText = "Membership Number"
@@ -479,7 +487,7 @@ Partial Class frmIndividual
         'dgcByesCount
         '
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgcByesCount.FillWeight = 60.0!
         Me.dgcByesCount.HeaderText = "First Round Bye"
@@ -533,7 +541,7 @@ Partial Class frmIndividual
         '
         Me.btnDeletePlayer.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnDeletePlayer.BackColor = System.Drawing.Color.Red
-        Me.btnDeletePlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.btnDeletePlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.btnDeletePlayer.ForeColor = System.Drawing.Color.White
         Me.btnDeletePlayer.Location = New System.Drawing.Point(619, 0)
         Me.btnDeletePlayer.Name = "btnDeletePlayer"
@@ -546,7 +554,7 @@ Partial Class frmIndividual
         '
         Me.cboChangeStatus.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.cboChangeStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboChangeStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.cboChangeStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cboChangeStatus.FormattingEnabled = True
         Me.cboChangeStatus.Location = New System.Drawing.Point(195, 0)
         Me.cboChangeStatus.Name = "cboChangeStatus"
@@ -565,18 +573,43 @@ Partial Class frmIndividual
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsl})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslPlayerPreReg, Me.tslBorder, Me.tslActivePlayer, Me.tslSpacer, Me.tslFileName})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 614)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1252, 22)
         Me.StatusStrip1.TabIndex = 6
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'tsl
+        'tslPlayerPreReg
         '
-        Me.tsl.Name = "tsl"
-        Me.tsl.Size = New System.Drawing.Size(119, 17)
-        Me.tsl.Text = "ToolStripStatusLabel1"
+        Me.tslPlayerPreReg.Name = "tslPlayerPreReg"
+        Me.tslPlayerPreReg.Size = New System.Drawing.Size(141, 17)
+        Me.tslPlayerPreReg.Text = "0 Player(s) Pre-Registered"
+        '
+        'tslBorder
+        '
+        Me.tslBorder.Name = "tslBorder"
+        Me.tslBorder.Size = New System.Drawing.Size(10, 17)
+        Me.tslBorder.Text = "|"
+        '
+        'tslActivePlayer
+        '
+        Me.tslActivePlayer.Name = "tslActivePlayer"
+        Me.tslActivePlayer.Size = New System.Drawing.Size(97, 17)
+        Me.tslActivePlayer.Text = "0 Player(s) Active"
+        '
+        'tslSpacer
+        '
+        Me.tslSpacer.Name = "tslSpacer"
+        Me.tslSpacer.Size = New System.Drawing.Size(989, 17)
+        Me.tslSpacer.Spring = True
+        '
+        'tslFileName
+        '
+        Me.tslFileName.Name = "tslFileName"
+        Me.tslFileName.Size = New System.Drawing.Size(71, 17)
+        Me.tslFileName.Text = "File Name - "
+        Me.tslFileName.Visible = False
         '
         'MenuStrip1
         '
@@ -586,6 +619,7 @@ Partial Class frmIndividual
         Me.MenuStrip1.Size = New System.Drawing.Size(1252, 24)
         Me.MenuStrip1.TabIndex = 7
         Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MenuStrip1.Visible = False
         '
         'FileToolStripMenuItem
         '
@@ -687,13 +721,13 @@ Partial Class frmIndividual
         'PenaltiesToolStripMenuItem
         '
         Me.PenaltiesToolStripMenuItem.Name = "PenaltiesToolStripMenuItem"
-        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.PenaltiesToolStripMenuItem.Text = "&Penalties"
         '
         'StaffJudgesToolStripMenuItem
         '
         Me.StaffJudgesToolStripMenuItem.Name = "StaffJudgesToolStripMenuItem"
-        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.StaffJudgesToolStripMenuItem.Text = "&Staff/Judges"
         '
         'SaveFileDialogCSV
@@ -722,7 +756,7 @@ Partial Class frmIndividual
         Me.Controls.Add(Me.dgvPlayers)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MinimumSize = New System.Drawing.Size(1268, 623)
         Me.Name = "frmIndividual"
@@ -764,7 +798,6 @@ Partial Class frmIndividual
     Friend WithEvents Label1 As Label
     Friend WithEvents txtMemberNo As TextBox
     Friend WithEvents btnAddPlayer As Button
-    Friend WithEvents cbGuest As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnSearchPlayer As Button
     Friend WithEvents txtSearchPlayer As TextBox
@@ -785,7 +818,7 @@ Partial Class frmIndividual
     Friend WithEvents ChangePlayerDetails0ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DeletePlayerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents tsl As ToolStripStatusLabel
+    Friend WithEvents tslPlayerPreReg As ToolStripStatusLabel
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveTournamentToolStripMenuItem As ToolStripMenuItem
@@ -811,4 +844,10 @@ Partial Class frmIndividual
     Friend WithEvents dgcStatus As DataGridViewTextBoxColumn
     Friend WithEvents SaveFileDialogCSV As SaveFileDialog
     Friend WithEvents SaveFileDialogXML As SaveFileDialog
+    Friend WithEvents btnNoNumber As Button
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents tslBorder As ToolStripStatusLabel
+    Friend WithEvents tslActivePlayer As ToolStripStatusLabel
+    Friend WithEvents tslSpacer As ToolStripStatusLabel
+    Friend WithEvents tslFileName As ToolStripStatusLabel
 End Class

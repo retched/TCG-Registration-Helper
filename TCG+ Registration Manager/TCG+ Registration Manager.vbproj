@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>retched.TCGRegManager</RootNamespace>
+	<TargetFramework>net48</TargetFramework>
+	<RootNamespace>retched.TCGRegManager</RootNamespace>
     <StartupObject>retched.TCGRegManager.frmMainMenu</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
     <Authors>Paul Williams (retched@hotmail.com)</Authors>
-    <NeutralLanguage>en-US</NeutralLanguage>
+    <NeutralLanguage></NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>bandai TCG+.png</PackageIcon>
     <PackageIconUrl />
@@ -57,4 +57,73 @@
     </EmbeddedResource>
   </ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="My Project\DataSources\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="mscorlib">
+	    <EmbedInteropTypes>False</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Xml.Linq">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Core">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Data">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Drawing">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.IO.Compression.FileSystem">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Numerics">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Runtime.Serialization">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Windows.Forms">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Update="System.Xml">
+	    <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </Reference>
+	</ItemGroup>
 </Project>

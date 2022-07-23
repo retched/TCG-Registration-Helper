@@ -163,6 +163,7 @@
                                                         .MembershipName = currentRow(9),
                                                         .SeatOrder = currentRow(10)
                                                     },
+                                                    .PlayerC = New PlayerInfo,
                                                     .Memo = currentRow(11)})
                             Case 1
                                 ' We have a single player. So Only PlayerA should be used.
@@ -177,6 +178,8 @@
                                                         .MembershipName = currentRow(6),
                                                         .SeatOrder = currentRow(7)
                                                     },
+                                                   .PlayerB = New PlayerInfo,
+                                                   .PlayerC = New PlayerInfo,
                                                    .Memo = currentRow(8)})
                         End Select
                     End If
