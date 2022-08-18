@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Import Include="System.ComponentModel" />
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />

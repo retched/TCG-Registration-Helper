@@ -46,6 +46,9 @@
         If (OpenFileDialogCSV.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogCSV.FileName
 
+            ' TODO: Check for Duos or Trios Import Form
+            ' First Row will contain a "- 1", "- 2", or "- 3"
+
             ' This should create a copy of frmIndividual
             Dim ChildForm As New frmIndividual
             ' Make it a child of this MDI form before showing it.
@@ -68,7 +71,7 @@
 
         If (OpenFileDialogXML.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogXML.FileName
-            ' TODO: Add code here to open the file.
+
             Dim intExpectedPlayers As Integer
 
             ' Open the file and find out what kind of event is it
@@ -78,10 +81,33 @@
             Select Case intExpectedPlayers
                 Case 3
                     ' TODO: Fix for three players
-                    Throw New NotImplementedException
+                    ' This should create a copy of frmTrios
+                    Dim ChildForm As New frmTrios
+                    ' Make it a child of this MDI form before showing it.
+                    ChildForm.MdiParent = Me
+
+                    ' Set the name of the CSV File.
+                    ChildForm.txtXMLFileName = FileName
+
+                    m_ChildFormNumber += 1
+                    ChildForm.Text = ChildForm.Text & "-" & FileName
+
+                    ChildForm.Show()
                 Case 2
                     ' TODO: Fix for Two Players
-                    Throw New NotImplementedException
+                    ' This should create a copy of frmDuos
+                    Dim ChildForm As New frmDuos
+                    ' Make it a child of this MDI form before showing it.
+                    ChildForm.MdiParent = Me
+
+                    ' Set the name of the CSV File.
+                    ChildForm.txtXMLFileName = FileName
+
+                    m_ChildFormNumber += 1
+                    ChildForm.Text = ChildForm.Text & "-" & FileName
+
+                    ChildForm.Show()
+
                 Case Else ' Think it should be ONE
                     ' This should open as a single player event.
 
@@ -114,5 +140,33 @@
         Using Process.Start(New ProcessStartInfo(strWebpageURL) With {.UseShellExecute = True})
         End Using
 
+    End Sub
+
+    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
+        Using frmPlayerDatabase As New frmMasterPlayerList
+            frmPlayerDatabase.ShowDialog()
+        End Using
+    End Sub
+
+    Private Sub TwoPlayersPerTeamToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TwoPlayersPerTeamToolStripMenuItem.Click
+        Dim ChildForm As New frmDuos
+        ' Make it a child of this MDI form before showing it.
+        ChildForm.MdiParent = Me
+
+        m_ChildFormNumber += 1
+        'ChildForm.Text = ChildForm.Text
+
+        ChildForm.Show()
+    End Sub
+
+    Private Sub ThreePlayersPerTeamToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThreePlayersPerTeamToolStripMenuItem.Click
+        Dim ChildForm As New frmTrios
+        ' Make it a child of this MDI form before showing it.
+        ChildForm.MdiParent = Me
+
+        m_ChildFormNumber += 1
+        'ChildForm.Text = ChildForm.Text
+
+        ChildForm.Show()
     End Sub
 End Class

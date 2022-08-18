@@ -146,6 +146,7 @@ Partial Class frmPlayerDetail
         Me.AcceptButton = Me.btnAddPlayer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(495, 205)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnAddPlayer)
@@ -157,7 +158,10 @@ Partial Class frmPlayerDetail
         Me.Controls.Add(Me.txtPlayerFirstName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtMemberNo)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmPlayerDetail"
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Add New Player to Master List"
         Me.ResumeLayout(False)
         Me.PerformLayout()

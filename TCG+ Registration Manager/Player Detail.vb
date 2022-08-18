@@ -14,7 +14,7 @@
             ClearFields()
         Else
             ' Everything works? Add this info to the XML
-            UpdateAllPlayerXML(txtMemberNo.Text, txtPlayerNickname.Text.Trim, txtPlayerFirstName.Text.Trim, txtPlayerLastName.Text.Trim)
+            DialogResult = DialogResult.OK
         End If
 
     End Sub
@@ -26,27 +26,6 @@
         txtPlayerNickname.Clear()
         txtMemberNo.Focus()
     End Sub
-
-    Private Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String, strPlayerFirstName As String, strPlayerLastName As String)
-        ' Open the XML AllPlayers.xml file
-        Dim xdoc As New XDocument
-        xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
-
-        Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
-
-        ' This should mean we have a NEW element.
-        Dim newPlayer As XElement = New XElement("Player")
-        newPlayer.Add(New XElement("FirstName", strPlayerFirstName))
-        newPlayer.Add(New XElement("LastName", strPlayerLastName))
-        newPlayer.Add(New XElement("MembershipNo", strMemberID))
-        newPlayer.Add(New XElement("MembershipName", strMemberName))
-
-        xdoc.Element("PlayerList").Add(newPlayer)
-
-
-        xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
-    End Sub
-
     Private Sub txtMemberNo_KeyUp(sender As Object, e As KeyPressEventArgs) Handles txtMemberNo.KeyPress
         ' Number keys only.
         e.Handled = Not Char.IsDigit(e.KeyChar)

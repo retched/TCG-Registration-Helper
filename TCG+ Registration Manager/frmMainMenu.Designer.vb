@@ -45,6 +45,7 @@ Partial Class frmMainMenu
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintTournamentRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageSetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -77,7 +78,7 @@ Partial Class frmMainMenu
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenTournamentToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripSeparator4, Me.PrintTournamentRosterToolStripMenuItem, Me.PageSetupToolStripMenuItem, Me.ToolStripSeparator5, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenTournamentToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripSeparator4, Me.MasterPlayerRosterToolStripMenuItem, Me.PrintTournamentRosterToolStripMenuItem, Me.PageSetupToolStripMenuItem, Me.ToolStripSeparator5, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -100,14 +101,12 @@ Partial Class frmMainMenu
         Me.TwoPlayersPerTeamToolStripMenuItem.Name = "TwoPlayersPerTeamToolStripMenuItem"
         Me.TwoPlayersPerTeamToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.TwoPlayersPerTeamToolStripMenuItem.Text = "Two Players Per Team"
-        Me.TwoPlayersPerTeamToolStripMenuItem.Visible = False
         '
         'ThreePlayersPerTeamToolStripMenuItem
         '
         Me.ThreePlayersPerTeamToolStripMenuItem.Name = "ThreePlayersPerTeamToolStripMenuItem"
         Me.ThreePlayersPerTeamToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ThreePlayersPerTeamToolStripMenuItem.Text = "Three Players Per Team"
-        Me.ThreePlayersPerTeamToolStripMenuItem.Visible = False
         '
         'OpenTournamentToolStripMenuItem
         '
@@ -193,6 +192,12 @@ Partial Class frmMainMenu
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(199, 6)
         Me.ToolStripSeparator4.Visible = False
+        '
+        'MasterPlayerRosterToolStripMenuItem
+        '
+        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
+        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
         '
         'PrintTournamentRosterToolStripMenuItem
         '
@@ -349,4 +354,5 @@ Partial Class frmMainMenu
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BandaiTCGTournamentPolicyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SoftwareOperatingManualToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MasterPlayerRosterToolStripMenuItem As ToolStripMenuItem
 End Class

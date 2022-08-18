@@ -23,13 +23,12 @@ Partial Class frmIndividual
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnNoNumber = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.btnAddPlayer = New System.Windows.Forms.Button()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -46,6 +45,7 @@ Partial Class frmIndividual
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtMemberNo = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnShowAll = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.rbMembershipID = New System.Windows.Forms.RadioButton()
         Me.rbPlayerName = New System.Windows.Forms.RadioButton()
@@ -87,6 +87,7 @@ Partial Class frmIndividual
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintTournamentRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageSetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -108,8 +109,7 @@ Partial Class frmIndividual
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.btnNoNumber)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Controls.Add(Me.btnClear)
         Me.GroupBox1.Controls.Add(Me.btnAddPlayer)
         Me.GroupBox1.Controls.Add(Me.cboStatus)
         Me.GroupBox1.Controls.Add(Me.Label6)
@@ -132,31 +132,21 @@ Partial Class frmIndividual
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Register Player"
         '
-        'btnNoNumber
+        'btnClear
         '
-        Me.btnNoNumber.Location = New System.Drawing.Point(397, 21)
-        Me.btnNoNumber.Name = "btnNoNumber"
-        Me.btnNoNumber.Size = New System.Drawing.Size(92, 29)
-        Me.btnNoNumber.TabIndex = 15
-        Me.btnNoNumber.Text = "No Number?"
-        Me.btnNoNumber.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(397, 141)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(77, 19)
-        Me.CheckBox1.TabIndex = 14
-        Me.CheckBox1.Text = "Unknown"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.btnClear.Location = New System.Drawing.Point(397, 21)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(92, 29)
+        Me.btnClear.TabIndex = 7
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnAddPlayer
         '
         Me.btnAddPlayer.Location = New System.Drawing.Point(165, 241)
         Me.btnAddPlayer.Name = "btnAddPlayer"
         Me.btnAddPlayer.Size = New System.Drawing.Size(159, 29)
-        Me.btnAddPlayer.TabIndex = 7
+        Me.btnAddPlayer.TabIndex = 6
         Me.btnAddPlayer.Text = "Add Player to Tournament"
         Me.btnAddPlayer.UseVisualStyleBackColor = True
         '
@@ -168,7 +158,7 @@ Partial Class frmIndividual
         Me.cboStatus.Location = New System.Drawing.Point(213, 207)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(276, 28)
-        Me.cboStatus.TabIndex = 6
+        Me.cboStatus.TabIndex = 5
         '
         'Label6
         '
@@ -189,7 +179,7 @@ Partial Class frmIndividual
         Me.Panel1.Location = New System.Drawing.Point(213, 172)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(276, 29)
-        Me.Panel1.TabIndex = 5
+        Me.Panel1.TabIndex = 4
         '
         'rbByes_1
         '
@@ -243,8 +233,8 @@ Partial Class frmIndividual
         Me.txtPlayerNickname.Location = New System.Drawing.Point(213, 136)
         Me.txtPlayerNickname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerNickname.Name = "txtPlayerNickname"
-        Me.txtPlayerNickname.Size = New System.Drawing.Size(177, 29)
-        Me.txtPlayerNickname.TabIndex = 4
+        Me.txtPlayerNickname.Size = New System.Drawing.Size(276, 29)
+        Me.txtPlayerNickname.TabIndex = 3
         '
         'Label3
         '
@@ -265,7 +255,7 @@ Partial Class frmIndividual
         Me.txtPlayerLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerLastName.Name = "txtPlayerLastName"
         Me.txtPlayerLastName.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerLastName.TabIndex = 3
+        Me.txtPlayerLastName.TabIndex = 2
         '
         'Label2
         '
@@ -286,7 +276,7 @@ Partial Class frmIndividual
         Me.txtPlayerFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerFirstName.Name = "txtPlayerFirstName"
         Me.txtPlayerFirstName.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerFirstName.TabIndex = 2
+        Me.txtPlayerFirstName.TabIndex = 1
         '
         'Label1
         '
@@ -308,13 +298,14 @@ Partial Class frmIndividual
         Me.txtMemberNo.MaxLength = 10
         Me.txtMemberNo.Name = "txtMemberNo"
         Me.txtMemberNo.Size = New System.Drawing.Size(177, 29)
-        Me.txtMemberNo.TabIndex = 1
+        Me.txtMemberNo.TabIndex = 0
         Me.txtMemberNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.btnShowAll)
         Me.GroupBox2.Controls.Add(Me.Panel2)
         Me.GroupBox2.Controls.Add(Me.btnSearchPlayer)
         Me.GroupBox2.Controls.Add(Me.txtSearchPlayer)
@@ -325,6 +316,15 @@ Partial Class frmIndividual
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Player Search"
+        '
+        'btnShowAll
+        '
+        Me.btnShowAll.Location = New System.Drawing.Point(388, 26)
+        Me.btnShowAll.Name = "btnShowAll"
+        Me.btnShowAll.Size = New System.Drawing.Size(103, 29)
+        Me.btnShowAll.TabIndex = 4
+        Me.btnShowAll.Text = "Show All"
+        Me.btnShowAll.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -373,7 +373,7 @@ Partial Class frmIndividual
         '
         'btnSearchPlayer
         '
-        Me.btnSearchPlayer.Location = New System.Drawing.Point(387, 26)
+        Me.btnSearchPlayer.Location = New System.Drawing.Point(279, 26)
         Me.btnSearchPlayer.Name = "btnSearchPlayer"
         Me.btnSearchPlayer.Size = New System.Drawing.Size(103, 29)
         Me.btnSearchPlayer.TabIndex = 1
@@ -385,7 +385,7 @@ Partial Class frmIndividual
         Me.txtSearchPlayer.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtSearchPlayer.Location = New System.Drawing.Point(6, 26)
         Me.txtSearchPlayer.Name = "txtSearchPlayer"
-        Me.txtSearchPlayer.Size = New System.Drawing.Size(372, 29)
+        Me.txtSearchPlayer.Size = New System.Drawing.Size(267, 29)
         Me.txtSearchPlayer.TabIndex = 0
         '
         'lbSearchResults
@@ -404,7 +404,7 @@ Partial Class frmIndividual
         '
         Me.cmsPlayerList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangePlayerDetails0ToolStripMenuItem, Me.DeletePlayerToolStripMenuItem})
         Me.cmsPlayerList.Name = "cms"
-        Me.cmsPlayerList.Size = New System.Drawing.Size(225, 70)
+        Me.cmsPlayerList.Size = New System.Drawing.Size(225, 48)
         '
         'ChangePlayerDetails0ToolStripMenuItem
         '
@@ -428,15 +428,16 @@ Partial Class frmIndividual
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvPlayers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvPlayers.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPlayers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcListIndex, Me.dgcSelect, Me.dgcMembershipNo, Me.dgcNickname, Me.dgcByesCount, Me.dgcStatus})
         Me.dgvPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
@@ -445,6 +446,7 @@ Partial Class frmIndividual
         Me.dgvPlayers.MultiSelect = False
         Me.dgvPlayers.Name = "dgvPlayers"
         Me.dgvPlayers.RowHeadersVisible = False
+        Me.dgvPlayers.RowTemplate.Height = 90
         Me.dgvPlayers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvPlayers.Size = New System.Drawing.Size(724, 524)
@@ -467,9 +469,9 @@ Partial Class frmIndividual
         '
         'dgcMembershipNo
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Courier New", 9.75!)
-        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 9.75!)
+        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgcMembershipNo.FillWeight = 80.0!
         Me.dgcMembershipNo.HeaderText = "Membership Number"
         Me.dgcMembershipNo.Name = "dgcMembershipNo"
@@ -477,8 +479,8 @@ Partial Class frmIndividual
         '
         'dgcNickname
         '
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgcNickname.FillWeight = 160.0!
         Me.dgcNickname.HeaderText = "Nickname (Player Name)"
         Me.dgcNickname.Name = "dgcNickname"
@@ -486,9 +488,9 @@ Partial Class frmIndividual
         '
         'dgcByesCount
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgcByesCount.FillWeight = 60.0!
         Me.dgcByesCount.HeaderText = "First Round Bye"
         Me.dgcByesCount.Name = "dgcByesCount"
@@ -623,7 +625,7 @@ Partial Class frmIndividual
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem1, Me.ToolStripSeparator1, Me.PrintTournamentRosterToolStripMenuItem, Me.PageSetupToolStripMenuItem, Me.ToolStripSeparator2})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem1, Me.ToolStripSeparator1, Me.MasterPlayerRosterToolStripMenuItem, Me.PrintTournamentRosterToolStripMenuItem, Me.PageSetupToolStripMenuItem, Me.ToolStripSeparator2})
         Me.FileToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
@@ -687,6 +689,13 @@ Partial Class frmIndividual
         Me.ToolStripSeparator1.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(199, 6)
+        '
+        'MasterPlayerRosterToolStripMenuItem
+        '
+        Me.MasterPlayerRosterToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
+        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
+        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
         '
         'PrintTournamentRosterToolStripMenuItem
         '
@@ -758,7 +767,7 @@ Partial Class frmIndividual
         Me.Controls.Add(Me.GroupBox1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MinimumSize = New System.Drawing.Size(1268, 623)
+        Me.MinimumSize = New System.Drawing.Size(1258, 625)
         Me.Name = "frmIndividual"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Individual Registration"
@@ -844,10 +853,11 @@ Partial Class frmIndividual
     Friend WithEvents dgcStatus As DataGridViewTextBoxColumn
     Friend WithEvents SaveFileDialogCSV As SaveFileDialog
     Friend WithEvents SaveFileDialogXML As SaveFileDialog
-    Friend WithEvents btnNoNumber As Button
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents tslBorder As ToolStripStatusLabel
     Friend WithEvents tslActivePlayer As ToolStripStatusLabel
     Friend WithEvents tslSpacer As ToolStripStatusLabel
     Friend WithEvents tslFileName As ToolStripStatusLabel
+    Friend WithEvents btnClear As Button
+    Friend WithEvents btnShowAll As Button
+    Friend WithEvents MasterPlayerRosterToolStripMenuItem As ToolStripMenuItem
 End Class

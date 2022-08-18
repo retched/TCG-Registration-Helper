@@ -99,7 +99,7 @@
 
             Dim currentRow As String()
             Dim intPlayers As Integer
-
+            Dim intLineCount As Integer = 0
             While Not csvDoc.EndOfData
 
                 Try
@@ -111,16 +111,22 @@
 
                     If currentRow(0) = "Team ID" Or currentRow.Any(Function(e) e.Contains("※")) Then
                         ' Skip this line, this is either a header OR the instruction row from Bandai.
-                        If currentRow.Any(Function(f) f.Contains("-3")) Then
+                        If currentRow.Any(Function(f) f.Contains("- 3")) Then
                             intPlayers = 3
 
-                        ElseIf currentRow.Any(Function(f) f.Contains("-2")) Then
+                        ElseIf currentRow.Any(Function(f) f.Contains("- 2")) Then
                             intPlayers = 2
 
                         Else intPlayers = 1
                         End If
 
                         Continue While
+                    ElseIf (currentRow(0) = "Ranking" Or currentRow(3) = "Opp %") And intLineCount = 0 Then
+                        ' If this first row contains Ranking or Opp%, stop this is a rankings file.
+                        Exit While
+                    ElseIf currentRow.Count < 9 Then
+                        ' Something went wrong, this isn't a valid file if it contains less than 9 columns.
+                        Exit While
                     Else
                         Select Case intPlayers
                             Case 3
@@ -185,13 +191,48 @@
                     End If
 
                 Catch ex As Exception
-                    MsgBox("Line " & ex.Message & " is invalid.  Skipping")
+                    MsgBox("Line " & intLineCount + 1 & " is invalid.  Skipping: " & Environment.NewLine & Environment.NewLine & ex.Message)
                 End Try
 
+                intLineCount += 1
             End While
 
         End Using
 
         Return lstOutputTeams
     End Function
+
+    Public Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String, Optional strPlayerFirstName As String = "", Optional strPlayerLastName As String = "")
+        ' Open the XML AllPlayers.xml file
+        Dim xdoc As New XDocument
+        xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
+
+        Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
+
+        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
+            If IsNothing(target) Then
+                ' This should mean we have a NEW element.
+                Dim newPlayer As XElement = New XElement("Player")
+                newPlayer.Add(New XElement("FirstName", strPlayerFirstName))
+                newPlayer.Add(New XElement("LastName", strPlayerLastName))
+                newPlayer.Add(New XElement("MembershipNo", strMemberID))
+                newPlayer.Add(New XElement("MembershipName", strMemberName))
+
+                xdoc.Element("PlayerList").Add(newPlayer)
+
+            Else
+                ' This should mean we are UPDATING an element.
+                ' If the incoming name is blank but the existing name is not, DO NOT UPDATE
+                target.SetElementValue("FirstName", strPlayerFirstName)
+                target.SetElementValue("LastName", strPlayerLastName)
+
+                target.SetElementValue("MembershipNo", strMemberID)
+                target.SetElementValue("MembershipName", strMemberName)
+
+            End If
+
+            xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
+        End If
+
+    End Sub
 End Module

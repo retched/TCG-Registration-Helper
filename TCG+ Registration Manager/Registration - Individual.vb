@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Xml
-Public Class frmIndividual
+﻿Public Class frmIndividual
 
     Public Property txtXMLFileName As String
     Public Property txtCSVFileName As String
@@ -52,12 +50,17 @@ Public Class frmIndividual
 
             lstTournTeams = lstFileData.ToList()
 
-            ' Add New Players to Global Player List 
-            AddNewPlayersFromImport()
             tslFileName.Text = "File Name: " & txtCSVFileName
             tslFileName.Visible = True
 
-            MessageBox.Show("CSV File Loaded Sucessfully")
+            If lstTournTeams.Count > 0 Then
+                ' Add New Players to Global Player List 
+                AddNewPlayersFromImport()
+                MessageBox.Show("CSV File Loaded Sucessfully")
+            Else
+                MessageBox.Show("There is no valid Membership data contained within the file." & Environment.NewLine & Environment.NewLine & "Are you trying to read a standings file?" & Environment.NewLine & Environment.NewLine & "Please double check the file and make sure you are using CSV Export from the ""My Event Details"" page and NOT from the Rankings page and try again.", "Invalid CSV File", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
         ElseIf Not String.IsNullOrEmpty(txtXMLFileName) Then
             ' If the XML Name is set, process the XML File.
             Dim lstFileData As List(Of Object) = xmlSinglePlayerReadOut(txtXMLFileName).ToList()
@@ -98,6 +101,10 @@ Public Class frmIndividual
             UpdateAllPlayerXML(staff.MembershipNumber, staff.MembershipName, staff.FirstName, staff.LastName)
         Next
 
+        ' Since a new team was made, we should update the "Global Player List" on the form.
+        LoadPlayersListFromXML()
+
+        FillListBox()
     End Sub
 
     Private Sub btnAddPlayer_Click(sender As Object, e As EventArgs) Handles btnAddPlayer.Click
@@ -174,43 +181,6 @@ Public Class frmIndividual
 
     End Sub
 
-    Private Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String, strPlayerFirstName As String, strPlayerLastName As String)
-        ' Open the XML AllPlayers.xml file
-        Dim xdoc As New XDocument
-        xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
-
-        Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
-
-        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
-            If IsNothing(target) Then
-                ' This should mean we have a NEW element.
-                Dim newPlayer As XElement = New XElement("Player")
-                newPlayer.Add(New XElement("FirstName", strPlayerFirstName))
-                newPlayer.Add(New XElement("LastName", strPlayerLastName))
-                newPlayer.Add(New XElement("MembershipNo", strMemberID))
-                newPlayer.Add(New XElement("MembershipName", strMemberName))
-
-                xdoc.Element("PlayerList").Add(newPlayer)
-
-            Else
-                ' This should mean we are UPDATING an element.
-                ' If the incoming name is blank but the existing name is not, DO NOT UPDATE
-                target.SetElementValue("FirstName", strPlayerFirstName)
-                target.SetElementValue("LastName", strPlayerLastName)
-                target.SetElementValue("MembershipNo", strMemberID)
-                target.SetElementValue("MembershipName", strMemberName)
-
-            End If
-
-            xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
-
-            ' Since a new team was made, we should update the "Global Player List" on the form.
-            LoadPlayersListFromXML()
-            lbSearchResults.ClearSelected()
-        End If
-
-    End Sub
-
     Private Sub BuildTournamentList()
         ' Clear the rows already there.
         dgvPlayers.Rows.Clear()
@@ -243,6 +213,7 @@ Public Class frmIndividual
 
     Sub ClearPlayer()
 
+        txtMemberNo.Focus()
         txtMemberNo.Clear()
         txtPlayerFirstName.Clear()
         txtPlayerLastName.Clear()
@@ -250,6 +221,9 @@ Public Class frmIndividual
         cboStatus.SelectedValue = 10
         rbByes_0.Checked = True
         txtMemberNo.Clear()
+
+        txtMemberNo.ReadOnly = False
+        txtPlayerNickname.ReadOnly = False
 
     End Sub
 
@@ -284,8 +258,9 @@ Public Class frmIndividual
             ElseIf rbMembershipID.Checked Then
                 lstSearch = lstSearch.OrderBy(Function(x) x.MembershipNumber).ToList()
             Else
-                'rbPlayerName.Checked, Sort by First Name Then Last Name.
-                lstSearch = lstSearch.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ToList()
+                'rbPlayerName.Checked, Sort by First Name Then Last Name THEN by Membership Name.
+                'lstSearch = (From player In lstSearch Order By player.LastName Ascending, player.FirstName Ascending, player.MembershipName Select player).ToList()
+                lstSearch = lstSearch.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ThenBy(Function(x) x.MembershipName).ToList()
             End If
 
             lbSearchResults.DataSource = lstSearch
@@ -297,7 +272,7 @@ Public Class frmIndividual
                 lstPlayers = lstPlayers.OrderBy(Function(x) x.MembershipNumber).ToList()
             Else
                 'rbPlayerName.Checked, Sort by First Name Then Last Name.
-                lstPlayers = lstPlayers.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ToList()
+                lstPlayers = lstPlayers.OrderBy(Function(x) x.LastName).ThenBy(Function(x) x.FirstName).ThenBy(Function(x) x.MembershipName).ToList()
             End If
 
             ' Fill listbox from dataset. (Format: "GUEST99999 - SomeNickname (PlayerFirst PlayerLast)" )
@@ -355,6 +330,7 @@ Public Class frmIndividual
         Else
             ' Clear the fields, but do NOT change the bye setting(?)
 
+
             txtPlayerFirstName.Clear()
             txtPlayerLastName.Clear()
             txtPlayerNickname.Clear()
@@ -362,6 +338,7 @@ Public Class frmIndividual
             rbByes_0.Checked = True
         End If
     End Sub
+
     Private Sub txtMemberNo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMemberNo.KeyDown, txtPlayerFirstName.KeyDown, txtPlayerLastName.KeyDown, txtPlayerNickname.KeyDown
         If e.KeyCode = Keys.Enter Then
 
@@ -369,6 +346,8 @@ Public Class frmIndividual
             e.Handled = True
 
         End If
+
+        ' When this value is changed, clear 
 
     End Sub
     Private Sub txtPlayerFirstName_KeyUp(sender As Object, e As KeyEventArgs) Handles txtPlayerFirstName.KeyUp, txtPlayerLastName.KeyUp, txtPlayerNickname.KeyUp, cboStatus.KeyUp
@@ -417,6 +396,11 @@ Public Class frmIndividual
 
             ' A row was selected, take that row and preload all the info back into entry field
 
+            If lstTournTeams(intSelected).TeamID <> 0 Then
+                txtMemberNo.ReadOnly = True
+                txtPlayerNickname.ReadOnly = True
+            End If
+
             txtMemberNo.Text = lstTournTeams(intSelected).PlayerA.MembershipNumber
             txtPlayerFirstName.Text = lstTournTeams(intSelected).PlayerA.FirstName
             txtPlayerLastName.Text = lstTournTeams(intSelected).PlayerA.LastName
@@ -455,7 +439,7 @@ Public Class frmIndividual
     End Sub
 
     Private Sub DeletePlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeletePlayerToolStripMenuItem.Click
-        If MessageBox.Show("Are you ABSOLUTELY sure that you want to delete this player from the local database?" & System.Environment.NewLine & System.Environment.NewLine & "This will not remove them from any tournaments they are registered for on Bandai TCG+ and will remove them from this current tournament.", "Delete This Player?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+        If MessageBox.Show("Are you ABSOLUTELY sure that you want to delete this player from the local database?" & System.Environment.NewLine & System.Environment.NewLine & "This will not remove them from the current tournament file nor any tournaments that are later loaded. This also will not remove them from a tournament that the player is registered for on Bandai TCG+." & Environment.NewLine & Environment.NewLine & "This will not prevent the player from being added back to the database if you update the status above.", "Delete This Player?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
             Dim strMemberToDelete As String = lbSearchResults.SelectedValue
 
@@ -478,23 +462,11 @@ Public Class frmIndividual
             ' Clear Selection of ListBox
             lbSearchResults.ClearSelected()
 
-            ' Also we should delete them from the current OPEN tournament too.
-            Dim intIndex As Integer = lstTournTeams.FindIndex(Function(x) x.PlayerA.MembershipNumber = strMemberToDelete)
+            ' Remove penalties AND judge listing.
+            lstPenalties.RemoveAll(Function(x) x.PlayerNumber = strMemberToDelete)
+            lstPenalties.RemoveAll(Function(x) x.JudgeNumber = strMemberToDelete)
+            lstStaff.RemoveAll(Function(x) x.MembershipNumber = strMemberToDelete)
 
-            If lstTournTeams(intIndex).TeamID = 0 Then
-
-                If intIndex <> -1 Then
-                    ' If it's not -1 then we find something and should delete that team on sight.
-
-                    lstTournTeams.RemoveAt(intIndex)
-
-                    ' Rebuild the list 
-                    BuildTournamentList()
-                End If
-
-                ' TODO: Remove penalties AND judge listing.
-
-            End If
         End If
 
     End Sub
@@ -896,7 +868,7 @@ No change in value will have any effect."",""Required""")
         End Using
     End Sub
 
-    Private Sub btnNoNumber_Click(sender As Object, e As EventArgs) Handles btnNoNumber.Click
+    Private Sub btnNoNumber_Click(sender As Object, e As EventArgs)
         MessageBox.Show("If the player does not have a Bandai TCG+ Number and does not want to sign up for one, that is fine." & Environment.NewLine & Environment.NewLine & "During the event's ""Check-In"" step, you can create a ""guest"" player to be added to the event. This player will NOT be able to use the app to report pairings nor will it count towards your TCG+ Shop Rank." & Environment.NewLine & Environment.NewLine & "Remember, the old BCC (Budokai Card Club) numbers do not work with the new system.", "How to handle ""guest"" registrations.", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
@@ -916,10 +888,44 @@ No change in value will have any effect."",""Required""")
                 .txtMemberNo.ReadOnly = True
             End With
 
+            frmChangeInfo.txtPlayerFirstName.Focus()
+
             If frmChangeInfo.ShowDialog = DialogResult.OK Then
                 ' We are changing the player's info, so update the XML as needed.
                 UpdateAllPlayerXML(frmChangeInfo.txtMemberNo.Text.Trim, frmChangeInfo.txtPlayerNickname.Text.Trim, frmChangeInfo.txtPlayerFirstName.Text.Trim, frmChangeInfo.txtPlayerLastName.Text.Trim)
+
+                LoadPlayersListFromXML()
             End If
+        End Using
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ClearPlayer()
+    End Sub
+
+    Private Sub cmsPlayerList_Closed(sender As Object, e As ToolStripDropDownClosedEventArgs) Handles cmsPlayerList.Closed
+        ' Reset the options
+        ChangePlayerDetails0ToolStripMenuItem.Text = "Change Player Details: {0}"
+    End Sub
+
+    Private Sub frmIndividual_Activated(sender As Object, e As EventArgs) Handles MyBase.GotFocus
+        ' Whenever the form is activated, refill the list from the XML.
+        LoadPlayersListFromXML()
+
+    End Sub
+
+    Private Sub btnShowAll_Click(sender As Object, e As EventArgs) Handles btnShowAll.Click
+        blnSearch = False
+        txtSearchPlayer.Clear()
+        FillListBox()
+    End Sub
+
+    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
+        Using frmPlayerDatabase As New frmMasterPlayerList
+            frmPlayerDatabase.ShowDialog()
+
+            LoadPlayersListFromXML()
+            BuildTournamentList()
         End Using
     End Sub
 End Class

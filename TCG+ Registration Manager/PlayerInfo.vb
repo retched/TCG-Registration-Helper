@@ -1,8 +1,8 @@
 ﻿Public Class PlayerInfo
-    Public Property FirstName As String
-    Public Property LastName As String
+    Public Property FirstName As String = ""
+    Public Property LastName As String = ""
     Public Property MembershipNumber As String
-    Public Property MembershipName As String
+    Public Property MembershipName As String = ""
     Public Property SeatOrder As String = "A"
 
     Public Property SearchHelper As String
@@ -87,7 +87,12 @@ End Class
 Public Class TournamentPlayer
     Public Property Status As Integer = 0
     Public Property ByeRounds As Integer
+#If DEBUG Then
     Public Property TeamID As Integer = 0
+#Else
+    Public Property TeamID As Integer = 0
+#End If
+
     Public Property TeamName As String
     Public Property Memo As String
 End Class
@@ -96,6 +101,24 @@ Public Class TournamentTeam : Inherits TournamentPlayer
     Public PlayerA As PlayerInfo
     Public PlayerB As PlayerInfo
     Public PlayerC As PlayerInfo
+
+    ' Okay, I need to check each member of this team to make sure that the number checked, isn't already in a team.
+
+    Public Function CheckTeam(strSearchNumber As String)
+        Dim blnFoundInTeam As Boolean = False
+
+        If PlayerA.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+
+        If Not IsNothing(PlayerB) Then
+            If PlayerB.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+        End If
+
+        If Not IsNothing(PlayerC) Then
+            If PlayerC.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+        End If
+
+        Return blnFoundInTeam
+    End Function
 End Class
 
 Public Class TournamentStaff : Inherits PlayerInfo

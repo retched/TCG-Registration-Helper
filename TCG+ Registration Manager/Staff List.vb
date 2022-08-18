@@ -152,7 +152,10 @@
             frmAddStaff.lstPlayers.AddRange(lstPlayers)
 
             If frmAddStaff.ShowDialog(Me) = DialogResult.OK Then
-                ' If all is well, add THAT player to the 
+                ' If all is well, add THAT player to the staff XML
+                UpdateAllPlayerXML(frmAddStaff.txtMemberNo.Text, frmAddStaff.txtPlayerNickname.Text, frmAddStaff.txtPlayerFirstName.Text, frmAddStaff.txtPlayerLastName.Text)
+
+                ' Then Reload the XML
                 LoadPlayersListFromXML()
 
                 cboStaffMember.SelectedValue = frmAddStaff.txtMemberNo.Text
