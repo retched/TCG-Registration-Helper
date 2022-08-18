@@ -46,7 +46,7 @@
 
         If Not String.IsNullOrEmpty(txtCSVFileName) Then
             ' If CSV Name is set, process the CSV file.
-            Dim lstFileData As List(Of TournamentTeam) = csvSinglePlayerReadOut(txtCSVFileName)
+            Dim lstFileData As List(Of TournamentTeam) = csvPlayerReadOut(txtCSVFileName)
 
             lstTournTeams = lstFileData.ToList()
 
@@ -63,7 +63,7 @@
 
         ElseIf Not String.IsNullOrEmpty(txtXMLFileName) Then
             ' If the XML Name is set, process the XML File.
-            Dim lstFileData As List(Of Object) = xmlSinglePlayerReadOut(txtXMLFileName).ToList()
+            Dim lstFileData As List(Of Object) = xmlPlayerReadOut(txtXMLFileName).ToList()
 
             lstTournTeams = lstFileData(0)
             lstStaff = lstFileData(1)

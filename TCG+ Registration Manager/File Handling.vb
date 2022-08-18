@@ -1,5 +1,5 @@
 ﻿Module FileHandling
-    Public Function xmlSinglePlayerReadOut(strFileName As String) As List(Of Object)
+    Public Function xmlPlayerReadOut(strFileName As String) As List(Of Object)
 
         Dim lstFinalOutput As New List(Of Object)
 
@@ -88,7 +88,7 @@
 
     End Function
 
-    Public Function csvSinglePlayerReadOut(strFileName As String) As List(Of TournamentTeam)
+    Public Function csvPlayerReadOut(strFileName As String) As List(Of TournamentTeam)
 
         Dim lstOutputTeams As New List(Of TournamentTeam)
 
@@ -110,16 +110,19 @@
                     ' No -2? Okay so that means there is only ONE PLAYER
 
                     If currentRow(0) = "Team ID" Or currentRow.Any(Function(e) e.Contains("※")) Then
+
                         ' Skip this line, this is either a header OR the instruction row from Bandai.
-                        If currentRow.Any(Function(f) f.Contains("- 3")) Then
-                            intPlayers = 3
-
-                        ElseIf currentRow.Any(Function(f) f.Contains("- 2")) Then
-                            intPlayers = 2
-
-                        Else intPlayers = 1
+                        If intLineCount = 0 Then
+                            If currentRow.Any(Function(f) f.Contains("- 3")) Then
+                                intPlayers = 3
+                            ElseIf currentRow.Any(Function(f) f.Contains("- 2")) Then
+                                intPlayers = 2
+                            Else
+                                intPlayers = 1
+                            End If
                         End If
 
+                        intLineCount += 1
                         Continue While
                     ElseIf (currentRow(0) = "Ranking" Or currentRow(3) = "Opp %") And intLineCount = 0 Then
                         ' If this first row contains Ranking or Opp%, stop this is a rankings file.
@@ -127,8 +130,8 @@
                     ElseIf currentRow.Count < 9 Then
                         ' Something went wrong, this isn't a valid file if it contains less than 9 columns.
                         Exit While
-                    Else
-                        Select Case intPlayers
+                        Else
+                            Select Case intPlayers
                             Case 3
                                 ' Trios Team
                                 lstOutputTeams.Add(New TournamentTeam With {

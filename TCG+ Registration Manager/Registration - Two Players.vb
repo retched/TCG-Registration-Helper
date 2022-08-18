@@ -40,7 +40,41 @@
         cboStatus.SelectedValue = 10
         cboChangeStatus.SelectedValue = 10
 
+        If Not String.IsNullOrEmpty(txtCSVFileName) Then
+            ' If CSV Name is set, process the CSV file.
+            Dim lstFileData As List(Of TournamentTeam) = csvPlayerReadOut(txtCSVFileName)
+
+            lstTournTeams = lstFileData.ToList()
+
+            tslFileName.Text = "File Name: " & txtCSVFileName
+            tslFileName.Visible = True
+
+            If lstTournTeams.Count > 0 Then
+                ' Add New Players to Global Player List 
+                AddNewPlayersFromImport()
+                MessageBox.Show("CSV File Loaded Sucessfully")
+            Else
+                MessageBox.Show("There is no valid Membership data contained within the file." & Environment.NewLine & Environment.NewLine & "Are you trying to read a standings file?" & Environment.NewLine & Environment.NewLine & "Please double check the file and make sure you are using CSV Export from the ""My Event Details"" page and NOT from the Rankings page and try again.", "Invalid CSV File", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        ElseIf Not String.IsNullOrEmpty(txtXMLFileName) Then
+            ' If the XML Name is set, process the XML File.
+            Dim lstFileData As List(Of Object) = xmlPlayerReadOut(txtXMLFileName).ToList()
+
+            lstTournTeams = lstFileData(0)
+            lstStaff = lstFileData(1)
+            lstPenalties = lstFileData(2)
+
+            ' Add New Players to Global Player List 
+            AddNewPlayersFromImport()
+            tslFileName.Text = "File Name: " & txtXMLFileName
+            tslFileName.Visible = True
+            MessageBox.Show("XML File Loaded Sucessfully")
+        End If
+
         LoadPlayersListFromXML()
+
+        BuildTournamentList()
 
         ClearTeamDetails()
 
@@ -67,7 +101,7 @@
         End If
 
         ' Are the two member number boxes NOT the same? (It's OK if they're both GUEST99999)
-        If txtMemberNo1.Text = txtMemberNo2.Text Then
+        If {txtMemberNo1.Text, txtMemberNo2.Text}.Distinct().Count() < 2 Then
             MessageBox.Show("Both Players details are identical. Please double check and try again.")
             Exit Sub
         End If
@@ -857,5 +891,27 @@ No change in value will have any effect."",""Required""")
             tslFileName.Visible = True
         End If
 
+    End Sub
+
+    Private Sub AddNewPlayersFromImport()
+        ' Gist: Comb through the imported players and add them (or update them) to the Global Player XML.
+
+        For Each team In lstTournTeams
+            team.PlayerA.FormatNumber()
+            team.PlayerB.FormatNumber()
+
+            ' We only have a two-player team in this list, so we only need PlayerA from lstTournTeams
+            UpdateAllPlayerXML(team.PlayerA.MembershipNumber, team.PlayerA.MembershipName, team.PlayerA.FirstName, team.PlayerA.LastName)
+            UpdateAllPlayerXML(team.PlayerB.MembershipNumber, team.PlayerB.MembershipName, team.PlayerB.FirstName, team.PlayerB.LastName)
+        Next
+
+        For Each staff In lstStaff
+            staff.FormatNumber()
+            ' We also have to loop through and add all staff members to the master list of players.
+            UpdateAllPlayerXML(staff.MembershipNumber, staff.MembershipName, staff.FirstName, staff.LastName)
+        Next
+
+        ' Since a new team was made, we should update the "Global Player List" on the form.
+        LoadPlayersListFromXML()
     End Sub
 End Class

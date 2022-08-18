@@ -107,14 +107,14 @@ Public Class TournamentTeam : Inherits TournamentPlayer
     Public Function CheckTeam(strSearchNumber As String)
         Dim blnFoundInTeam As Boolean = False
 
-        If PlayerA.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+        If PlayerA.MembershipNumber = strSearchNumber Then blnFoundInTeam = True
 
         If Not IsNothing(PlayerB) Then
-            If PlayerB.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+            If PlayerB.MembershipNumber = strSearchNumber Then blnFoundInTeam = True
         End If
 
         If Not IsNothing(PlayerC) Then
-            If PlayerC.MembershipNumber = strSearchNumber Then blnFoundInTeam = False
+            If PlayerC.MembershipNumber = strSearchNumber Then blnFoundInTeam = True
         End If
 
         Return blnFoundInTeam

@@ -49,18 +49,77 @@
             ' TODO: Check for Duos or Trios Import Form
             ' First Row will contain a "- 1", "- 2", or "- 3"
 
-            ' This should create a copy of frmIndividual
-            Dim ChildForm As New frmIndividual
-            ' Make it a child of this MDI form before showing it.
-            ChildForm.MdiParent = Me
+            Using csvDoc As New FileIO.TextFieldParser(FileName)
+                csvDoc.TextFieldType = FileIO.FieldType.Delimited
+                csvDoc.Delimiters = New String() {","}
+                csvDoc.HasFieldsEnclosedInQuotes = True
 
-            ' Set the name of the CSV File.
-            ChildForm.txtCSVFileName = FileName
+                Dim firstRow As String()
+                Dim intPlayers As Integer
+                Dim intLineCount As Integer = 0
 
-            m_ChildFormNumber += 1
-            ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+                ' We're only reading the first row of, what should be, row headers
+                firstRow = csvDoc.ReadFields()
 
-            ChildForm.Show()
+                If firstRow(0) = "Team ID" Then
+                    ' Skip this line, this is either a header OR the instruction row from Bandai.
+                    If firstRow.Any(Function(f) f.Contains("- 3")) Then
+                        intPlayers = 3
+
+                    ElseIf firstRow.Any(Function(f) f.Contains("- 2")) Then
+                        intPlayers = 2
+
+                    Else intPlayers = 1
+                    End If
+                End If
+
+                Select Case intPlayers
+                    Case 3 ' Load Trios
+                        ' This should create a copy of frmDuos
+                        Dim ChildForm As New frmTrios
+                        ' Make it a child of this MDI form before showing it.
+                        ChildForm.MdiParent = Me
+
+                        ' Set the name of the CSV File.
+                        ChildForm.txtCSVFileName = FileName
+
+                        m_ChildFormNumber += 1
+                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+
+                        ChildForm.Show()
+                    Case 2 ' Load Duos
+                        ' This should create a copy of frmDuos
+                        Dim ChildForm As New frmDuos
+                        ' Make it a child of this MDI form before showing it.
+                        ChildForm.MdiParent = Me
+
+                        ' Set the name of the CSV File.
+                        ChildForm.txtCSVFileName = FileName
+
+                        m_ChildFormNumber += 1
+                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+
+                        ChildForm.Show()
+
+                    Case 1 ' Load Individual
+                        ' This should create a copy of frmIndividual
+                        Dim ChildForm As New frmIndividual
+                        ' Make it a child of this MDI form before showing it.
+                        ChildForm.MdiParent = Me
+
+                        ' Set the name of the CSV File.
+                        ChildForm.txtCSVFileName = FileName
+
+                        m_ChildFormNumber += 1
+                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+
+                        ChildForm.Show()
+                    Case Else ' If there is no valid row, something wrong... back out.
+
+                End Select
+
+            End Using
+
 
         End If
     End Sub
@@ -80,7 +139,6 @@
 
             Select Case intExpectedPlayers
                 Case 3
-                    ' TODO: Fix for three players
                     ' This should create a copy of frmTrios
                     Dim ChildForm As New frmTrios
                     ' Make it a child of this MDI form before showing it.
@@ -94,7 +152,6 @@
 
                     ChildForm.Show()
                 Case 2
-                    ' TODO: Fix for Two Players
                     ' This should create a copy of frmDuos
                     Dim ChildForm As New frmDuos
                     ' Make it a child of this MDI form before showing it.

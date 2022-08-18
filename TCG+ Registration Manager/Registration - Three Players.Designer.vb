@@ -23,10 +23,10 @@ Partial Class frmTrios
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tslPlayerPreReg = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslBorder = New System.Windows.Forms.ToolStripStatusLabel()
@@ -76,6 +76,16 @@ Partial Class frmTrios
         Me.txtPlayerFirstName2 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtMemberNo2 = New System.Windows.Forms.TextBox()
+        Me.tpPlayerC = New System.Windows.Forms.TabPage()
+        Me.btnClearPlayer3 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtPlayerNickname3 = New System.Windows.Forms.TextBox()
+        Me.txtPlayerLastName3 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtPlayerFirstName3 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtMemberNo3 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.rbByes_1 = New System.Windows.Forms.RadioButton()
@@ -110,16 +120,9 @@ Partial Class frmTrios
         Me.DeletePlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveFileDialogCSV = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialogXML = New System.Windows.Forms.SaveFileDialog()
-        Me.tpPlayerC = New System.Windows.Forms.TabPage()
-        Me.btnClearPlayer3 = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtPlayerNickname3 = New System.Windows.Forms.TextBox()
-        Me.txtPlayerLastName3 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtPlayerFirstName3 = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtMemberNo3 = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TournamentRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PenaltyListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StaffListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.dgvTeams, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -128,11 +131,11 @@ Partial Class frmTrios
         Me.tcTeams.SuspendLayout()
         Me.tpPlayerA.SuspendLayout()
         Me.tpPlayerB.SuspendLayout()
+        Me.tpPlayerC.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.cmsPlayerList.SuspendLayout()
-        Me.tpPlayerC.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -254,19 +257,20 @@ Partial Class frmTrios
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTeams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTeams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvTeams.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvTeams.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTeams.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcListIndex, Me.dgcSelect, Me.dgcTeamName, Me.dgcNickname, Me.dgcByesCount, Me.dgcStatus})
         Me.dgvTeams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvTeams.EnableHeadersVisualStyles = False
         Me.dgvTeams.Location = New System.Drawing.Point(516, 39)
+        Me.dgvTeams.MultiSelect = False
         Me.dgvTeams.Name = "dgvTeams"
         Me.dgvTeams.RowHeadersVisible = False
         Me.dgvTeams.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -291,9 +295,9 @@ Partial Class frmTrios
         '
         'dgcTeamName
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgcTeamName.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgcTeamName.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgcTeamName.FillWeight = 110.0!
         Me.dgcTeamName.HeaderText = "Team Name"
         Me.dgcTeamName.Name = "dgcTeamName"
@@ -301,8 +305,8 @@ Partial Class frmTrios
         '
         'dgcNickname
         '
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgcNickname.FillWeight = 160.0!
         Me.dgcNickname.HeaderText = "Team Members (Player Name)"
         Me.dgcNickname.Name = "dgcNickname"
@@ -310,9 +314,9 @@ Partial Class frmTrios
         '
         'dgcByesCount
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgcByesCount.FillWeight = 60.0!
         Me.dgcByesCount.HeaderText = "First Round Bye"
         Me.dgcByesCount.Name = "dgcByesCount"
@@ -664,6 +668,120 @@ Partial Class frmTrios
         Me.txtMemberNo2.TabIndex = 35
         Me.txtMemberNo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'tpPlayerC
+        '
+        Me.tpPlayerC.Controls.Add(Me.btnClearPlayer3)
+        Me.tpPlayerC.Controls.Add(Me.Label8)
+        Me.tpPlayerC.Controls.Add(Me.txtPlayerNickname3)
+        Me.tpPlayerC.Controls.Add(Me.txtPlayerLastName3)
+        Me.tpPlayerC.Controls.Add(Me.Label9)
+        Me.tpPlayerC.Controls.Add(Me.txtPlayerFirstName3)
+        Me.tpPlayerC.Controls.Add(Me.Label10)
+        Me.tpPlayerC.Controls.Add(Me.txtMemberNo3)
+        Me.tpPlayerC.Controls.Add(Me.Label11)
+        Me.tpPlayerC.Location = New System.Drawing.Point(4, 22)
+        Me.tpPlayerC.Name = "tpPlayerC"
+        Me.tpPlayerC.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpPlayerC.Size = New System.Drawing.Size(483, 177)
+        Me.tpPlayerC.TabIndex = 2
+        Me.tpPlayerC.Text = "Player C"
+        Me.tpPlayerC.UseVisualStyleBackColor = True
+        '
+        'btnClearPlayer3
+        '
+        Me.btnClearPlayer3.Location = New System.Drawing.Point(384, 16)
+        Me.btnClearPlayer3.Name = "btnClearPlayer3"
+        Me.btnClearPlayer3.Size = New System.Drawing.Size(92, 29)
+        Me.btnClearPlayer3.TabIndex = 39
+        Me.btnClearPlayer3.Text = "Clear"
+        Me.btnClearPlayer3.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label8.Location = New System.Drawing.Point(7, 136)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(148, 19)
+        Me.Label8.TabIndex = 43
+        Me.Label8.Text = "Player Member Name*"
+        '
+        'txtPlayerNickname3
+        '
+        Me.txtPlayerNickname3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.txtPlayerNickname3.Location = New System.Drawing.Point(200, 131)
+        Me.txtPlayerNickname3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPlayerNickname3.Name = "txtPlayerNickname3"
+        Me.txtPlayerNickname3.Size = New System.Drawing.Size(276, 29)
+        Me.txtPlayerNickname3.TabIndex = 38
+        '
+        'txtPlayerLastName3
+        '
+        Me.txtPlayerLastName3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.txtPlayerLastName3.Location = New System.Drawing.Point(200, 94)
+        Me.txtPlayerLastName3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPlayerLastName3.Name = "txtPlayerLastName3"
+        Me.txtPlayerLastName3.Size = New System.Drawing.Size(276, 29)
+        Me.txtPlayerLastName3.TabIndex = 37
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label9.Location = New System.Drawing.Point(7, 99)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(115, 19)
+        Me.Label9.TabIndex = 42
+        Me.Label9.Text = "Player Last Name"
+        '
+        'txtPlayerFirstName3
+        '
+        Me.txtPlayerFirstName3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.txtPlayerFirstName3.Location = New System.Drawing.Point(200, 55)
+        Me.txtPlayerFirstName3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPlayerFirstName3.Name = "txtPlayerFirstName3"
+        Me.txtPlayerFirstName3.Size = New System.Drawing.Size(276, 29)
+        Me.txtPlayerFirstName3.TabIndex = 36
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label10.Location = New System.Drawing.Point(7, 60)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(116, 19)
+        Me.Label10.TabIndex = 41
+        Me.Label10.Text = "Player First Name"
+        '
+        'txtMemberNo3
+        '
+        Me.txtMemberNo3.Font = New System.Drawing.Font("Courier New", 14.0!)
+        Me.txtMemberNo3.Location = New System.Drawing.Point(200, 16)
+        Me.txtMemberNo3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtMemberNo3.MaxLength = 10
+        Me.txtMemberNo3.Name = "txtMemberNo3"
+        Me.txtMemberNo3.Size = New System.Drawing.Size(177, 29)
+        Me.txtMemberNo3.TabIndex = 35
+        Me.txtMemberNo3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label11.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label11.Location = New System.Drawing.Point(7, 21)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(185, 19)
+        Me.Label11.TabIndex = 40
+        Me.Label11.Text = "TCG+ Membership Number*"
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -869,10 +987,11 @@ Partial Class frmTrios
         '
         'PrintTournamentRosterToolStripMenuItem
         '
+        Me.PrintTournamentRosterToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TournamentRosterToolStripMenuItem, Me.PenaltyListToolStripMenuItem, Me.StaffListToolStripMenuItem})
         Me.PrintTournamentRosterToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.PrintTournamentRosterToolStripMenuItem.Name = "PrintTournamentRosterToolStripMenuItem"
-        Me.PrintTournamentRosterToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.PrintTournamentRosterToolStripMenuItem.Text = "&Print Tournament Roster"
+        Me.PrintTournamentRosterToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.PrintTournamentRosterToolStripMenuItem.Text = "&Print"
         Me.PrintTournamentRosterToolStripMenuItem.Visible = False
         '
         'PageSetupToolStripMenuItem
@@ -941,119 +1060,23 @@ Partial Class frmTrios
         Me.SaveFileDialogXML.SupportMultiDottedExtensions = True
         Me.SaveFileDialogXML.Title = "Save Master Tournament File"
         '
-        'tpPlayerC
+        'TournamentRosterToolStripMenuItem
         '
-        Me.tpPlayerC.Controls.Add(Me.btnClearPlayer3)
-        Me.tpPlayerC.Controls.Add(Me.Label8)
-        Me.tpPlayerC.Controls.Add(Me.txtPlayerNickname3)
-        Me.tpPlayerC.Controls.Add(Me.txtPlayerLastName3)
-        Me.tpPlayerC.Controls.Add(Me.Label9)
-        Me.tpPlayerC.Controls.Add(Me.txtPlayerFirstName3)
-        Me.tpPlayerC.Controls.Add(Me.Label10)
-        Me.tpPlayerC.Controls.Add(Me.txtMemberNo3)
-        Me.tpPlayerC.Controls.Add(Me.Label11)
-        Me.tpPlayerC.Location = New System.Drawing.Point(4, 22)
-        Me.tpPlayerC.Name = "tpPlayerC"
-        Me.tpPlayerC.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpPlayerC.Size = New System.Drawing.Size(483, 177)
-        Me.tpPlayerC.TabIndex = 2
-        Me.tpPlayerC.Text = "Player C"
-        Me.tpPlayerC.UseVisualStyleBackColor = True
+        Me.TournamentRosterToolStripMenuItem.Name = "TournamentRosterToolStripMenuItem"
+        Me.TournamentRosterToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TournamentRosterToolStripMenuItem.Text = "&Tournament Roster"
         '
-        'btnClearPlayer3
+        'PenaltyListToolStripMenuItem
         '
-        Me.btnClearPlayer3.Location = New System.Drawing.Point(384, 16)
-        Me.btnClearPlayer3.Name = "btnClearPlayer3"
-        Me.btnClearPlayer3.Size = New System.Drawing.Size(92, 29)
-        Me.btnClearPlayer3.TabIndex = 39
-        Me.btnClearPlayer3.Text = "Clear"
-        Me.btnClearPlayer3.UseVisualStyleBackColor = True
+        Me.PenaltyListToolStripMenuItem.Name = "PenaltyListToolStripMenuItem"
+        Me.PenaltyListToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PenaltyListToolStripMenuItem.Text = "&Penalty List"
         '
-        'Label8
+        'StaffListToolStripMenuItem
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(7, 136)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(148, 19)
-        Me.Label8.TabIndex = 43
-        Me.Label8.Text = "Player Member Name*"
-        '
-        'txtPlayerNickname3
-        '
-        Me.txtPlayerNickname3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerNickname3.Location = New System.Drawing.Point(200, 131)
-        Me.txtPlayerNickname3.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPlayerNickname3.Name = "txtPlayerNickname3"
-        Me.txtPlayerNickname3.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerNickname3.TabIndex = 38
-        '
-        'txtPlayerLastName3
-        '
-        Me.txtPlayerLastName3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerLastName3.Location = New System.Drawing.Point(200, 94)
-        Me.txtPlayerLastName3.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPlayerLastName3.Name = "txtPlayerLastName3"
-        Me.txtPlayerLastName3.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerLastName3.TabIndex = 37
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label9.Location = New System.Drawing.Point(7, 99)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(115, 19)
-        Me.Label9.TabIndex = 42
-        Me.Label9.Text = "Player Last Name"
-        '
-        'txtPlayerFirstName3
-        '
-        Me.txtPlayerFirstName3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerFirstName3.Location = New System.Drawing.Point(200, 55)
-        Me.txtPlayerFirstName3.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPlayerFirstName3.Name = "txtPlayerFirstName3"
-        Me.txtPlayerFirstName3.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerFirstName3.TabIndex = 36
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label10.Location = New System.Drawing.Point(7, 60)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(116, 19)
-        Me.Label10.TabIndex = 41
-        Me.Label10.Text = "Player First Name"
-        '
-        'txtMemberNo3
-        '
-        Me.txtMemberNo3.Font = New System.Drawing.Font("Courier New", 14.0!)
-        Me.txtMemberNo3.Location = New System.Drawing.Point(200, 16)
-        Me.txtMemberNo3.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtMemberNo3.MaxLength = 10
-        Me.txtMemberNo3.Name = "txtMemberNo3"
-        Me.txtMemberNo3.Size = New System.Drawing.Size(177, 29)
-        Me.txtMemberNo3.TabIndex = 35
-        Me.txtMemberNo3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label11.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label11.Location = New System.Drawing.Point(7, 21)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(185, 19)
-        Me.Label11.TabIndex = 40
-        Me.Label11.Text = "TCG+ Membership Number*"
+        Me.StaffListToolStripMenuItem.Name = "StaffListToolStripMenuItem"
+        Me.StaffListToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StaffListToolStripMenuItem.Text = "&Staff List"
         '
         'frmTrios
         '
@@ -1084,6 +1107,8 @@ Partial Class frmTrios
         Me.tpPlayerA.PerformLayout()
         Me.tpPlayerB.ResumeLayout(False)
         Me.tpPlayerB.PerformLayout()
+        Me.tpPlayerC.ResumeLayout(False)
+        Me.tpPlayerC.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -1091,8 +1116,6 @@ Partial Class frmTrios
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.cmsPlayerList.ResumeLayout(False)
-        Me.tpPlayerC.ResumeLayout(False)
-        Me.tpPlayerC.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1191,4 +1214,7 @@ Partial Class frmTrios
     Friend WithEvents Label10 As Label
     Friend WithEvents txtMemberNo3 As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents TournamentRosterToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PenaltyListToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StaffListToolStripMenuItem As ToolStripMenuItem
 End Class

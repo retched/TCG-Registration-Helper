@@ -101,12 +101,14 @@ Partial Class frmMainMenu
         Me.TwoPlayersPerTeamToolStripMenuItem.Name = "TwoPlayersPerTeamToolStripMenuItem"
         Me.TwoPlayersPerTeamToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.TwoPlayersPerTeamToolStripMenuItem.Text = "Two Players Per Team"
+        Me.TwoPlayersPerTeamToolStripMenuItem.Visible = False
         '
         'ThreePlayersPerTeamToolStripMenuItem
         '
         Me.ThreePlayersPerTeamToolStripMenuItem.Name = "ThreePlayersPerTeamToolStripMenuItem"
         Me.ThreePlayersPerTeamToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ThreePlayersPerTeamToolStripMenuItem.Text = "Three Players Per Team"
+        Me.ThreePlayersPerTeamToolStripMenuItem.Visible = False
         '
         'OpenTournamentToolStripMenuItem
         '
