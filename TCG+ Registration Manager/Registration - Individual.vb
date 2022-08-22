@@ -55,7 +55,7 @@
 
             If lstTournTeams.Count > 0 Then
                 ' Add New Players to Global Player List 
-                AddNewPlayersFromImport()
+                AddNewPlayersFromImportCSV()
                 MessageBox.Show("CSV File Loaded Sucessfully")
             Else
                 MessageBox.Show("There is no valid Membership data contained within the file." & Environment.NewLine & Environment.NewLine & "Are you trying to read a standings file?" & Environment.NewLine & Environment.NewLine & "Please double check the file and make sure you are using CSV Export from the ""My Event Details"" page and NOT from the Rankings page and try again.", "Invalid CSV File", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -70,7 +70,7 @@
             lstPenalties = lstFileData(2)
 
             ' Add New Players to Global Player List 
-            AddNewPlayersFromImport()
+            AddNewPlayersFromImportXML()
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
             MessageBox.Show("XML File Loaded Sucessfully")
@@ -86,7 +86,7 @@
 
     End Sub
 
-    Private Sub AddNewPlayersFromImport()
+    Private Sub AddNewPlayersFromImportXML()
         ' Gist: Comb through the imported players and add them (or update them) to the Global Player XML.
 
         For Each team In lstTournTeams
@@ -99,6 +99,21 @@
             staff.FormatNumber()
             ' We also have to loop through and add all staff members to the master list of players.
             UpdateAllPlayerXML(staff.MembershipNumber, staff.MembershipName, staff.FirstName, staff.LastName)
+        Next
+
+        ' Since a new team was made, we should update the "Global Player List" on the form.
+        LoadPlayersListFromXML()
+
+        FillListBox()
+    End Sub
+
+    Private Sub AddNewPlayersFromImportCSV()
+        ' Gist: Comb through the imported players and add them (or update them) to the Global Player XML.
+
+        For Each team In lstTournTeams
+            team.PlayerA.FormatNumber()
+            ' We only have a SINGLE team in this list, so we only need PlayerA from lstTournTeams
+            UpdateAllPlayerXML(team.PlayerA.MembershipNumber, team.PlayerA.MembershipName)
         Next
 
         ' Since a new team was made, we should update the "Global Player List" on the form.
@@ -164,14 +179,14 @@
             ' Should also add this team to the XML file of AllPlayers too and reload the XMLFile.
             ' Does this team ID (non-guest exist within the AllPlayers XML?)
             UpdateAllPlayerXML(txtMemberNo.Text, txtPlayerNickname.Text, txtPlayerFirstName.Text, txtPlayerLastName.Text)
+            LoadPlayersListFromXML()
 
             ' Clear and reset all the fields
             ClearPlayer()
 
             BuildTournamentList()
 
-            ' Clear the selection of the DGV
-            dgvPlayers.ClearSelection()
+
 
             ' Go back to entry.
             txtMemberNo.Focus()
@@ -224,6 +239,9 @@
 
         txtMemberNo.ReadOnly = False
         txtPlayerNickname.ReadOnly = False
+
+        ' Clear the selection of the DGV
+        dgvPlayers.ClearSelection()
 
     End Sub
 

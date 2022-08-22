@@ -204,8 +204,40 @@
 
         Return lstOutputTeams
     End Function
+    Public Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String)
+        ' Open the XML AllPlayers.xml file
+        Dim xdoc As New XDocument
+        xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
 
-    Public Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String, Optional strPlayerFirstName As String = "", Optional strPlayerLastName As String = "")
+        Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
+
+        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
+            If IsNothing(target) Then
+                ' This should mean we have a NEW element.
+                Dim newPlayer As XElement = New XElement("Player")
+                newPlayer.Add(New XElement("MembershipNo", strMemberID))
+                newPlayer.Add(New XElement("MembershipName", strMemberName))
+                newPlayer.Add(New XElement("FirstName", ""))
+                newPlayer.Add(New XElement("LastName", ""))
+
+                xdoc.Element("PlayerList").Add(newPlayer)
+
+            Else
+                ' This should mean we are UPDATING an element.
+                ' If the incoming name is blank but the existing name is not, DO NOT UPDATE
+                target.SetElementValue("MembershipNo", strMemberID)
+                target.SetElementValue("MembershipName", strMemberName)
+
+                ' TODO: How to get the current element value
+            End If
+
+            xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
+        End If
+
+    End Sub
+
+
+    Public Sub UpdateAllPlayerXML(strMemberID As String, strMemberName As String, Optional strPlayerFirstName As String = Nothing, Optional strPlayerLastName As String = Nothing)
         ' Open the XML AllPlayers.xml file
         Dim xdoc As New XDocument
         xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
