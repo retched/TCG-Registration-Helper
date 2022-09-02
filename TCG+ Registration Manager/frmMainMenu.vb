@@ -46,7 +46,6 @@
         If (OpenFileDialogCSV.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogCSV.FileName
 
-            ' TODO: Check for Duos or Trios Import Form
             ' First Row will contain a "- 1", "- 2", or "- 3"
 
             Using csvDoc As New FileIO.TextFieldParser(FileName)
@@ -63,14 +62,17 @@
 
                 If firstRow(0) = "Team ID" Then
                     ' Skip this line, this is either a header OR the instruction row from Bandai.
-                    If firstRow.Any(Function(f) f.Contains("- 3")) Then
-                        intPlayers = 3
+                    ' TODO: When Bandai fixes team tournaments, undo this.
+                    'If firstRow.Any(Function(f) f.Contains("- 3")) Then
+                    '    intPlayers = 3
 
-                    ElseIf firstRow.Any(Function(f) f.Contains("- 2")) Then
-                        intPlayers = 2
+                    'ElseIf firstRow.Any(Function(f) f.Contains("- 2")) Then
+                    '    intPlayers = 2
 
-                    Else intPlayers = 1
-                    End If
+                    'Else intPlayers = 1
+                    'End If
+
+                    intPlayers = 1
                 End If
 
                 Select Case intPlayers

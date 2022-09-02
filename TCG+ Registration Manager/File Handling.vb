@@ -113,13 +113,14 @@
 
                         ' Skip this line, this is either a header OR the instruction row from Bandai.
                         If intLineCount = 0 Then
-                            If currentRow.Any(Function(f) f.Contains("- 3")) Then
-                                intPlayers = 3
-                            ElseIf currentRow.Any(Function(f) f.Contains("- 2")) Then
-                                intPlayers = 2
-                            Else
-                                intPlayers = 1
-                            End If
+                            ' TODO: When Bandai releases info about team tournaments, fix this.
+                            'If currentRow.Any(Function(f) f.Contains("- 3")) Then
+                            '    intPlayers = 3
+                            'ElseIf currentRow.Any(Function(f) f.Contains("- 2")) Then
+                            '    intPlayers = 2
+                            'Else intPlayers = 1
+                            'End If
+                            intPlayers = 1
                         End If
 
                         intLineCount += 1
@@ -227,8 +228,6 @@
                 ' If the incoming name is blank but the existing name is not, DO NOT UPDATE
                 target.SetElementValue("MembershipNo", strMemberID)
                 target.SetElementValue("MembershipName", strMemberName)
-
-                ' TODO: How to get the current element value
             End If
 
             xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
