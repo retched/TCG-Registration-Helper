@@ -1110,4 +1110,9 @@ No change in value will have any effect."",""Required""")
 
         ClearPlayer()
     End Sub
+
+    Private Sub frmIndividual_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        ' Rebuild the tournament list as needed
+        BuildTournamentList()
+    End Sub
 End Class

@@ -28,15 +28,15 @@ Partial Class frmMasterPlayerList
         Me.dgvMasterList = New System.Windows.Forms.DataGridView()
         Me.dgcMembershipID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcMembershipName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcPlayerLastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcPlayerFirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcPlayerLastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAddPlayer = New System.Windows.Forms.Button()
         Me.txtSearchField = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnEditPlayer = New System.Windows.Forms.Button()
         Me.btnDelPlayer = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnShowAll = New System.Windows.Forms.Button()
         CType(Me.dgvMasterList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,7 +56,7 @@ Partial Class frmMasterPlayerList
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvMasterList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvMasterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMasterList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcMembershipID, Me.dgcMembershipName, Me.dgcPlayerLastName, Me.dgcPlayerFirstName})
+        Me.dgvMasterList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcMembershipID, Me.dgcMembershipName, Me.dgcPlayerFirstName, Me.dgcPlayerLastName})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -90,17 +90,17 @@ Partial Class frmMasterPlayerList
         Me.dgcMembershipName.Name = "dgcMembershipName"
         Me.dgcMembershipName.ReadOnly = True
         '
-        'dgcPlayerLastName
-        '
-        Me.dgcPlayerLastName.HeaderText = "Last Name"
-        Me.dgcPlayerLastName.Name = "dgcPlayerLastName"
-        Me.dgcPlayerLastName.ReadOnly = True
-        '
         'dgcPlayerFirstName
         '
         Me.dgcPlayerFirstName.HeaderText = "First Name"
         Me.dgcPlayerFirstName.Name = "dgcPlayerFirstName"
         Me.dgcPlayerFirstName.ReadOnly = True
+        '
+        'dgcPlayerLastName
+        '
+        Me.dgcPlayerLastName.HeaderText = "Last Name"
+        Me.dgcPlayerLastName.Name = "dgcPlayerLastName"
+        Me.dgcPlayerLastName.ReadOnly = True
         '
         'btnAddPlayer
         '
@@ -117,9 +117,9 @@ Partial Class frmMasterPlayerList
         '
         Me.txtSearchField.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearchField.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearchField.Location = New System.Drawing.Point(198, 13)
+        Me.txtSearchField.Location = New System.Drawing.Point(12, 13)
         Me.txtSearchField.Name = "txtSearchField"
-        Me.txtSearchField.Size = New System.Drawing.Size(272, 27)
+        Me.txtSearchField.Size = New System.Drawing.Size(458, 27)
         Me.txtSearchField.TabIndex = 0
         '
         'btnSearch
@@ -168,15 +168,15 @@ Partial Class frmMasterPlayerList
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnShowAll
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(644, 11)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(162, 30)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "Show All"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnShowAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnShowAll.Location = New System.Drawing.Point(644, 11)
+        Me.btnShowAll.Name = "btnShowAll"
+        Me.btnShowAll.Size = New System.Drawing.Size(162, 30)
+        Me.btnShowAll.TabIndex = 7
+        Me.btnShowAll.Text = "Show All"
+        Me.btnShowAll.UseVisualStyleBackColor = True
         '
         'frmMasterPlayerList
         '
@@ -185,7 +185,7 @@ Partial Class frmMasterPlayerList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(818, 612)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnShowAll)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnDelPlayer)
         Me.Controls.Add(Me.btnEditPlayer)
@@ -213,9 +213,9 @@ Partial Class frmMasterPlayerList
     Friend WithEvents btnEditPlayer As Button
     Friend WithEvents btnDelPlayer As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnShowAll As Button
     Friend WithEvents dgcMembershipID As DataGridViewTextBoxColumn
     Friend WithEvents dgcMembershipName As DataGridViewTextBoxColumn
-    Friend WithEvents dgcPlayerLastName As DataGridViewTextBoxColumn
     Friend WithEvents dgcPlayerFirstName As DataGridViewTextBoxColumn
+    Friend WithEvents dgcPlayerLastName As DataGridViewTextBoxColumn
 End Class

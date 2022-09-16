@@ -12,7 +12,7 @@
                                                       .LastName = st.Element("LastName"),
                                                       .MembershipNumber = st.Element("MembershipNo")}).ToList()
 
-        lstPlayers = lstPlayers.OrderBy(Function(x) x.MembershipName.ToLower).ToList
+        lstPlayers = lstPlayers.OrderBy(Function(x) x.LastName.ToLower).ThenBy(Function(x) x.FirstName.ToLower).ThenBy(Function(x) x.MembershipName.ToLower).ToList
 
         Dim iVerScroll As Integer = dgvMasterList.FirstDisplayedScrollingRowIndex
 
@@ -64,7 +64,7 @@
             If frmEditPlayer.ShowDialog = DialogResult.OK Then
                 UpdateAllPlayerXML(frmEditPlayer.txtMemberNo.Text, frmEditPlayer.txtPlayerNickname.Text, frmEditPlayer.txtPlayerFirstName.Text, frmEditPlayer.txtPlayerLastName.Text)
 
-                ' Since a new team was made, we should update the "Global Player List" on the form.
+                ' Since a change was made, we should update the "Global Player List" on the form.
                 LoadPlayersListFromXML()
                 dgvMasterList.ClearSelection()
             End If
@@ -107,5 +107,48 @@
             LoadPlayersListFromXML()
 
         End If
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim lstSearch As List(Of PlayerInfo) = lstPlayers.FindAll(Function(x) x.SearchHelper.ToLower.Contains(txtSearchField.Text.ToLower.Trim)).ToList
+
+        ' Erase the current contents and start over.
+        dgvMasterList.Rows.Clear()
+
+        For Each player In lstSearch
+            dgvMasterList.Rows.Add(player.MembershipNumber, player.MembershipName, player.LastName, player.FirstName)
+        Next
+
+    End Sub
+
+
+    Private Sub frmMasterPlayerList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        ' Reload the file.
+        LoadPlayersListFromXML()
+    End Sub
+
+    Private Sub btnShowAll_Click(sender As Object, e As EventArgs) Handles btnShowAll.Click
+        LoadPlayersListFromXML()
+    End Sub
+
+    Private Sub dgvMasterList_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvMasterList.CellMouseDoubleClick
+        Using frmEditPlayer As New frmPlayerDetail
+
+            frmEditPlayer.txtMemberNo.Text = dgvMasterList.SelectedRows(0).Cells(0).Value
+            frmEditPlayer.txtPlayerFirstName.Text = dgvMasterList.SelectedRows(0).Cells(2).Value
+            frmEditPlayer.txtPlayerLastName.Text = dgvMasterList.SelectedRows(0).Cells(3).Value
+            frmEditPlayer.txtPlayerNickname.Text = dgvMasterList.SelectedRows(0).Cells(1).Value
+
+
+            If frmEditPlayer.ShowDialog = DialogResult.OK Then
+                UpdateAllPlayerXML(frmEditPlayer.txtMemberNo.Text, frmEditPlayer.txtPlayerNickname.Text, frmEditPlayer.txtPlayerFirstName.Text, frmEditPlayer.txtPlayerLastName.Text)
+
+                ' Since a change was made, we should update the "Global Player List" on the form.
+                LoadPlayersListFromXML()
+
+                dgvMasterList.ClearSelection()
+            End If
+
+        End Using
     End Sub
 End Class
