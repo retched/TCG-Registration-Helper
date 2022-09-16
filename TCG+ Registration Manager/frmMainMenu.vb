@@ -43,7 +43,7 @@
 
         OpenFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
 
-        If (OpenFileDialogCSV.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+        If (OpenFileDialogCSV.ShowDialog(Me) = DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogCSV.FileName
 
             ' First Row will contain a "- 1", "- 2", or "- 3"

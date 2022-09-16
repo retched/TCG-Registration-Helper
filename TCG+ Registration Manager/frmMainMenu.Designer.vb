@@ -131,6 +131,7 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator2
         '
+        Me.ToolStripSeparator2.MergeIndex = 1
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(199, 6)
         '
@@ -143,6 +144,7 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator3
         '
+        Me.ToolStripSeparator3.MergeIndex = 2
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(199, 6)
         Me.ToolStripSeparator3.Visible = False
@@ -191,6 +193,7 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator4
         '
+        Me.ToolStripSeparator4.MergeIndex = 3
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(199, 6)
         Me.ToolStripSeparator4.Visible = False
@@ -217,6 +220,8 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator5
         '
+        Me.ToolStripSeparator5.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
+        Me.ToolStripSeparator5.MergeIndex = 4
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(199, 6)
         Me.ToolStripSeparator5.Visible = False

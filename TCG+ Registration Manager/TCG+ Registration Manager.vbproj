@@ -2,18 +2,24 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	<TargetFramework>net48</TargetFramework>
+	<TargetFramework>net481</TargetFramework>
 	<RootNamespace>retched.TCGRegManager</RootNamespace>
     <StartupObject>retched.TCGRegManager.frmMainMenu</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
-    <Authors>Paul Williams (retched@hotmail.com)</Authors>
+    <Authors>Paul Williams</Authors>
     <NeutralLanguage></NeutralLanguage>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>bandai TCG+.png</PackageIcon>
     <PackageIconUrl />
     <ApplicationIcon>bandai TCG+.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <Copyright></Copyright>
+    <RepositoryType>git</RepositoryType>
+    <AssemblyVersion>1.1.0-rc</AssemblyVersion>
+    <FileVersion>1.1.0-rc</FileVersion>
+    <PackageProjectUrl>https://github.com/retched/TCG-Registration-Manager</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/retched/TCG-Registration-Manager.git</RepositoryUrl>
+    <Version>$(VersionPrefix)</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +40,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +54,11 @@
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="..\..\..\..\..\Downloads\bandai TCG+.png">
       <Pack>True</Pack>
