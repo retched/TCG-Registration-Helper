@@ -1,6 +1,8 @@
 ﻿Public Class frmMasterPlayerList
     Dim lstPlayers As New List(Of PlayerInfo)
+
     Sub LoadPlayersListFromXML()
+
         Dim xdoc As New XDocument
         xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
 
@@ -14,13 +16,11 @@
 
         lstPlayers = lstPlayers.OrderBy(Function(x) x.LastName.ToLower).ThenBy(Function(x) x.FirstName.ToLower).ThenBy(Function(x) x.MembershipName.ToLower).ToList
 
-        Dim iVerScroll As Integer = dgvMasterList.FirstDisplayedScrollingRowIndex
-
         ' Cycle through and add each row to the datagridview.
         dgvMasterList.Rows.Clear()
 
         For Each player In lstPlayers
-            dgvMasterList.Rows.Add(player.MembershipNumber, player.MembershipName, player.LastName, player.FirstName)
+            dgvMasterList.Rows.Add(player.MembershipNumber, player.MembershipName, player.FirstName, player.LastName)
         Next
 
     End Sub
@@ -28,6 +28,10 @@
     Private Sub frmMasterPlayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load the list from the XML
         LoadPlayersListFromXML()
+
+        Me.Left = (MdiParent.ClientRectangle.Width - Me.Width) / 2
+        Me.Top = (MdiParent.ClientRectangle.Height - Me.Height) / 2
+
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

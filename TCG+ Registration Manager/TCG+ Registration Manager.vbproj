@@ -1,146 +1,292 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D12D2B90-6F17-4932-8019-3E8B922F9B60}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-	<TargetFramework>net481</TargetFramework>
-	<RootNamespace>retched.TCGRegManager</RootNamespace>
-    <StartupObject>retched.TCGRegManager.frmMainMenu</StartupObject>
-    <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>retched.TCGRegManager.My.MyApplication</StartupObject>
+    <RootNamespace>retched.TCGRegManager</RootNamespace>
+    <AssemblyName>TCG+ Registration Manager</AssemblyName>
+    <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <Authors>Paul Williams</Authors>
-    <NeutralLanguage></NeutralLanguage>
-    <PackageIcon>bandai TCG+.png</PackageIcon>
-    <PackageIconUrl />
-    <ApplicationIcon>bandai TCG+.ico</ApplicationIcon>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-    <Copyright></Copyright>
-    <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0-rc</FileVersion>
-    <PackageProjectUrl>https://github.com/retched/TCG-Registration-Manager</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/retched/TCG-Registration-Manager.git</RepositoryUrl>
-    <Version>$(VersionPrefix)</Version>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>embedded</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bandai TCG+.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>keyfile.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
     <Import Include="System.ComponentModel" />
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.IO" />
+    <Import Include="System.Text" />
     <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Update="My Project\Application.Designer.vb">
-      <DesignTime>True</DesignTime>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Change Membership Number.Designer.vb">
+      <DependentUpon>Change Membership Number.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Change Membership Number.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Change Team ID.Designer.vb">
+      <DependentUpon>Change Team ID.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Change Team ID.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="File Handling.vb" />
+    <Compile Include="frmMainMenu.Designer.vb">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Print List Options.Designer.vb">
+      <DependentUpon>Print List Options.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Print List Options.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Player List.Designer.vb">
+      <DependentUpon>Master Player List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Player List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Update="My Project\Resources.Designer.vb">
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="My Project\Settings.Designer.vb">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Player Detail.Designer.vb">
+      <DependentUpon>Player Detail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Player Detail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerInfo.vb" />
+    <Compile Include="Registration - Individual.Designer.vb">
+      <DependentUpon>Registration - Individual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Registration - Individual.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registration - Three Players.Designer.vb">
+      <DependentUpon>Registration - Three Players.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Registration - Three Players.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registration - Two Players.Designer.vb">
+      <DependentUpon>Registration - Two Players.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Registration - Two Players.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash Screen.Designer.vb">
+      <DependentUpon>Splash Screen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Splash Screen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Staff List.Designer.vb">
+      <DependentUpon>Staff List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Staff List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatusDictionary.vb" />
+    <Compile Include="Tournament - Penalty Detail.Designer.vb">
+      <DependentUpon>Tournament - Penalty Detail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tournament - Penalty Detail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tournament - Penalty Form.Designer.vb">
+      <DependentUpon>Tournament - Penalty Form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tournament - Penalty Form.vb">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
-    <None Update="AllPlayers.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="My Project\Application.myapp">
+    <EmbeddedResource Include="Change Membership Number.resx">
+      <DependentUpon>Change Membership Number.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Change Team ID.resx">
+      <DependentUpon>Change Team ID.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Player List.resx">
+      <DependentUpon>Master Player List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player Detail.resx">
+      <DependentUpon>Player Detail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print List Options.resx">
+      <DependentUpon>Print List Options.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registration - Individual.resx">
+      <DependentUpon>Registration - Individual.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registration - Three Players.resx">
+      <DependentUpon>Registration - Three Players.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registration - Two Players.resx">
+      <DependentUpon>Registration - Two Players.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Splash Screen.resx">
+      <DependentUpon>Splash Screen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff List.resx">
+      <DependentUpon>Staff List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournament - Penalty Detail.resx">
+      <DependentUpon>Tournament - Penalty Detail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournament - Penalty Form.resx">
+      <DependentUpon>Tournament - Penalty Form.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="keyfile.pfx" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Update="My Project\Settings.settings">
-      <CustomToolNamespace>My</CustomToolNamespace>
+    <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="..\..\..\..\..\Downloads\bandai TCG+.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
-
   <ItemGroup>
-    <EmbeddedResource Update="My Project\Resources.resx">
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="My Project\DataSources\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="mscorlib">
-	    <EmbedInteropTypes>False</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Xml.Linq">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Core">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Data">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Drawing">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.IO.Compression.FileSystem">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Numerics">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Runtime.Serialization">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Windows.Forms">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Update="System.Xml">
-	    <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </Reference>
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="AllPlayers.xml" />
+    <Content Include="bandai TCG+.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>del /q AllPlayers.xml</PreBuildEvent>
+  </PropertyGroup>
 </Project>

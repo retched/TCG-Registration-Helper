@@ -27,8 +27,12 @@
         txtMemberNo.Focus()
     End Sub
     Private Sub txtMemberNo_KeyUp(sender As Object, e As KeyPressEventArgs) Handles txtMemberNo.KeyPress
-        ' Number keys only.
-        e.Handled = Not Char.IsDigit(e.KeyChar)
+        ' Number keys only.AndAlso Not Char.IsControl(e.KeyChar)
+
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+
     End Sub
 
     Private Sub txtMemberNo_Leave(sender As Object, e As EventArgs) Handles txtMemberNo.Leave

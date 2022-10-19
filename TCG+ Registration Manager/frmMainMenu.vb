@@ -202,9 +202,13 @@
     End Sub
 
     Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
-        Using frmPlayerDatabase As New frmMasterPlayerList
-            frmPlayerDatabase.ShowDialog()
-        End Using
+
+        frmMasterPlayerList.MdiParent = Me
+
+        m_ChildFormNumber += 1
+
+        frmMasterPlayerList.Show()
+
     End Sub
 
     Private Sub TwoPlayersPerTeamToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TwoPlayersPerTeamToolStripMenuItem.Click
