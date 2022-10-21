@@ -201,15 +201,6 @@
 
     End Sub
 
-    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
-
-        frmMasterPlayerList.MdiParent = Me
-
-        m_ChildFormNumber += 1
-
-        frmMasterPlayerList.Show()
-
-    End Sub
 
     Private Sub TwoPlayersPerTeamToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TwoPlayersPerTeamToolStripMenuItem.Click
         Dim ChildForm As New frmDuos

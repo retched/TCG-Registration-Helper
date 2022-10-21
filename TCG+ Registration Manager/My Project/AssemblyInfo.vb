@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("TCG+ Registration Manager")>
-<Assembly: AssemblyDescription("A CSV file maker for Bandai TCG+ uploads.")>
+<Assembly: AssemblyTitle("TCG+ Registration Helper")>
+<Assembly: AssemblyDescription("A CSV file maker for Bandai TCG+ event uploads.")>
 <Assembly: AssemblyCompany("Paul Williams")>
-<Assembly: AssemblyProduct("TCG+ Registration Manager Tool")>
+<Assembly: AssemblyProduct("TCG+ Registration Helper")>
 <Assembly: AssemblyCopyright("Copyright ©  2022 Paul Williams (retched@hotmail.com)")>
 <Assembly: AssemblyTrademark("")>
 
