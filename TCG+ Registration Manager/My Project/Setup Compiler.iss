@@ -25,7 +25,8 @@ InfoBeforeFile=F:\Users\retch\Documents\Visual Studio 2017\Projects\TCG+ Registr
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=TCG+ Helper Setup
+OutputBaseFilename=TCG+ Registration Manager
+SetupIconFile=F:\Users\retch\Documents\Visual Studio 2017\Projects\TCG+ Registration Manager\TCG+ Registration Manager\bandai TCG+.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,13 +39,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "F:\Users\retch\Documents\Visual Studio 2017\Projects\TCG+ Registration Manager\TCG+ Registration Manager\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Users\retch\Documents\Bandai TCG+ Helper.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Users\retch\Documents\Visual Studio 2017\Projects\TCG+ Registration Manager\TCG+ Registration Manager\bin\Release\Bandai TCG+ Helper.pdf"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{group}\TCG+ Helper Read Me"; Filename: "{app}\Bandai TCG+ Helper.pdf"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
