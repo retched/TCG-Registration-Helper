@@ -84,6 +84,10 @@
 
         BuildTournamentList()
 
+        ' Load the setting for the Full Player Name option and treat as needed.
+
+        FullNameEntryToolStripMenuItem.Checked = My.Settings.PlayerNameFull
+
     End Sub
 
     Private Sub AddNewPlayersFromImportXML()
@@ -200,12 +204,15 @@
         ' Clear the rows already there.
         dgvPlayers.Rows.Clear()
 
+        ' Make sure the list is sorted by TeamID since that is the official order by Bandai.
+        lstTournTeams = lstTournTeams.OrderBy(Function(o) o.TeamID = 0).ThenBy(Function(o) o.TeamID).ToList
+
         For Each team In lstTournTeams
             ' Find each team in the master list of players and add change the data as needed
 
             Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.MembershipNumber = team.PlayerA.MembershipNumber)
             If IsNothing(result) Then
-                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
+                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, lstTournTeams.IndexOf(team) + 1, team.TeamID, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
             Else
                 ' We found a matching team
                 ' That means we copy that team's info over to the tournament team info
@@ -213,7 +220,7 @@
                 team.PlayerA.FirstName = result.FirstName
                 team.PlayerA.MembershipName = result.MembershipName
 
-                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
+                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, lstTournTeams.IndexOf(team) + 1, team.TeamID, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
             End If
 
         Next
@@ -221,7 +228,8 @@
         tslPlayerPreReg.Text = String.Format("{0} Player(s) Pre-Registered", lstTournTeams.Count())
         tslActivePlayer.Text = String.Format("{0} Player(s) Active", lstTournTeams.FindAll(Function(x As TournamentTeam) x.Status = "10").Count)
 
-        dgvPlayers.Sort(dgvPlayers.Columns("dgcNickname"), ListSortDirection.Ascending)
+        'dgvPlayers.Sort(dgvPlayers.Columns("dgcNickname"), ListSortDirection.Ascending)
+        dgvPlayers.Sort(dgvPlayers.Columns("dgcIndex"), ListSortDirection.Ascending)
 
         dgvPlayers.ClearSelection()
     End Sub
@@ -353,7 +361,7 @@
             txtPlayerLastName.Clear()
             txtPlayerNickname.Clear()
             cboStatus.SelectedValue = 10
-            rbByes_0.Checked = True
+            'rbByes_0.Checked = True
         End If
     End Sub
 
@@ -449,10 +457,12 @@
         If e.Button = MouseButtons.Right Then
             lbSearchResults.SelectedIndex = lbSearchResults.IndexFromPoint(e.Location)
 
-            If lbSearchResults.SelectedIndex <> -1 Then cmsPlayerList.Show()
-
             ' Change the first item in the CMS to what is needed.
             ChangePlayerDetails0ToolStripMenuItem.Text = String.Format(ChangePlayerDetails0ToolStripMenuItem.Text, lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).SummaryName)
+
+
+            If lbSearchResults.SelectedIndex <> -1 Then cmsPlayerList.Show()
+
         End If
     End Sub
 
@@ -599,13 +609,13 @@ No change in value will have any effect."",""Required""")
                     If team.Status <> 9999 Then
                         csvDoc.Write("""" & team.TeamID & """,")
                         csvDoc.Write("""" & team.TeamName & """,")
-                        csvDoc.Write("""" & 0 & """,")
+                        csvDoc.Write("""" & """,")
                         csvDoc.Write("""" & team.Status & """,")
                         csvDoc.Write("""" & team.ByeRounds & """,")
                         csvDoc.Write("""" & team.PlayerA.MembershipNumber & """,")
                         csvDoc.Write("""" & team.PlayerA.MembershipName & """,")
                         csvDoc.Write("""" & team.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & team.PlayerA.PlayerFullName & """")
+                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, team.PlayerA.PlayerFullName, "") & """")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -653,13 +663,13 @@ No change in value will have any effect."",""Required""")
                     If player.Status <> 9999 Then
                         csvDoc.Write("""" & player.TeamID & """,")
                         csvDoc.Write("""" & player.TeamName & """,")
-                        csvDoc.Write("""" & 0 & """,")
+                        csvDoc.Write("""" & """,")
                         csvDoc.Write("""" & player.Status & """,")
                         csvDoc.Write("""" & player.ByeRounds & """,")
                         csvDoc.Write("""" & player.PlayerA.MembershipNumber & """,")
                         csvDoc.Write("""" & player.PlayerA.MembershipName & """,")
                         csvDoc.Write("""" & player.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & player.PlayerA.PlayerFullName & """")
+                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, player.PlayerA.PlayerFullName, "") & """")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -938,12 +948,249 @@ No change in value will have any effect."",""Required""")
         FillListBox()
     End Sub
 
-    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
+    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Using frmPlayerDatabase As New frmMasterPlayerList
             frmPlayerDatabase.ShowDialog()
 
             LoadPlayersListFromXML()
             BuildTournamentList()
         End Using
+    End Sub
+
+    Private Sub btnAddFromFile_Click(sender As Object, e As EventArgs) Handles btnAddFromFile.Click
+        ' Put the cmsAddFromFile menu above the "AddFromFile"
+        cmsAddFromFile.Show(btnAddFromFile, 0, -cmsAddFromFile.Height)
+
+    End Sub
+
+    Private Sub AddFromCSVToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddFromCSVToolStripMenuItem.Click
+        ' Prompt the user for a CSV File.
+        If (OpenFileDialogCSV.ShowDialog(Me) = DialogResult.OK) Then
+            Dim lstFileData As List(Of TournamentTeam) = csvPlayerReadOut(OpenFileDialogCSV.FileName)
+
+            ' Process that CSV file by going through each player in the
+            ' CSV and updating as needed.
+
+            ' If the "TeamID" AND "MembershipNumber" BOTH match, replace the 
+            ' status of that player with the incoming file.
+
+            For Each player In lstFileData
+                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID))
+
+                If index <> -1 Then
+                    If lstTournTeams(index).Status < player.Status Then
+                        lstTournTeams(index).Status = player.Status
+                        lstTournTeams(index).TeamID = player.TeamID
+                    End If
+                Else
+                    lstTournTeams.Add(player)
+                End If
+            Next
+
+        End If
+        AddNewPlayersFromImportCSV()
+        lbSearchResults.ClearSelected()
+
+        BuildTournamentList()
+    End Sub
+
+    Private Sub AddFromXMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddFromXMLToolStripMenuItem.Click
+        If (OpenFileDialogCSV.ShowDialog(Me) = DialogResult.OK) Then
+            Dim lstFileData As List(Of TournamentTeam) = xmlPlayerReadOut(OpenFileDialogXML.FileName)(0)
+
+            ' Process that CSV file by going through each player in the
+            ' CSV and updating as needed.
+
+            ' If the "TeamID" AND "MembershipNumber" BOTH match, replace the 
+            ' status of that player with the incoming file.
+
+            For Each player In lstFileData
+                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID))
+
+                If index <> -1 Then
+                    If lstTournTeams(index).Status < player.Status Then
+                        lstTournTeams(index).Status = player.Status
+                        lstTournTeams(index).TeamID = player.TeamID
+                    End If
+                Else
+                    lstTournTeams.Add(player)
+                End If
+            Next
+
+        End If
+
+        AddNewPlayersFromImportXML()
+        lbSearchResults.ClearSelected()
+
+        BuildTournamentList()
+    End Sub
+
+    Private Sub dgvPlayers_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvPlayers.CellMouseClick
+
+        If e.Button = MouseButtons.Right And e.RowIndex >= 0 Then
+            dgvPlayers.CurrentCell = dgvPlayers.Rows(e.RowIndex).Cells(e.ColumnIndex)
+
+            cmsTournamentList.Show(dgvPlayers, dgvPlayers.PointToClient(Cursor.Position))
+
+            ' Change the first item in the CMS to what is needed.
+            ' Get the current Tournament Status of the selected Player
+            Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
+
+            Select Case lstTournTeams(index).Status
+                Case 1
+                    AppliedToolStripMenuItem.Checked = True
+                Case 2
+                    SuccessfulToolStripMenuItem.Checked = True
+                Case 3
+                    WaitingListToolStripMenuItem.Checked = True
+                Case 4
+                    UnsuccessfulToolStripMenuItem.Checked = True
+                Case 5
+                    CancelledToolStripMenuItem.Checked = True
+                Case 6
+                    SelectedCheckedInToolStripMenuItem.Checked = True
+                Case 7
+                    WaitingForCancellationCheckedInToolStripMenuItem.Checked = True
+                Case 8
+                    AbsentOnDayOfEventToolStripMenuItem.Checked = True
+                Case 9
+                    AdvanceElectedToolStripMenuItem.Checked = True
+                Case 10
+                    ParticipatingInTournamentToolStripMenuItem.Checked = True
+                Case 11
+                    DroppedToolStripMenuItem.Checked = True
+            End Select
+
+        End If
+    End Sub
+
+    Private Sub cmsTournamentList_Closed(sender As Object, e As ToolStripDropDownClosedEventArgs) Handles cmsTournamentList.Closed
+        ' Reset all items back to unchecked.
+        AppliedToolStripMenuItem.Checked = False
+        SuccessfulToolStripMenuItem.Checked = False
+        WaitingListToolStripMenuItem.Checked = False
+        UnsuccessfulToolStripMenuItem.Checked = False
+        CancelledToolStripMenuItem.Checked = False
+        SelectedCheckedInToolStripMenuItem.Checked = False
+        WaitingForCancellationCheckedInToolStripMenuItem.Checked = False
+        AbsentOnDayOfEventToolStripMenuItem.Checked = False
+        AdvanceElectedToolStripMenuItem.Checked = False
+        ParticipatingInTournamentToolStripMenuItem.Checked = False
+        DroppedToolStripMenuItem.Checked = False
+    End Sub
+
+    Private Sub AppliedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaitingListToolStripMenuItem.Click, WaitingForCancellationCheckedInToolStripMenuItem.Click, UnsuccessfulToolStripMenuItem.Click, SuccessfulToolStripMenuItem.Click, SelectedCheckedInToolStripMenuItem.Click, ParticipatingInTournamentToolStripMenuItem.Click, DroppedToolStripMenuItem.Click, CancelledToolStripMenuItem.Click, AppliedToolStripMenuItem.Click, AdvanceElectedToolStripMenuItem.Click, AbsentOnDayOfEventToolStripMenuItem.Click
+        Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
+
+        Select Case sender.Name
+            Case AppliedToolStripMenuItem.Name
+                lstTournTeams(index).Status = 1
+            Case SuccessfulToolStripMenuItem.Name
+                lstTournTeams(index).Status = 2
+            Case WaitingListToolStripMenuItem.Name
+                lstTournTeams(index).Status = 3
+            Case UnsuccessfulToolStripMenuItem.Name
+                lstTournTeams(index).Status = 4
+            Case CancelledToolStripMenuItem.Name
+                lstTournTeams(index).Status = 5
+            Case SelectedCheckedInToolStripMenuItem.Name
+                lstTournTeams(index).Status = 6
+            Case WaitingForCancellationCheckedInToolStripMenuItem.Name
+                lstTournTeams(index).Status = 7
+            Case AbsentOnDayOfEventToolStripMenuItem.Name
+                lstTournTeams(index).Status = 8
+            Case AdvanceElectedToolStripMenuItem.Name
+                lstTournTeams(index).Status = 9
+            Case ParticipatingInTournamentToolStripMenuItem.Name
+                lstTournTeams(index).Status = 10
+            Case DroppedToolStripMenuItem.Name
+                lstTournTeams(index).Status = 11
+        End Select
+
+        ' Rebuild the tournament list as needed
+        BuildTournamentList()
+    End Sub
+
+    Private Sub DeletePlayerFromTournamentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeletePlayerFromTournamentToolStripMenuItem.Click
+        Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
+
+        If lstTournTeams(intLstID).TeamID <> 0 Then
+            MessageBox.Show("Cannot delete this player." & Environment.NewLine & Environment.NewLine & "Either the player pre-registered or was enrolled through the TCG+ app. To remove this player from the pairings, set their status to ANYTHING but ""Participating in Tournament"".", "Cannot delete pre-registered player", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            lstTournTeams.RemoveAt(intLstID)
+
+            BuildTournamentList()
+        End If
+
+        ClearPlayer()
+    End Sub
+
+    Private Sub ChangeTeamIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeTeamIDToolStripMenuItem.Click
+        Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
+
+        Using frmChangeTeam As New frmChangeTeamID
+
+            frmChangeTeam.lblOldTeamID.Text = lstTournTeams(intLstID).TeamID
+            frmChangeTeam.nudTeamID.Value = lstTournTeams(intLstID).TeamID
+
+            While frmChangeTeam.DialogResult <> DialogResult.OK And frmChangeTeam.DialogResult <> DialogResult.Cancel
+                If frmChangeTeam.ShowDialog = DialogResult.OK Then
+
+                    ' Have to make sure at least the value doesn't already exist in the list.
+                    ' Or That It's a different value.
+                    If lstTournTeams.Any(Function(n) n.TeamID = frmChangeTeam.nudTeamID.Value) And frmChangeTeam.nudTeamID.Value <> 0 And frmChangeTeam.nudTeamID.Value <> lstTournTeams(intLstID).TeamID Then
+                        frmChangeTeam.DialogResult = DialogResult.None
+                        MessageBox.Show("The selected value already exist within the list and is invalid. Please choose another TeamID.", "Invalid TeamID", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        ' Okay so this number is NOT invalid, so change it as needed.
+                        lstTournTeams(intLstID).TeamID = frmChangeTeam.nudTeamID.Value
+                        BuildTournamentList()
+                    End If
+                End If
+            End While
+        End Using
+    End Sub
+
+    Private Sub ChangeMembershipNumberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeMembershipNumberToolStripMenuItem.Click
+        Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
+
+        Using frmChangePlayer As New frmChangePlayerNumber
+
+            frmChangePlayer.lblOldPlayerID.Text = lstTournTeams(intLstID).PlayerA.MembershipNumber
+            frmChangePlayer.txtNewPlayerID.Text = lstTournTeams(intLstID).PlayerA.MembershipNumber
+
+            While frmChangePlayer.DialogResult <> DialogResult.OK And frmChangePlayer.DialogResult <> DialogResult.Cancel
+                If frmChangePlayer.ShowDialog = DialogResult.OK Then
+
+                    ' Have to make sure at least the value doesn't already exist in the list.
+                    ' Or That It's a different value.
+                    If lstTournTeams.Any(Function(n) n.PlayerA.MembershipNumber = frmChangePlayer.txtNewPlayerID.Text) And frmChangePlayer.txtNewPlayerID.Text <> "0000000000" And frmChangePlayer.txtNewPlayerID.Text <> "GUEST99999" And frmChangePlayer.txtNewPlayerID.Text <> lstTournTeams(intLstID).PlayerA.MembershipNumber Then
+                        frmChangePlayer.DialogResult = DialogResult.None
+                        MessageBox.Show("The selected player already exist within the tournament list or is invalid. Please enter another Membership ID.", "Invalid Membership ID", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        ' Okay so this number is NOT invalid, so change it as needed.
+                        lstTournTeams(intLstID).PlayerA.MembershipNumber = frmChangePlayer.txtNewPlayerID.Text
+                        BuildTournamentList()
+                    End If
+                End If
+            End While
+        End Using
+    End Sub
+
+    Private Sub FullNameEntryToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles FullNameEntryToolStripMenuItem.CheckedChanged
+        ' If the player name option is checked, enable the First and Last name field.
+
+        txtPlayerFirstName.Enabled = FullNameEntryToolStripMenuItem.Checked
+        txtPlayerLastName.Enabled = FullNameEntryToolStripMenuItem.Checked
+
+    End Sub
+
+    Private Sub FullNameEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FullNameEntryToolStripMenuItem.Click
+        FullNameEntryToolStripMenuItem.Checked = Not FullNameEntryToolStripMenuItem.Checked
+
+        ' Change the Option too
+        My.Settings.PlayerNameFull = Not My.Settings.PlayerNameFull
+        My.Settings.Save()
+
     End Sub
 End Class

@@ -49,7 +49,7 @@
         {0, "Caution"},
         {1, "Warning"},
         {2, "Game Loss"},
-        {3, "Match Loss"},
+        {3, "Match Loss / Defeat"},
         {4, "Disqualification"}
     }
 End Module

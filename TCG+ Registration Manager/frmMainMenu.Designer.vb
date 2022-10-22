@@ -45,10 +45,6 @@ Partial Class frmMainMenu
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintTournamentRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PageSetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,6 +58,7 @@ Partial Class frmMainMenu
         Me.SoftwareOperatingManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialogCSV = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogXML = New System.Windows.Forms.OpenFileDialog()
+        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -72,13 +69,13 @@ Partial Class frmMainMenu
         Me.MenuStrip1.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(5, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1246, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1261, 24)
         Me.MenuStrip1.TabIndex = 9
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenTournamentToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripSeparator4, Me.MasterPlayerRosterToolStripMenuItem, Me.PrintTournamentRosterToolStripMenuItem, Me.PageSetupToolStripMenuItem, Me.ToolStripSeparator5, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenTournamentToolStripMenuItem, Me.MasterPlayerRosterToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseTournamentToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveTournamentToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripSeparator4, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -87,7 +84,7 @@ Partial Class frmMainMenu
         '
         Me.NewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndividualPlayerToolStripMenuItem, Me.TwoPlayersPerTeamToolStripMenuItem, Me.ThreePlayersPerTeamToolStripMenuItem})
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.NewToolStripMenuItem.Text = "&New Tournament"
         '
         'IndividualPlayerToolStripMenuItem
@@ -114,7 +111,7 @@ Partial Class frmMainMenu
         '
         Me.OpenTournamentToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CommaSeparatedValueFileToolStripMenuItem, Me.TournamentXMLxmlToolStripMenuItem})
         Me.OpenTournamentToolStripMenuItem.Name = "OpenTournamentToolStripMenuItem"
-        Me.OpenTournamentToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.OpenTournamentToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.OpenTournamentToolStripMenuItem.Text = "&Open Tournament"
         '
         'CommaSeparatedValueFileToolStripMenuItem
@@ -131,27 +128,29 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator2
         '
+        Me.ToolStripSeparator2.MergeIndex = 1
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(199, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(178, 6)
         '
         'CloseTournamentToolStripMenuItem
         '
         Me.CloseTournamentToolStripMenuItem.Name = "CloseTournamentToolStripMenuItem"
-        Me.CloseTournamentToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.CloseTournamentToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.CloseTournamentToolStripMenuItem.Text = "&Close Tournament"
         Me.CloseTournamentToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator3
         '
+        Me.ToolStripSeparator3.MergeIndex = 2
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(199, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(178, 6)
         Me.ToolStripSeparator3.Visible = False
         '
         'SaveTournamentToolStripMenuItem
         '
         Me.SaveTournamentToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CommaSeparatedValuesFilecsvToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.SaveTournamentToolStripMenuItem.Name = "SaveTournamentToolStripMenuItem"
-        Me.SaveTournamentToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.SaveTournamentToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.SaveTournamentToolStripMenuItem.Text = "&Save Tournament"
         Me.SaveTournamentToolStripMenuItem.Visible = False
         '
@@ -172,7 +171,7 @@ Partial Class frmMainMenu
         '
         Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4})
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(202, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(181, 22)
         Me.ToolStripMenuItem2.Text = "S&ave Copy As..."
         Me.ToolStripMenuItem2.Visible = False
         '
@@ -191,41 +190,16 @@ Partial Class frmMainMenu
         '
         'ToolStripSeparator4
         '
+        Me.ToolStripSeparator4.MergeIndex = 3
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(199, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(178, 6)
         Me.ToolStripSeparator4.Visible = False
-        '
-        'MasterPlayerRosterToolStripMenuItem
-        '
-        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
-        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
-        '
-        'PrintTournamentRosterToolStripMenuItem
-        '
-        Me.PrintTournamentRosterToolStripMenuItem.Name = "PrintTournamentRosterToolStripMenuItem"
-        Me.PrintTournamentRosterToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.PrintTournamentRosterToolStripMenuItem.Text = "&Print Tournament Roster"
-        Me.PrintTournamentRosterToolStripMenuItem.Visible = False
-        '
-        'PageSetupToolStripMenuItem
-        '
-        Me.PageSetupToolStripMenuItem.Name = "PageSetupToolStripMenuItem"
-        Me.PageSetupToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.PageSetupToolStripMenuItem.Text = "P&age Setup"
-        Me.PageSetupToolStripMenuItem.Visible = False
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(199, 6)
-        Me.ToolStripSeparator5.Visible = False
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.MergeIndex = 30
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'TournamentToolStripMenuItem
@@ -301,11 +275,17 @@ Partial Class frmMainMenu
         '
         Me.OpenFileDialogXML.Filter = "Tournament XML (*.xml)|*.xml|All Files (*.*)|*.*"
         '
+        'MasterPlayerRosterToolStripMenuItem
+        '
+        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
+        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1246, 614)
+        Me.ClientSize = New System.Drawing.Size(1261, 614)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
@@ -350,9 +330,6 @@ Partial Class frmMainMenu
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents PrintTournamentRosterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PageSetupToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BandaiTCGTournamentPolicyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SoftwareOperatingManualToolStripMenuItem As ToolStripMenuItem

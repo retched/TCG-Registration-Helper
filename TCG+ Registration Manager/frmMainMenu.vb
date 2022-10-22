@@ -43,7 +43,7 @@
 
         OpenFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
 
-        If (OpenFileDialogCSV.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+        If (OpenFileDialogCSV.ShowDialog(Me) = DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogCSV.FileName
 
             ' First Row will contain a "- 1", "- 2", or "- 3"
@@ -201,11 +201,6 @@
 
     End Sub
 
-    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
-        Using frmPlayerDatabase As New frmMasterPlayerList
-            frmPlayerDatabase.ShowDialog()
-        End Using
-    End Sub
 
     Private Sub TwoPlayersPerTeamToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TwoPlayersPerTeamToolStripMenuItem.Click
         Dim ChildForm As New frmDuos
@@ -227,5 +222,18 @@
         'ChildForm.Text = ChildForm.Text
 
         ChildForm.Show()
+    End Sub
+
+    Private Sub SoftwareOperatingManualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoftwareOperatingManualToolStripMenuItem.Click
+        LaunchWebsite(Application.StartupPath + "/Bandai TCG+ Helper.pdf")
+    End Sub
+    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
+        Dim frmPlayerDatabase As New frmMasterPlayerList
+        frmPlayerDatabase.MdiParent = Me
+        frmPlayerDatabase.Show()
+
+        m_ChildFormNumber += 1
+
+
     End Sub
 End Class
