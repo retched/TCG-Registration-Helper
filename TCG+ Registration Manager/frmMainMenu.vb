@@ -223,4 +223,17 @@
 
         ChildForm.Show()
     End Sub
+
+    Private Sub SoftwareOperatingManualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoftwareOperatingManualToolStripMenuItem.Click
+        LaunchWebsite(Application.StartupPath + "/Bandai TCG+ Helper.pdf")
+    End Sub
+    Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
+        Dim frmPlayerDatabase As New frmMasterPlayerList
+        frmPlayerDatabase.MdiParent = Me
+        frmPlayerDatabase.Show()
+
+        m_ChildFormNumber += 1
+
+
+    End Sub
 End Class

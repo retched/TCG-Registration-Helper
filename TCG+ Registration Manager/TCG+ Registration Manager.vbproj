@@ -255,7 +255,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="keyfile.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -272,7 +271,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AllPlayers.xml" />
     <Content Include="bandai TCG+.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -39,15 +39,6 @@
 
 To clone and run this application, you'll need [Git](https://git-scm.com) installed on your computer. Additionally, to build the executable you will need [Visual Studio 2022](https://visualstudio.microsoft.com/). (Any version of Visual Studio 2022 should do fine.)
 
-From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/retched/TCG-Registration-Manager.git
-
-# Go into the repository
-$ cd electron-markdownify
-```
 Once installed or built, launch the program from a "safe" location. (ie. No anti-virus sandboxes and not from a protected directory (like Program Files).)
 
 For more details on the operation, read the enclosed README PDF.
@@ -61,15 +52,18 @@ You can [download](https://github.com/retched/TCG-Registration-Manager/releases)
 <a href='https://ko-fi.com/Y8Y65PLO' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a> 
 
 ## Contribution Guidelines
-For more details on how to contribute to the open-source project, please read CONTRIBUTING.md for Contribution Guidelines to the project.
-
 In general, we use the GitHub Flow for the process and storage of the source code. This means, all work should be submitted on the GitHub system. This includes Pull Requests, Bug Reporting, Feature Requests, and so on. 
 
-Before creating a pull request, be sure the bug and/or feature is posted as an Issue.
+Before creating a pull request, be sure the bug and/or feature is posted as an Issue and that you are assigned that Issue as a task.
+* If a revelant issue exists, discuss the issue and get it assigned to yourself on GitHub.
+* If no issue exists, open a new issue and assign it to yourself. (You shouldn't wait for it to be assigned to you.)
+
+Be sure that when you are making your pull request that you mention that specific issue and request approval.
 
 ## License
 
-    TCG+ Registration Helper. A program for TOs to make the most of Bandai TCG+ event registration system.
+    TCG+ Registration Helper. A program for TOs to make the
+	most of Bandai TCG+ event registration system.
     Copyright (C) 2022, Paul Williams (retched@hotmail.com)
 
     This program is free software: you can redistribute it and/or modify

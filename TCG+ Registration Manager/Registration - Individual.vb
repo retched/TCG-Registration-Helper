@@ -84,6 +84,10 @@
 
         BuildTournamentList()
 
+        ' Load the setting for the Full Player Name option and treat as needed.
+
+        FullNameEntryToolStripMenuItem.Checked = My.Settings.PlayerNameFull
+
     End Sub
 
     Private Sub AddNewPlayersFromImportXML()
@@ -611,7 +615,7 @@ No change in value will have any effect."",""Required""")
                         csvDoc.Write("""" & team.PlayerA.MembershipNumber & """,")
                         csvDoc.Write("""" & team.PlayerA.MembershipName & """,")
                         csvDoc.Write("""" & team.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & team.PlayerA.PlayerFullName & """")
+                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, team.PlayerA.PlayerFullName, "") & """")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -665,7 +669,7 @@ No change in value will have any effect."",""Required""")
                         csvDoc.Write("""" & player.PlayerA.MembershipNumber & """,")
                         csvDoc.Write("""" & player.PlayerA.MembershipName & """,")
                         csvDoc.Write("""" & player.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & player.PlayerA.PlayerFullName & """")
+                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, player.PlayerA.PlayerFullName, "") & """")
                         csvDoc.Write(Environment.NewLine)
                     End If
                 Next
@@ -1171,5 +1175,22 @@ No change in value will have any effect."",""Required""")
                 End If
             End While
         End Using
+    End Sub
+
+    Private Sub FullNameEntryToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles FullNameEntryToolStripMenuItem.CheckedChanged
+        ' If the player name option is checked, enable the First and Last name field.
+
+        txtPlayerFirstName.Enabled = FullNameEntryToolStripMenuItem.Checked
+        txtPlayerLastName.Enabled = FullNameEntryToolStripMenuItem.Checked
+
+    End Sub
+
+    Private Sub FullNameEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FullNameEntryToolStripMenuItem.Click
+        FullNameEntryToolStripMenuItem.Checked = Not FullNameEntryToolStripMenuItem.Checked
+
+        ' Change the Option too
+        My.Settings.PlayerNameFull = Not My.Settings.PlayerNameFull
+        My.Settings.Save()
+
     End Sub
 End Class

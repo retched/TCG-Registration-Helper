@@ -37,6 +37,7 @@ Partial Class frmMasterPlayerList
         Me.btnDelPlayer = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnShowAll = New System.Windows.Forms.Button()
+        Me.btnClearPlayerNames = New System.Windows.Forms.Button()
         CType(Me.dgvMasterList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -74,7 +75,7 @@ Partial Class frmMasterPlayerList
         Me.dgvMasterList.RowHeadersVisible = False
         Me.dgvMasterList.RowTemplate.Height = 27
         Me.dgvMasterList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvMasterList.Size = New System.Drawing.Size(794, 401)
+        Me.dgvMasterList.Size = New System.Drawing.Size(835, 401)
         Me.dgvMasterList.TabIndex = 2
         '
         'dgcMembershipID
@@ -108,7 +109,7 @@ Partial Class frmMasterPlayerList
         'btnAddPlayer
         '
         Me.btnAddPlayer.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnAddPlayer.Location = New System.Drawing.Point(76, 454)
+        Me.btnAddPlayer.Location = New System.Drawing.Point(12, 454)
         Me.btnAddPlayer.Name = "btnAddPlayer"
         Me.btnAddPlayer.Size = New System.Drawing.Size(162, 30)
         Me.btnAddPlayer.TabIndex = 3
@@ -136,7 +137,7 @@ Partial Class frmMasterPlayerList
         '
         Me.btnEditPlayer.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnEditPlayer.Enabled = False
-        Me.btnEditPlayer.Location = New System.Drawing.Point(244, 454)
+        Me.btnEditPlayer.Location = New System.Drawing.Point(180, 454)
         Me.btnEditPlayer.Name = "btnEditPlayer"
         Me.btnEditPlayer.Size = New System.Drawing.Size(162, 30)
         Me.btnEditPlayer.TabIndex = 4
@@ -147,7 +148,7 @@ Partial Class frmMasterPlayerList
         '
         Me.btnDelPlayer.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnDelPlayer.Enabled = False
-        Me.btnDelPlayer.Location = New System.Drawing.Point(412, 454)
+        Me.btnDelPlayer.Location = New System.Drawing.Point(348, 454)
         Me.btnDelPlayer.Name = "btnDelPlayer"
         Me.btnDelPlayer.Size = New System.Drawing.Size(162, 30)
         Me.btnDelPlayer.TabIndex = 5
@@ -158,7 +159,7 @@ Partial Class frmMasterPlayerList
         '
         Me.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(580, 454)
+        Me.btnClose.Location = New System.Drawing.Point(684, 454)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(162, 30)
         Me.btnClose.TabIndex = 6
@@ -174,13 +175,25 @@ Partial Class frmMasterPlayerList
         Me.btnShowAll.Text = "Show All"
         Me.btnShowAll.UseVisualStyleBackColor = True
         '
+        'btnClearPlayerNames
+        '
+        Me.btnClearPlayerNames.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnClearPlayerNames.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnClearPlayerNames.Location = New System.Drawing.Point(516, 454)
+        Me.btnClearPlayerNames.Name = "btnClearPlayerNames"
+        Me.btnClearPlayerNames.Size = New System.Drawing.Size(162, 30)
+        Me.btnClearPlayerNames.TabIndex = 8
+        Me.btnClearPlayerNames.Text = "Clear all Player Names"
+        Me.btnClearPlayerNames.UseVisualStyleBackColor = True
+        '
         'frmMasterPlayerList
         '
         Me.AcceptButton = Me.btnAddPlayer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(818, 496)
+        Me.ClientSize = New System.Drawing.Size(859, 496)
+        Me.Controls.Add(Me.btnClearPlayerNames)
         Me.Controls.Add(Me.btnShowAll)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnDelPlayer)
@@ -190,6 +203,7 @@ Partial Class frmMasterPlayerList
         Me.Controls.Add(Me.btnAddPlayer)
         Me.Controls.Add(Me.dgvMasterList)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MinimumSize = New System.Drawing.Size(875, 535)
         Me.Name = "frmMasterPlayerList"
         Me.ShowInTaskbar = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
@@ -213,4 +227,5 @@ Partial Class frmMasterPlayerList
     Friend WithEvents dgcMembershipName As DataGridViewTextBoxColumn
     Friend WithEvents dgcPlayerFirstName As DataGridViewTextBoxColumn
     Friend WithEvents dgcPlayerLastName As DataGridViewTextBoxColumn
+    Friend WithEvents btnClearPlayerNames As Button
 End Class

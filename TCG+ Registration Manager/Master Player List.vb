@@ -155,4 +155,20 @@
 
         End Using
     End Sub
+
+    Private Sub btnClearPlayerNames_Click(sender As Object, e As EventArgs) Handles btnClearPlayerNames.Click
+        If MessageBox.Show("This option will allow you to completely remove all stored First and Last Names from the AllPlayers.xml. (It will keep the Player Nickname.)" & Environment.NewLine & Environment.NewLine & "This option is NOT REVERSIBLE. PROCEED WITH CAUTION!!!", "Delete all player names from AllPlayers.XML?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            Dim xdoc As New XDocument
+            xdoc = XDocument.Load(Application.StartupPath + "\AllPlayers.xml")
+
+            ' Don't delete the child nodes, set it.
+            xdoc.Descendants("FirstName").Value = ""
+            xdoc.Descendants("LastName").Value = ""
+
+            xdoc.Save(Application.StartupPath + "\AllPlayers.xml")
+
+            ' Reload the file.
+            LoadPlayersListFromXML()
+        End If
+    End Sub
 End Class
