@@ -83,10 +83,10 @@ See `LICENSE.txt` for the full license.
 More Links
 ---
 
-> [retchedlive.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp; Personal website and web blog
-> GitHub [@retched](https://github.com/retched) &nbsp;&middot;&nbsp; Public projects and open sourced.
-> GitLab [@retched](https://gitlab.com/retched) &nbsp;&middot;&nbsp; Private repositories
-> Twitter [@retched](https://twitter.com/retched) &nbsp;&middot;&nbsp; Random musings
-> Twitch  [@retched](https://twitch.tv/retched) &nbsp;&middot;&nbsp; Live coding, paired programming, video games.
+* [retchedlive.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp; Personal website and web blog
+* GitHub [@retched](https://github.com/retched) &nbsp;&middot;&nbsp; Public projects and open sourced.
+* GitLab [@retched](https://gitlab.com/retched) &nbsp;&middot;&nbsp; Private repositories
+* Twitter [@retched](https://twitter.com/retched) &nbsp;&middot;&nbsp; Random musings
+* Twitch  [@retched](https://twitch.tv/retched) &nbsp;&middot;&nbsp; Live coding, paired programming, video games.
 
-Source Code: Copyright © 2022, Paul Williams, All rights reserved.
+Source Code: Copyright © 2022-2023, Paul Williams, All rights reserved.
