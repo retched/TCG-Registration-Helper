@@ -41,7 +41,11 @@
 
     Private Sub CommaSeparatedValueFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CommaSeparatedValueFileToolStripMenuItem.Click
 
-        OpenFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        If Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) AndAlso My.Computer.FileSystem.DirectoryExists(My.Settings.LastUsedDirectory) Then
+            OpenFileDialogCSV.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            OpenFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
 
         If (OpenFileDialogCSV.ShowDialog(Me) = DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogCSV.FileName
@@ -128,7 +132,11 @@
 
     Private Sub TournamentXMLxmlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TournamentXMLxmlToolStripMenuItem.Click
 
-        OpenFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        If Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) Then
+            OpenFileDialogXML.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            OpenFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
 
         If (OpenFileDialogXML.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
             Dim FileName As String = OpenFileDialogXML.FileName

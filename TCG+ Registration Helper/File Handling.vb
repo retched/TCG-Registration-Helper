@@ -25,7 +25,8 @@
                     .MembershipNumber = player.Descendants("MemberNumber").Value,
                     .FirstName = player.Descendants("PlayerFirstName").Value,
                     .LastName = player.Descendants("PlayerLastName").Value,
-                    .SeatOrder = player.Descendants("SeatOrder").Value}
+                    .SeatOrder = player.Descendants("SeatOrder").Value,
+                    .DeckRecipe = player.Descendants("DeckRecipe").Value}
                 tpPlayer.FormatNumber()
 
                 Select Case tpPlayer.SeatOrder
@@ -186,11 +187,13 @@
                                                    .PlayerA = New PlayerInfo With {
                                                         .MembershipNumber = currentRow(5),
                                                         .MembershipName = currentRow(6),
-                                                        .SeatOrder = currentRow(7)
+                                                        .SeatOrder = currentRow(7),
+                                                        .DeckRecipe = currentRow(9)
                                                     },
                                                    .PlayerB = New PlayerInfo,
                                                    .PlayerC = New PlayerInfo,
-                                                   .Memo = currentRow(8)})
+                                                   .Memo = currentRow(8),
+                                                   .SMSAuth = currentRow(10)})
                         End Select
                     End If
 
@@ -212,7 +215,10 @@
 
         Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
 
-        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
+        ' 0000000986 is an INVALID Member ID. Some TCG+ created files contain this number.
+        ' This number SHOULD NOT BE ALLOWED to be saved as a regular player. (It will causes an error message when imported.)
+
+        If (strMemberID <> "GUEST99999" And strMemberID <> "0000000986") And Not String.IsNullOrWhiteSpace(strMemberID) Then
             If IsNothing(target) Then
                 ' This should mean we have a NEW element.
                 Dim newPlayer As XElement = New XElement("Player")
@@ -243,7 +249,7 @@
 
         Dim target As XElement = xdoc.Descendants("Player").FirstOrDefault(Function(x) x.Element("MembershipNo").Value = strMemberID)
 
-        If strMemberID <> "GUEST99999" And Not String.IsNullOrWhiteSpace(strMemberID) Then
+        If (strMemberID <> "GUEST99999" And strMemberID <> "0000000986") And Not String.IsNullOrWhiteSpace(strMemberID) Then
             If IsNothing(target) Then
                 ' This should mean we have a NEW element.
                 Dim newPlayer As XElement = New XElement("Player")

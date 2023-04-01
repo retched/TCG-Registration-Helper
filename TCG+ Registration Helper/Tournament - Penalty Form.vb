@@ -72,8 +72,9 @@
 
         Using frmEditPenalty As New frmPenaltyDetail
 
-            Dim selectedPenalty As TournamentPenalty = lstPenalties(dgvPenalties.SelectedRows(0).Cells(0).Value)
+            frmEditPenalty.EditMode = True
 
+            Dim selectedPenalty As TournamentPenalty = lstPenalties(dgvPenalties.SelectedRows(0).Cells(0).Value)
 
             frmEditPenalty.cboPlayer.DataSource = New BindingSource(lstTournPlayers, Nothing)
             frmEditPenalty.cboPlayer.ValueMember = "MembershipNumber"
@@ -94,6 +95,7 @@
             frmEditPenalty.cboPenalty.SelectedValue = selectedPenalty.PenaltyType
 
             frmEditPenalty.txtPenaltyNotes.Text = selectedPenalty.Notes
+
             If frmEditPenalty.ShowDialog(Me) = DialogResult.OK Then
                 ' We are for sure, editing a penalty detail.
 

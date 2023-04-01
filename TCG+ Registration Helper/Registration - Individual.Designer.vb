@@ -23,12 +23,12 @@ Partial Class frmIndividual
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnAddPlayer = New System.Windows.Forms.Button()
@@ -59,14 +59,6 @@ Partial Class frmIndividual
         Me.ChangePlayerDetails0ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeletePlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.dgvPlayers = New System.Windows.Forms.DataGridView()
-        Me.dgcListIndex = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcSelect = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.dgcIndex = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcTeamId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcMembershipNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcNickname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcByesCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgcStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbSelectAll = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -88,12 +80,14 @@ Partial Class frmIndividual
         Me.CommaSeparatedValuesFilecsvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TournamentXMLxmlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CommaSeparatedValuesFilecsvToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TournamentXMLxmlToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.TournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PenaltiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StaffJudgesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FullNameEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveFileDialogCSV = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialogXML = New System.Windows.Forms.SaveFileDialog()
         Me.AddFromCSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -117,8 +111,17 @@ Partial Class frmIndividual
         Me.AdvanceElectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ParticipatingInTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DroppedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.FullNameEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.dgcListIndex = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcSelect = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.dgcIndex = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcTeamId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcMembershipNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcNickname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgcStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsmiPlayerName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddPlayerToTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WaitingListShufflerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -162,16 +165,16 @@ Partial Class frmIndividual
         Me.btnClear.Location = New System.Drawing.Point(397, 21)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(92, 29)
-        Me.btnClear.TabIndex = 7
+        Me.btnClear.TabIndex = 2
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnAddPlayer
         '
-        Me.btnAddPlayer.Location = New System.Drawing.Point(165, 241)
+        Me.btnAddPlayer.Location = New System.Drawing.Point(165, 238)
         Me.btnAddPlayer.Name = "btnAddPlayer"
         Me.btnAddPlayer.Size = New System.Drawing.Size(159, 29)
-        Me.btnAddPlayer.TabIndex = 6
+        Me.btnAddPlayer.TabIndex = 13
         Me.btnAddPlayer.Text = "Add Player to Tournament"
         Me.btnAddPlayer.UseVisualStyleBackColor = True
         '
@@ -180,31 +183,31 @@ Partial Class frmIndividual
         Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cboStatus.FormattingEnabled = True
-        Me.cboStatus.Location = New System.Drawing.Point(213, 207)
+        Me.cboStatus.Location = New System.Drawing.Point(213, 204)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(276, 28)
-        Me.cboStatus.TabIndex = 5
+        Me.cboStatus.TabIndex = 12
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label6.Location = New System.Drawing.Point(20, 212)
+        Me.Label6.Location = New System.Drawing.Point(20, 209)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 19)
-        Me.Label6.TabIndex = 13
+        Me.Label6.TabIndex = 11
         Me.Label6.Text = "Status"
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.rbByes_1)
         Me.Panel1.Controls.Add(Me.rbByes_0)
-        Me.Panel1.Location = New System.Drawing.Point(213, 172)
+        Me.Panel1.Location = New System.Drawing.Point(213, 169)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(276, 29)
-        Me.Panel1.TabIndex = 4
+        Me.Panel1.TabIndex = 10
         '
         'rbByes_1
         '
@@ -233,11 +236,11 @@ Partial Class frmIndividual
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(20, 177)
+        Me.Label5.Location = New System.Drawing.Point(20, 174)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(96, 19)
-        Me.Label5.TabIndex = 12
+        Me.Label5.TabIndex = 9
         Me.Label5.Text = "Assigned Byes"
         '
         'Label4
@@ -245,63 +248,63 @@ Partial Class frmIndividual
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(20, 141)
+        Me.Label4.Location = New System.Drawing.Point(18, 62)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(148, 19)
-        Me.Label4.TabIndex = 11
+        Me.Label4.TabIndex = 3
         Me.Label4.Text = "Player Member Name*"
         '
         'txtPlayerNickname
         '
         Me.txtPlayerNickname.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerNickname.Location = New System.Drawing.Point(213, 136)
+        Me.txtPlayerNickname.Location = New System.Drawing.Point(211, 57)
         Me.txtPlayerNickname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerNickname.Name = "txtPlayerNickname"
         Me.txtPlayerNickname.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerNickname.TabIndex = 3
+        Me.txtPlayerNickname.TabIndex = 4
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label3.Location = New System.Drawing.Point(20, 104)
+        Me.Label3.Location = New System.Drawing.Point(20, 138)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(115, 19)
-        Me.Label3.TabIndex = 10
+        Me.Label3.TabIndex = 7
         Me.Label3.Text = "Player Last Name"
         '
         'txtPlayerLastName
         '
         Me.txtPlayerLastName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerLastName.Location = New System.Drawing.Point(213, 99)
+        Me.txtPlayerLastName.Location = New System.Drawing.Point(213, 133)
         Me.txtPlayerLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerLastName.Name = "txtPlayerLastName"
         Me.txtPlayerLastName.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerLastName.TabIndex = 2
+        Me.txtPlayerLastName.TabIndex = 8
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(20, 65)
+        Me.Label2.Location = New System.Drawing.Point(20, 99)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(116, 19)
-        Me.Label2.TabIndex = 9
+        Me.Label2.TabIndex = 5
         Me.Label2.Text = "Player First Name"
         '
         'txtPlayerFirstName
         '
         Me.txtPlayerFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPlayerFirstName.Location = New System.Drawing.Point(213, 60)
+        Me.txtPlayerFirstName.Location = New System.Drawing.Point(213, 94)
         Me.txtPlayerFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPlayerFirstName.Name = "txtPlayerFirstName"
         Me.txtPlayerFirstName.Size = New System.Drawing.Size(276, 29)
-        Me.txtPlayerFirstName.TabIndex = 1
+        Me.txtPlayerFirstName.TabIndex = 6
         '
         'Label1
         '
@@ -312,7 +315,7 @@ Partial Class frmIndividual
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(185, 19)
-        Me.Label1.TabIndex = 8
+        Me.Label1.TabIndex = 0
         Me.Label1.Text = "TCG+ Membership Number*"
         '
         'txtMemberNo
@@ -323,7 +326,7 @@ Partial Class frmIndividual
         Me.txtMemberNo.MaxLength = 10
         Me.txtMemberNo.Name = "txtMemberNo"
         Me.txtMemberNo.Size = New System.Drawing.Size(177, 29)
-        Me.txtMemberNo.TabIndex = 0
+        Me.txtMemberNo.TabIndex = 1
         Me.txtMemberNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GroupBox2
@@ -455,98 +458,28 @@ Partial Class frmIndividual
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvPlayers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvPlayers.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
-        Me.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPlayers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcListIndex, Me.dgcSelect, Me.dgcIndex, Me.dgcTeamId, Me.dgcMembershipNo, Me.dgcNickname, Me.dgcByesCount, Me.dgcStatus})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.dgvPlayers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcListIndex, Me.dgcSelect, Me.dgcIndex, Me.dgcTeamId, Me.dgcMembershipNo, Me.dgcNickname, Me.dgcStatus})
         Me.dgvPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvPlayers.EnableHeadersVisualStyles = False
         Me.dgvPlayers.Location = New System.Drawing.Point(516, 37)
         Me.dgvPlayers.MultiSelect = False
         Me.dgvPlayers.Name = "dgvPlayers"
         Me.dgvPlayers.RowHeadersVisible = False
-        Me.dgvPlayers.RowTemplate.Height = 90
+        Me.dgvPlayers.RowTemplate.Height = 44
         Me.dgvPlayers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvPlayers.Size = New System.Drawing.Size(731, 539)
         Me.dgvPlayers.TabIndex = 3
-        '
-        'dgcListIndex
-        '
-        Me.dgcListIndex.HeaderText = "lstPlayerID"
-        Me.dgcListIndex.Name = "dgcListIndex"
-        Me.dgcListIndex.ReadOnly = True
-        Me.dgcListIndex.Visible = False
-        '
-        'dgcSelect
-        '
-        Me.dgcSelect.FalseValue = "0"
-        Me.dgcSelect.FillWeight = 25.0!
-        Me.dgcSelect.HeaderText = ""
-        Me.dgcSelect.Name = "dgcSelect"
-        Me.dgcSelect.TrueValue = "1"
-        '
-        'dgcIndex
-        '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgcIndex.DefaultCellStyle = DataGridViewCellStyle14
-        Me.dgcIndex.FillWeight = 25.0!
-        Me.dgcIndex.HeaderText = "#"
-        Me.dgcIndex.Name = "dgcIndex"
-        '
-        'dgcTeamId
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgcTeamId.DefaultCellStyle = DataGridViewCellStyle15
-        Me.dgcTeamId.FillWeight = 75.0!
-        Me.dgcTeamId.HeaderText = "Team ID#"
-        Me.dgcTeamId.Name = "dgcTeamId"
-        '
-        'dgcMembershipNo
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Courier New", 9.75!)
-        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle16
-        Me.dgcMembershipNo.FillWeight = 80.0!
-        Me.dgcMembershipNo.HeaderText = "Membership Number"
-        Me.dgcMembershipNo.Name = "dgcMembershipNo"
-        Me.dgcMembershipNo.ReadOnly = True
-        '
-        'dgcNickname
-        '
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle17
-        Me.dgcNickname.FillWeight = 140.0!
-        Me.dgcNickname.HeaderText = "Nickname (Player Name)"
-        Me.dgcNickname.Name = "dgcNickname"
-        Me.dgcNickname.ReadOnly = True
-        '
-        'dgcByesCount
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.dgcByesCount.DefaultCellStyle = DataGridViewCellStyle18
-        Me.dgcByesCount.FillWeight = 60.0!
-        Me.dgcByesCount.HeaderText = "First Round Bye"
-        Me.dgcByesCount.Name = "dgcByesCount"
-        Me.dgcByesCount.ReadOnly = True
-        '
-        'dgcStatus
-        '
-        Me.dgcStatus.FillWeight = 120.0!
-        Me.dgcStatus.HeaderText = "Status"
-        Me.dgcStatus.Name = "dgcStatus"
-        Me.dgcStatus.ReadOnly = True
-        Me.dgcStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'cbSelectAll
         '
@@ -709,23 +642,23 @@ Partial Class frmIndividual
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CommaSeparatedValuesFilecsvToolStripMenuItem1, Me.TournamentXMLxmlToolStripMenuItem1})
         Me.ToolStripMenuItem1.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.ToolStripMenuItem1.Text = "S&ave Copy As..."
         '
-        'ToolStripMenuItem2
+        'CommaSeparatedValuesFilecsvToolStripMenuItem1
         '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(262, 22)
-        Me.ToolStripMenuItem2.Text = "&Comma-Separated Values File (.csv)"
+        Me.CommaSeparatedValuesFilecsvToolStripMenuItem1.Name = "CommaSeparatedValuesFilecsvToolStripMenuItem1"
+        Me.CommaSeparatedValuesFilecsvToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.CommaSeparatedValuesFilecsvToolStripMenuItem1.Text = "&Comma-Separated Values File (.csv)"
         '
-        'ToolStripMenuItem3
+        'TournamentXMLxmlToolStripMenuItem1
         '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(262, 22)
-        Me.ToolStripMenuItem3.Text = "Tournament XML (.xml)"
+        Me.TournamentXMLxmlToolStripMenuItem1.Name = "TournamentXMLxmlToolStripMenuItem1"
+        Me.TournamentXMLxmlToolStripMenuItem1.Size = New System.Drawing.Size(262, 22)
+        Me.TournamentXMLxmlToolStripMenuItem1.Text = "Tournament XML (.xml)"
         '
         'ToolStripSeparator1
         '
@@ -736,7 +669,7 @@ Partial Class frmIndividual
         '
         'TournamentToolStripMenuItem
         '
-        Me.TournamentToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PenaltiesToolStripMenuItem, Me.StaffJudgesToolStripMenuItem, Me.ToolStripSeparator2, Me.FullNameEntryToolStripMenuItem})
+        Me.TournamentToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PenaltiesToolStripMenuItem, Me.StaffJudgesToolStripMenuItem, Me.WaitingListShufflerToolStripMenuItem, Me.ToolStripSeparator2, Me.FullNameEntryToolStripMenuItem})
         Me.TournamentToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.TournamentToolStripMenuItem.Name = "TournamentToolStripMenuItem"
         Me.TournamentToolStripMenuItem.Size = New System.Drawing.Size(83, 20)
@@ -745,14 +678,27 @@ Partial Class frmIndividual
         'PenaltiesToolStripMenuItem
         '
         Me.PenaltiesToolStripMenuItem.Name = "PenaltiesToolStripMenuItem"
-        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.PenaltiesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.PenaltiesToolStripMenuItem.Text = "&Penalties"
         '
         'StaffJudgesToolStripMenuItem
         '
         Me.StaffJudgesToolStripMenuItem.Name = "StaffJudgesToolStripMenuItem"
-        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.StaffJudgesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.StaffJudgesToolStripMenuItem.Text = "&Staff/Judges"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(197, 6)
+        '
+        'FullNameEntryToolStripMenuItem
+        '
+        Me.FullNameEntryToolStripMenuItem.Checked = True
+        Me.FullNameEntryToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.FullNameEntryToolStripMenuItem.Name = "FullNameEntryToolStripMenuItem"
+        Me.FullNameEntryToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.FullNameEntryToolStripMenuItem.Text = "&Full Player Name Entry"
         '
         'SaveFileDialogCSV
         '
@@ -798,33 +744,33 @@ Partial Class frmIndividual
         '
         'cmsTournamentList
         '
-        Me.cmsTournamentList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangeMembershipNumberToolStripMenuItem, Me.ChangeTeamIDToolStripMenuItem, Me.DeletePlayerFromTournamentToolStripMenuItem, Me.ChangePlayerStatusToToolStripMenuItem})
+        Me.cmsTournamentList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiPlayerName, Me.AddPlayerToTournamentToolStripMenuItem, Me.ToolStripSeparator4, Me.ChangeMembershipNumberToolStripMenuItem, Me.ChangeTeamIDToolStripMenuItem, Me.DeletePlayerFromTournamentToolStripMenuItem, Me.ChangePlayerStatusToToolStripMenuItem})
         Me.cmsTournamentList.Name = "cmsTournamentList"
-        Me.cmsTournamentList.Size = New System.Drawing.Size(241, 92)
+        Me.cmsTournamentList.Size = New System.Drawing.Size(272, 142)
         '
         'ChangeMembershipNumberToolStripMenuItem
         '
         Me.ChangeMembershipNumberToolStripMenuItem.Name = "ChangeMembershipNumberToolStripMenuItem"
-        Me.ChangeMembershipNumberToolStripMenuItem.Size = New System.Drawing.Size(240, 22)
+        Me.ChangeMembershipNumberToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
         Me.ChangeMembershipNumberToolStripMenuItem.Text = "Change &Membership Number"
         '
         'ChangeTeamIDToolStripMenuItem
         '
         Me.ChangeTeamIDToolStripMenuItem.Name = "ChangeTeamIDToolStripMenuItem"
-        Me.ChangeTeamIDToolStripMenuItem.Size = New System.Drawing.Size(240, 22)
+        Me.ChangeTeamIDToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
         Me.ChangeTeamIDToolStripMenuItem.Text = "Change &TeamID"
         '
         'DeletePlayerFromTournamentToolStripMenuItem
         '
         Me.DeletePlayerFromTournamentToolStripMenuItem.Name = "DeletePlayerFromTournamentToolStripMenuItem"
-        Me.DeletePlayerFromTournamentToolStripMenuItem.Size = New System.Drawing.Size(240, 22)
+        Me.DeletePlayerFromTournamentToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
         Me.DeletePlayerFromTournamentToolStripMenuItem.Text = "Delete Player From Tournament"
         '
         'ChangePlayerStatusToToolStripMenuItem
         '
         Me.ChangePlayerStatusToToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AppliedToolStripMenuItem, Me.SuccessfulToolStripMenuItem, Me.WaitingListToolStripMenuItem, Me.UnsuccessfulToolStripMenuItem, Me.CancelledToolStripMenuItem, Me.SelectedCheckedInToolStripMenuItem, Me.WaitingForCancellationCheckedInToolStripMenuItem, Me.AbsentOnDayOfEventToolStripMenuItem, Me.AdvanceElectedToolStripMenuItem, Me.ParticipatingInTournamentToolStripMenuItem, Me.DroppedToolStripMenuItem})
         Me.ChangePlayerStatusToToolStripMenuItem.Name = "ChangePlayerStatusToToolStripMenuItem"
-        Me.ChangePlayerStatusToToolStripMenuItem.Size = New System.Drawing.Size(240, 22)
+        Me.ChangePlayerStatusToToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
         Me.ChangePlayerStatusToToolStripMenuItem.Text = "Change Player Status To"
         '
         'AppliedToolStripMenuItem
@@ -893,18 +839,95 @@ Partial Class frmIndividual
         Me.DroppedToolStripMenuItem.Size = New System.Drawing.Size(275, 22)
         Me.DroppedToolStripMenuItem.Text = "&Dropped"
         '
-        'ToolStripSeparator2
+        'dgcListIndex
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(190, 6)
+        Me.dgcListIndex.HeaderText = "lstPlayerID"
+        Me.dgcListIndex.Name = "dgcListIndex"
+        Me.dgcListIndex.ReadOnly = True
+        Me.dgcListIndex.Visible = False
         '
-        'FullNameEntryToolStripMenuItem
+        'dgcSelect
         '
-        Me.FullNameEntryToolStripMenuItem.Checked = True
-        Me.FullNameEntryToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.FullNameEntryToolStripMenuItem.Name = "FullNameEntryToolStripMenuItem"
-        Me.FullNameEntryToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.FullNameEntryToolStripMenuItem.Text = "&Full Player Name Entry"
+        Me.dgcSelect.FalseValue = "0"
+        Me.dgcSelect.FillWeight = 25.0!
+        Me.dgcSelect.HeaderText = ""
+        Me.dgcSelect.Name = "dgcSelect"
+        Me.dgcSelect.TrueValue = "1"
+        '
+        'dgcIndex
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgcIndex.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgcIndex.FillWeight = 25.0!
+        Me.dgcIndex.HeaderText = "#"
+        Me.dgcIndex.Name = "dgcIndex"
+        Me.dgcIndex.ReadOnly = True
+        '
+        'dgcTeamId
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgcTeamId.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgcTeamId.FillWeight = 75.0!
+        Me.dgcTeamId.HeaderText = "Team ID#"
+        Me.dgcTeamId.Name = "dgcTeamId"
+        Me.dgcTeamId.ReadOnly = True
+        '
+        'dgcMembershipNo
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Courier New", 9.75!)
+        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgcMembershipNo.FillWeight = 80.0!
+        Me.dgcMembershipNo.HeaderText = "Membership Number"
+        Me.dgcMembershipNo.Name = "dgcMembershipNo"
+        Me.dgcMembershipNo.ReadOnly = True
+        '
+        'dgcNickname
+        '
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgcNickname.FillWeight = 140.0!
+        Me.dgcNickname.HeaderText = "Nickname (Player Name)"
+        Me.dgcNickname.Name = "dgcNickname"
+        Me.dgcNickname.ReadOnly = True
+        '
+        'dgcStatus
+        '
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcStatus.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgcStatus.FillWeight = 120.0!
+        Me.dgcStatus.HeaderText = "Status"
+        Me.dgcStatus.Name = "dgcStatus"
+        Me.dgcStatus.ReadOnly = True
+        Me.dgcStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(268, 6)
+        '
+        'tsmiPlayerName
+        '
+        Me.tsmiPlayerName.Enabled = False
+        Me.tsmiPlayerName.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.tsmiPlayerName.Name = "tsmiPlayerName"
+        Me.tsmiPlayerName.Size = New System.Drawing.Size(271, 22)
+        Me.tsmiPlayerName.Text = "{0}"
+        '
+        'AddPlayerToTournamentToolStripMenuItem
+        '
+        Me.AddPlayerToTournamentToolStripMenuItem.Image = Global.retched.TCGRegManager.My.Resources.Resources.green_check_mark
+        Me.AddPlayerToTournamentToolStripMenuItem.Name = "AddPlayerToTournamentToolStripMenuItem"
+        Me.AddPlayerToTournamentToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
+        Me.AddPlayerToTournamentToolStripMenuItem.Text = "&Add Player to Tournament / Check-In"
+        '
+        'WaitingListShufflerToolStripMenuItem
+        '
+        Me.WaitingListShufflerToolStripMenuItem.Name = "WaitingListShufflerToolStripMenuItem"
+        Me.WaitingListShufflerToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.WaitingListShufflerToolStripMenuItem.Text = "&Build Tournament Pools"
+        Me.WaitingListShufflerToolStripMenuItem.Visible = False
         '
         'frmIndividual
         '
@@ -994,8 +1017,6 @@ Partial Class frmIndividual
     Friend WithEvents PenaltiesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StaffJudgesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents SaveFileDialogCSV As SaveFileDialog
     Friend WithEvents SaveFileDialogXML As SaveFileDialog
@@ -1024,16 +1045,21 @@ Partial Class frmIndividual
     Friend WithEvents AdvanceElectedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ParticipatingInTournamentToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DroppedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeTeamIDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeMembershipNumberToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents FullNameEntryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CommaSeparatedValuesFilecsvToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents TournamentXMLxmlToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents dgcListIndex As DataGridViewTextBoxColumn
     Friend WithEvents dgcSelect As DataGridViewCheckBoxColumn
     Friend WithEvents dgcIndex As DataGridViewTextBoxColumn
     Friend WithEvents dgcTeamId As DataGridViewTextBoxColumn
     Friend WithEvents dgcMembershipNo As DataGridViewTextBoxColumn
     Friend WithEvents dgcNickname As DataGridViewTextBoxColumn
-    Friend WithEvents dgcByesCount As DataGridViewTextBoxColumn
     Friend WithEvents dgcStatus As DataGridViewTextBoxColumn
-    Friend WithEvents ChangeTeamIDToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ChangeMembershipNumberToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents FullNameEntryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsmiPlayerName As ToolStripMenuItem
+    Friend WithEvents AddPlayerToTournamentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents WaitingListShufflerToolStripMenuItem As ToolStripMenuItem
 End Class

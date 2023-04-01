@@ -25,10 +25,6 @@ Partial Class frmPenalties
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgvPenalties = New System.Windows.Forms.DataGridView()
-        Me.btnAddPenalty = New System.Windows.Forms.Button()
-        Me.btnEditPenalty = New System.Windows.Forms.Button()
-        Me.btnDeletePenalty = New System.Windows.Forms.Button()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.dgcPenaltyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcPlayer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcInfractionType = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,6 +32,10 @@ Partial Class frmPenalties
         Me.dgcRound = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcJudge = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgcNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAddPenalty = New System.Windows.Forms.Button()
+        Me.btnEditPenalty = New System.Windows.Forms.Button()
+        Me.btnDeletePenalty = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         CType(Me.dgvPenalties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -62,51 +62,8 @@ Partial Class frmPenalties
         Me.dgvPenalties.Name = "dgvPenalties"
         Me.dgvPenalties.RowHeadersVisible = False
         Me.dgvPenalties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPenalties.Size = New System.Drawing.Size(792, 305)
+        Me.dgvPenalties.Size = New System.Drawing.Size(792, 311)
         Me.dgvPenalties.TabIndex = 0
-        '
-        'btnAddPenalty
-        '
-        Me.btnAddPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnAddPenalty.Location = New System.Drawing.Point(181, 321)
-        Me.btnAddPenalty.Name = "btnAddPenalty"
-        Me.btnAddPenalty.Size = New System.Drawing.Size(109, 25)
-        Me.btnAddPenalty.TabIndex = 1
-        Me.btnAddPenalty.Text = "&Add Penalty"
-        Me.btnAddPenalty.UseVisualStyleBackColor = True
-        '
-        'btnEditPenalty
-        '
-        Me.btnEditPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnEditPenalty.Enabled = False
-        Me.btnEditPenalty.Location = New System.Drawing.Point(295, 321)
-        Me.btnEditPenalty.Name = "btnEditPenalty"
-        Me.btnEditPenalty.Size = New System.Drawing.Size(109, 25)
-        Me.btnEditPenalty.TabIndex = 2
-        Me.btnEditPenalty.Text = "&Edit Penalty"
-        Me.btnEditPenalty.UseVisualStyleBackColor = True
-        '
-        'btnDeletePenalty
-        '
-        Me.btnDeletePenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnDeletePenalty.Enabled = False
-        Me.btnDeletePenalty.Location = New System.Drawing.Point(409, 321)
-        Me.btnDeletePenalty.Name = "btnDeletePenalty"
-        Me.btnDeletePenalty.Size = New System.Drawing.Size(109, 25)
-        Me.btnDeletePenalty.TabIndex = 3
-        Me.btnDeletePenalty.Text = "&Delete Penalty"
-        Me.btnDeletePenalty.UseVisualStyleBackColor = True
-        '
-        'btnClose
-        '
-        Me.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnClose.Location = New System.Drawing.Point(523, 321)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(109, 25)
-        Me.btnClose.TabIndex = 4
-        Me.btnClose.Text = "&Close"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'dgcPenaltyID
         '
@@ -152,11 +109,54 @@ Partial Class frmPenalties
         Me.dgcNotes.Name = "dgcNotes"
         Me.dgcNotes.ReadOnly = True
         '
+        'btnAddPenalty
+        '
+        Me.btnAddPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnAddPenalty.Location = New System.Drawing.Point(181, 327)
+        Me.btnAddPenalty.Name = "btnAddPenalty"
+        Me.btnAddPenalty.Size = New System.Drawing.Size(109, 25)
+        Me.btnAddPenalty.TabIndex = 1
+        Me.btnAddPenalty.Text = "&Add Penalty"
+        Me.btnAddPenalty.UseVisualStyleBackColor = True
+        '
+        'btnEditPenalty
+        '
+        Me.btnEditPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnEditPenalty.Enabled = False
+        Me.btnEditPenalty.Location = New System.Drawing.Point(295, 327)
+        Me.btnEditPenalty.Name = "btnEditPenalty"
+        Me.btnEditPenalty.Size = New System.Drawing.Size(109, 25)
+        Me.btnEditPenalty.TabIndex = 2
+        Me.btnEditPenalty.Text = "&Edit Penalty"
+        Me.btnEditPenalty.UseVisualStyleBackColor = True
+        '
+        'btnDeletePenalty
+        '
+        Me.btnDeletePenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnDeletePenalty.Enabled = False
+        Me.btnDeletePenalty.Location = New System.Drawing.Point(409, 327)
+        Me.btnDeletePenalty.Name = "btnDeletePenalty"
+        Me.btnDeletePenalty.Size = New System.Drawing.Size(109, 25)
+        Me.btnDeletePenalty.TabIndex = 3
+        Me.btnDeletePenalty.Text = "&Delete Penalty"
+        Me.btnDeletePenalty.UseVisualStyleBackColor = True
+        '
+        'btnClose
+        '
+        Me.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK
+        Me.btnClose.Location = New System.Drawing.Point(523, 327)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(109, 25)
+        Me.btnClose.TabIndex = 4
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
         'frmPenalties
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(812, 359)
+        Me.ClientSize = New System.Drawing.Size(812, 388)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnDeletePenalty)

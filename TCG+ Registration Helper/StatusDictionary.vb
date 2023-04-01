@@ -45,11 +45,33 @@
         {20, "Players under the influence of drugs or alcohol"}
     }
 
+    Public _suggested As Dictionary(Of Integer, Integer) = New Dictionary(Of Integer, Integer) From {
+        {1, 1},
+        {2, 1},
+        {3, 1},
+        {4, 1},
+        {5, 2},
+        {6, 1},
+        {7, 1},
+        {8, 2},
+        {9, 2},
+        {10, 1},
+        {11, 1},
+        {12, 1},
+        {13, 1},
+        {14, 1},
+        {15, 4},
+        {16, 4},
+        {17, 4},
+        {18, 4},
+        {19, 4},
+        {20, 4}
+    }
     Public _penalty As Dictionary(Of Integer, String) = New Dictionary(Of Integer, String) From {
         {0, "Caution"},
         {1, "Warning"},
         {2, "Game Loss"},
-        {3, "Match Loss / Defeat"},
+        {3, "Match Loss"},
         {4, "Disqualification"}
     }
 End Module

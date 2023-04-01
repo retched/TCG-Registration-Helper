@@ -26,5 +26,8 @@
                 Application.Exit()
             End Try
         End If
+
+        ' Change the version number to that of the one listed in the Assembly
+        lblVersionNumber.Text = "Version " & Application.ProductVersion.ToString
     End Sub
 End Class

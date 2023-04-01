@@ -35,6 +35,7 @@ Partial Class frmMainMenu
         Me.OpenTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CommaSeparatedValueFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TournamentXMLxmlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -58,7 +59,6 @@ Partial Class frmMainMenu
         Me.SoftwareOperatingManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialogCSV = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogXML = New System.Windows.Forms.OpenFileDialog()
-        Me.MasterPlayerRosterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -125,6 +125,12 @@ Partial Class frmMainMenu
         Me.TournamentXMLxmlToolStripMenuItem.Name = "TournamentXMLxmlToolStripMenuItem"
         Me.TournamentXMLxmlToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.TournamentXMLxmlToolStripMenuItem.Text = "&Tournament XML (.xml)"
+        '
+        'MasterPlayerRosterToolStripMenuItem
+        '
+        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
+        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
         '
         'ToolStripSeparator2
         '
@@ -275,12 +281,6 @@ Partial Class frmMainMenu
         '
         Me.OpenFileDialogXML.Filter = "Tournament XML (*.xml)|*.xml|All Files (*.*)|*.*"
         '
-        'MasterPlayerRosterToolStripMenuItem
-        '
-        Me.MasterPlayerRosterToolStripMenuItem.Name = "MasterPlayerRosterToolStripMenuItem"
-        Me.MasterPlayerRosterToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.MasterPlayerRosterToolStripMenuItem.Text = "&Master Player Roster"
-        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -293,7 +293,7 @@ Partial Class frmMainMenu
         Me.MinimumSize = New System.Drawing.Size(1118, 650)
         Me.Name = "frmMainMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "TCG+ Tournament Entry Manager"
+        Me.Text = "TCG+ Registration Helper"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)

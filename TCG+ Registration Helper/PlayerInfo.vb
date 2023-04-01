@@ -4,6 +4,7 @@
     Public Property MembershipNumber As String
     Public Property MembershipName As String = ""
     Public Property SeatOrder As String = "A"
+    Public Property DeckRecipe As String = ""
 
     Public Property SearchHelper As String
         Get
@@ -88,7 +89,7 @@ Public Class TournamentPlayer
     Public Property Status As Integer = 0
     Public Property ByeRounds As Integer
 #If DEBUG Then
-    Public Property TeamID As Integer = 0
+    Public Property TeamID As Integer = 10
 #Else
     Public Property TeamID As Integer = 0
 #End If
@@ -101,6 +102,7 @@ Public Class TournamentTeam : Inherits TournamentPlayer
     Public PlayerA As PlayerInfo
     Public PlayerB As PlayerInfo
     Public PlayerC As PlayerInfo
+    Public SMSAuth As String = ""
 
     ' Okay, I need to check each member of this team to make sure that the number checked, isn't already in a team.
 

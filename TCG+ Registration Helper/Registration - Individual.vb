@@ -1,4 +1,6 @@
-﻿Public Class frmIndividual
+﻿Imports System.Drawing.Drawing2D
+
+Public Class frmIndividual
 
     Public Property txtXMLFileName As String
     Public Property txtCSVFileName As String
@@ -57,6 +59,9 @@
                 ' Add New Players to Global Player List 
                 AddNewPlayersFromImportCSV()
                 MessageBox.Show("CSV File Loaded Sucessfully")
+
+                My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtCSVFileName)
+                My.Settings.Save()
             Else
                 MessageBox.Show("There is no valid Membership data contained within the file." & Environment.NewLine & Environment.NewLine & "Are you trying to read a standings file?" & Environment.NewLine & Environment.NewLine & "Please double check the file and make sure you are using CSV Export from the ""My Event Details"" page and NOT from the Rankings page and try again.", "Invalid CSV File", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
@@ -74,6 +79,9 @@
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
             MessageBox.Show("XML File Loaded Sucessfully")
+
+            My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtXMLFileName)
+            My.Settings.Save()
         End If
 
         ' Load from XML and put names into Datatable
@@ -120,6 +128,9 @@
             UpdateAllPlayerXML(team.PlayerA.MembershipNumber, team.PlayerA.MembershipName)
         Next
 
+        ' If any player has a number of 0000000986, alert the user that the upload
+        ' will fail since that is an invalid number.
+
         ' Since a new team was made, we should update the "Global Player List" on the form.
         LoadPlayersListFromXML()
 
@@ -130,6 +141,8 @@
 
         If String.IsNullOrEmpty(txtMemberNo.Text.Trim) Or String.IsNullOrEmpty(txtPlayerNickname.Text.Trim) Then
             MessageBox.Show("You must enter at LEAST a Membership Number and a Nickname.", "Invalid Entrant", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ElseIf txtMemberNo.Text = "0000000986" Then
+            MessageBox.Show("CAUTION! The number that you have entered/updated is an invalid TCG+ Membership Number. Using this number in your CSV upload will cause your upload to fail. Please consider having the player recreate their TCG+ account with a new number and delete this number off of your player roster.", "Invalid TCG+ Membership Number Entered", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
             ' Add Player to Tournament List, check to make sure they AREN'T in the list already
             ' Again we're only working with Player A as this is a solo event.
@@ -212,7 +225,7 @@
 
             Dim result As PlayerInfo = lstPlayers.Find(Function(x) x.MembershipNumber = team.PlayerA.MembershipNumber)
             If IsNothing(result) Then
-                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, lstTournTeams.IndexOf(team) + 1, team.TeamID, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
+                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, lstTournTeams.IndexOf(team) + 1, team.TeamID, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, _status.Item(team.Status))
             Else
                 ' We found a matching team
                 ' That means we copy that team's info over to the tournament team info
@@ -220,7 +233,19 @@
                 team.PlayerA.FirstName = result.FirstName
                 team.PlayerA.MembershipName = result.MembershipName
 
-                dgvPlayers.Rows.Add(lstTournTeams.IndexOf(team), False, lstTournTeams.IndexOf(team) + 1, team.TeamID, team.PlayerA.MembershipNumber, team.PlayerA.SummaryName, IIf(team.ByeRounds, "Yes", "No"), _status.Item(team.Status))
+                Dim index As Integer = dgvPlayers.Rows.Add()
+
+                With dgvPlayers.Rows(index)
+                    .Cells("dgcListIndex").Value = lstTournTeams.IndexOf(team)
+                    .Cells("dgcSelect").Value = False
+                    .Cells("dgcIndex").Value = lstTournTeams.IndexOf(team) + 1
+                    .Cells("dgcTeamId").Value = team.TeamID
+                    .Cells("dgcMembershipNo").Value = team.PlayerA.MembershipNumber
+                    .Cells("dgcNickname").Value = team.PlayerA.SummaryName
+                    .Cells("dgcStatus").Value = _status.Item(team.Status) & IIf(team.ByeRounds, Environment.NewLine & "First Round Bye", "")
+                End With
+
+                'dgvPlayers.Rows.Add()
             End If
 
         Next
@@ -339,6 +364,9 @@
 
             ' Find the team whose info matches
             FindPlayerFromList(txtMemberNo.Text)
+
+            If txtMemberNo.Text = "0000000986" Then MessageBox.Show("CAUTION! The number that you have entered/updated is an invalid TCG+ Membership Number. Using this number in your CSV upload will cause your upload to fail. Please consider having the player recreate their TCG+ account with a new number and delete this number off of your player roster.", "Invalid TCG+ Membership Number Entered", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
         End If
 
     End Sub
@@ -397,6 +425,9 @@
                 tourn.Cells("dgcSelect").Value = 0
             End If
         Next
+
+        ' Clear checkbox at the top of the player list.
+        cbSelectAll.Checked = False
     End Sub
 
     Private Sub cbSelectAll_CheckedChanged(sender As Object, e As EventArgs) Handles cbSelectAll.CheckedChanged
@@ -466,6 +497,7 @@
         End If
     End Sub
 
+
     Private Sub DeletePlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeletePlayerToolStripMenuItem.Click
         If MessageBox.Show("Are you ABSOLUTELY sure that you want to delete this player from the local database?" & System.Environment.NewLine & System.Environment.NewLine & "This will not remove them from the current tournament file nor any tournaments that are later loaded. This also will not remove them from a tournament that the player is registered for on Bandai TCG+." & Environment.NewLine & Environment.NewLine & "This will not prevent the player from being added back to the database if you update the status above.", "Delete This Player?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
@@ -511,10 +543,10 @@
         Next
 
         If intCount > 0 Then
-            If MessageBox.Show(String.Format("You are about to delete {0} player(s) from this tournament." & Environment.NewLine & Environment.NewLine & "Are you sure you want to proceed?", intCount), "Deleting Multiple Players", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            If MessageBox.Show(String.Format("You are about to delete/drop {0} player(s) from this tournament." & Environment.NewLine & Environment.NewLine & "Are you sure you want to proceed?", intCount), "Deleting Multiple Players", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 For Each row In dgvPlayers.Rows
-                    If row.Cells(1).Value = True Then
-                        Dim intListIndex As Integer = row.Cells(0).Value
+                    If row.Cells("dgcSelect").Value = True Then
+                        Dim intListIndex As Integer = row.Cells("dgcListIndex").Value
 
                         If lstTournTeams(intListIndex).TeamID = 0 Then
                             ' Remove the team from the list.
@@ -525,9 +557,12 @@
                         Else
                             ' Can't delete the team, make an error
                             lstErrors.Add(lstTournTeams(intListIndex))
+
+                            ' Instead of deleting them, change the player to "Absent on Day of Event".
+                            lstTournTeams(intListIndex).Status = 8
                         End If
 
-                        row.Cells(1).Value = False
+                        row.Cells("dgcSelect").Value = False
 
                     End If
                 Next
@@ -540,11 +575,14 @@
                     Next
 
 
-                    MessageBox.Show(String.Format("Deleted {0} players from the tournament roster." & Environment.NewLine & Environment.NewLine & "But {1} player(s) could not be deleted. Either the player pre-registered or was enrolled through the TCG+ app. To remove these players from the pairings, set their status to ANYTHING but ""Participating in Tournament""." & Environment.NewLine & Environment.NewLine & "Players not removed:" & Environment.NewLine & strErrors, intCount - lstErrors.Count, lstErrors.Count), "Deleted Players", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(String.Format("Deleted {0} players from the tournament roster." & Environment.NewLine & Environment.NewLine & "But {1} player(s) could not be deleted and were dropped instead. Either the player pre-registered or was enrolled through TCG+. To remove these players from the pairings, this player was set to ""Absent on Day of Event""." & Environment.NewLine & Environment.NewLine & "Players withdrawn:" & Environment.NewLine & strErrors, intCount - lstErrors.Count, lstErrors.Count), "Deleted Players", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show(String.Format("Succesfully deleted {0} players from tournament roster.", intCount), "Deleted players with no errors", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
             End If
+
+            ' Rebuild the Tournament List whether or not the list was successfully changed.
+            BuildTournamentList()
         ElseIf dgvPlayers.SelectedRows.Count = 1 Then
             Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
 
@@ -552,11 +590,12 @@
                 MessageBox.Show("Cannot delete this player." & Environment.NewLine & Environment.NewLine & "Either the player pre-registered or was enrolled through the TCG+ app. To remove this player from the pairings, set their status to ANYTHING but ""Participating in Tournament"".", "Cannot delete pre-registered player", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 lstTournTeams.RemoveAt(intLstID)
-
-                BuildTournamentList()
             End If
-
+            ' Rebuild the Tournament List whether or not the list was successfully changed.
+            BuildTournamentList()
         End If
+
+
 
         dgvPlayers.ClearSelection()
 
@@ -569,10 +608,22 @@
     Private Sub CommaSeparatedValuesFilecsvToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CommaSeparatedValuesFilecsvToolStripMenuItem.Click
 
         Dim FileName As String
+
+        Dim blnHasInvalidPlayerNumber As Boolean = False
+
+        If Not String.IsNullOrWhiteSpace(txtCSVFileName) AndAlso My.Computer.FileSystem.FileExists(txtCSVFileName) Then
+            SaveFileDialogCSV.InitialDirectory = Path.GetDirectoryName(txtCSVFileName)
+        ElseIf Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) Then
+            SaveFileDialogCSV.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
+
+
         If Not String.IsNullOrWhiteSpace(txtCSVFileName) AndAlso My.Computer.FileSystem.FileExists(txtCSVFileName) Then
             FileName = txtCSVFileName
         Else
-            SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+
             SaveFileDialogCSV.ShowDialog(Me)
             FileName = SaveFileDialogCSV.FileName
 
@@ -584,7 +635,7 @@
             txtCSVFileName = FileName
 
             Using csvDoc As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(FileName, False)
-                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo""")
+                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"",""Deck Recipe - 1"", ""SMS Auth""")
                 csvDoc.WriteLine("""Required
 ※Please set the value to 0 for new registrations."",""Optional
 ※Required for team competitions only"",""Uneditable
@@ -603,21 +654,22 @@ No change in value will have any effect."",""Required
 1: 1 Round Bye
 Optional
 ※When not entered"",""Required"",""Uneditable
-No change in value will have any effect."",""Required""")
+No change in value will have any effect."",""Required
+※Please set the seat order(A/B/C).""")
 
                 For Each team In lstTournTeams
-                    If team.Status <> 9999 Then
-                        csvDoc.Write("""" & team.TeamID & """,")
-                        csvDoc.Write("""" & team.TeamName & """,")
-                        csvDoc.Write("""" & """,")
-                        csvDoc.Write("""" & team.Status & """,")
-                        csvDoc.Write("""" & team.ByeRounds & """,")
-                        csvDoc.Write("""" & team.PlayerA.MembershipNumber & """,")
-                        csvDoc.Write("""" & team.PlayerA.MembershipName & """,")
-                        csvDoc.Write("""" & team.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, team.PlayerA.PlayerFullName, "") & """")
-                        csvDoc.Write(Environment.NewLine)
-                    End If
+                    csvDoc.Write("""" & team.TeamID & """,")
+                    csvDoc.Write("""" & team.TeamName & """,")
+                    csvDoc.Write("""" & """,")
+                    csvDoc.Write("""" & team.Status & """,")
+                    csvDoc.Write("""" & team.ByeRounds & """,")
+                    csvDoc.Write("""" & team.PlayerA.MembershipNumber & """,")
+                    csvDoc.Write("""" & team.PlayerA.MembershipName & """,")
+                    csvDoc.Write("""" & team.PlayerA.SeatOrder & """,")
+                    csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, team.PlayerA.PlayerFullName, "") & """,")
+                    csvDoc.Write("""" & team.PlayerA.DeckRecipe & """,")
+                    csvDoc.Write("""" & team.SMSAuth & """")
+                    csvDoc.Write(Environment.NewLine)
                 Next
 
                 csvDoc.Close()
@@ -625,20 +677,30 @@ No change in value will have any effect."",""Required""")
 
             tslFileName.Text = "File Name: " & txtCSVFileName
             tslFileName.Visible = True
+
+            My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtCSVFileName)
+            My.Settings.Save()
+            'MessageBox.Show("Last Path Used: " & Path.GetDirectoryName(txtCSVFileName))
+            MessageBox.Show("CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
 
-    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub CommaSeparatedValuesFilecsvToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CommaSeparatedValuesFilecsvToolStripMenuItem1.Click
         ' No check for a file, this one will ALWAYS generate a prompt.
-
-        SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        If Not String.IsNullOrWhiteSpace(txtCSVFileName) AndAlso My.Computer.FileSystem.FileExists(txtCSVFileName) Then
+            SaveFileDialogCSV.InitialDirectory = Path.GetDirectoryName(txtCSVFileName)
+        ElseIf Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) Then
+            SaveFileDialogCSV.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
 
         If SaveFileDialogCSV.ShowDialog(Me) = DialogResult.OK Then
             Dim FileName As String = SaveFileDialogCSV.FileName
 
             Using csvDoc As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(FileName, False)
-                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo""")
+                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"", ""Deck Recipe - 1"", ""SMS Auth""")
                 csvDoc.WriteLine("""Required
 ※Please set the value to 0 for new registrations."",""Optional
 ※Required for team competitions only"",""Uneditable
@@ -660,18 +722,18 @@ Optional
 No change in value will have any effect."",""Required""")
 
                 For Each player In lstTournTeams
-                    If player.Status <> 9999 Then
-                        csvDoc.Write("""" & player.TeamID & """,")
-                        csvDoc.Write("""" & player.TeamName & """,")
-                        csvDoc.Write("""" & """,")
-                        csvDoc.Write("""" & player.Status & """,")
-                        csvDoc.Write("""" & player.ByeRounds & """,")
-                        csvDoc.Write("""" & player.PlayerA.MembershipNumber & """,")
-                        csvDoc.Write("""" & player.PlayerA.MembershipName & """,")
-                        csvDoc.Write("""" & player.PlayerA.SeatOrder & """,")
-                        csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, player.PlayerA.PlayerFullName, "") & """")
-                        csvDoc.Write(Environment.NewLine)
-                    End If
+                    csvDoc.Write("""" & player.TeamID & """,")
+                    csvDoc.Write("""" & player.TeamName & """,")
+                    csvDoc.Write("""" & """,")
+                    csvDoc.Write("""" & player.Status & """,")
+                    csvDoc.Write("""" & player.ByeRounds & """,")
+                    csvDoc.Write("""" & player.PlayerA.MembershipNumber & """,")
+                    csvDoc.Write("""" & player.PlayerA.MembershipName & """,")
+                    csvDoc.Write("""" & player.PlayerA.SeatOrder & """,")
+                    csvDoc.Write("""" & IIf(My.Settings.PlayerNameFull, player.PlayerA.PlayerFullName, "") & """,")
+                    csvDoc.Write("""" & player.PlayerA.DeckRecipe & """,")
+                    csvDoc.Write("""" & player.SMSAuth & """")
+                    csvDoc.Write(Environment.NewLine)
                 Next
 
                 csvDoc.Close()
@@ -680,6 +742,11 @@ No change in value will have any effect."",""Required""")
 
             tslFileName.Text = "File Name: " & txtCSVFileName
             tslFileName.Visible = True
+
+            My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtCSVFileName)
+            My.Settings.Save()
+            'MessageBox.Show("Last Path Used: " & Path.GetDirectoryName(txtCSVFileName))
+            MessageBox.Show("CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
@@ -688,10 +755,18 @@ No change in value will have any effect."",""Required""")
 
         Dim FileName As String
 
+
+        If Not String.IsNullOrWhiteSpace(txtCSVFileName) AndAlso My.Computer.FileSystem.FileExists(txtCSVFileName) Then
+            SaveFileDialogXML.InitialDirectory = Path.GetDirectoryName(txtCSVFileName)
+        ElseIf Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) Then
+            SaveFileDialogXML.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            SaveFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
+
         If Not String.IsNullOrWhiteSpace(txtXMLFileName) AndAlso My.Computer.FileSystem.FileExists(txtXMLFileName) Then
             FileName = txtXMLFileName
         Else
-            SaveFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
             SaveFileDialogXML.ShowDialog(Me)
             FileName = SaveFileDialogXML.FileName
         End If
@@ -729,7 +804,8 @@ No change in value will have any effect."",""Required""")
                                                                                          New XElement("MemberName", team.PlayerA.MembershipName),
                                                                                          New XElement("PlayerFirstName", team.PlayerA.FirstName),
                                                                                          New XElement("PlayerLastName", team.PlayerA.LastName),
-                                                                                         New XElement("SeatOrder", "A")))))
+                                                                                         New XElement("SeatOrder", "A"),
+                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe)))))
             Next
             'tournament.Add(playerNode)
 
@@ -765,13 +841,23 @@ No change in value will have any effect."",""Required""")
             xDoc.Save(txtXMLFileName)
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
+
+            My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtXMLFileName)
+            My.Settings.Save()
+            MessageBox.Show("XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
-    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+    Private Sub TournamentXMLxmlToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles TournamentXMLxmlToolStripMenuItem1.Click
         ' This is to save a copy as. So there will always be a prompt.
 
-        SaveFileDialogCSV.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        If Not String.IsNullOrWhiteSpace(txtCSVFileName) AndAlso My.Computer.FileSystem.FileExists(txtCSVFileName) Then
+            SaveFileDialogXML.InitialDirectory = Path.GetDirectoryName(txtCSVFileName)
+        ElseIf Not String.IsNullOrWhiteSpace(My.Settings.LastUsedDirectory) Then
+            SaveFileDialogXML.InitialDirectory = My.Settings.LastUsedDirectory
+        Else
+            SaveFileDialogXML.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        End If
 
         If SaveFileDialogXML.ShowDialog(Me) = DialogResult.OK Then
             ' Set this file name as the NEW saved file name.
@@ -806,7 +892,8 @@ No change in value will have any effect."",""Required""")
                                                                                          New XElement("MemberName", team.PlayerA.MembershipName),
                                                                                          New XElement("PlayerFirstName", team.PlayerA.FirstName),
                                                                                          New XElement("PlayerLastName", team.PlayerA.LastName),
-                                                                                         New XElement("SeatOrder", "A")))))
+                                                                                         New XElement("SeatOrder", "A"),
+                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe)))))
             Next
             'tournament.Add(playerNode)
 
@@ -843,6 +930,9 @@ No change in value will have any effect."",""Required""")
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
 
+            My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtXMLFileName)
+            My.Settings.Save()
+            MessageBox.Show("XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
@@ -1025,16 +1115,22 @@ No change in value will have any effect."",""Required""")
         BuildTournamentList()
     End Sub
 
+
+
     Private Sub dgvPlayers_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvPlayers.CellMouseClick
 
         If e.Button = MouseButtons.Right And e.RowIndex >= 0 Then
             dgvPlayers.CurrentCell = dgvPlayers.Rows(e.RowIndex).Cells(e.ColumnIndex)
 
-            cmsTournamentList.Show(dgvPlayers, dgvPlayers.PointToClient(Cursor.Position))
-
             ' Change the first item in the CMS to what is needed.
             ' Get the current Tournament Status of the selected Player
             Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
+
+            ' Set the options of the cmsTournamentList as needed.
+            ' Change the name of the "player" space to the actual player.
+            tsmiPlayerName.Text = String.Format(tsmiPlayerName.Text, lstTournTeams(index).PlayerA.SummaryName)
+
+            cmsTournamentList.Show(dgvPlayers, dgvPlayers.PointToClient(Cursor.Position))
 
             Select Case lstTournTeams(index).Status
                 Case 1
@@ -1077,6 +1173,9 @@ No change in value will have any effect."",""Required""")
         AdvanceElectedToolStripMenuItem.Checked = False
         ParticipatingInTournamentToolStripMenuItem.Checked = False
         DroppedToolStripMenuItem.Checked = False
+
+        ' Reset it back to default
+        tsmiPlayerName.Text = "{0}"
     End Sub
 
     Private Sub AppliedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaitingListToolStripMenuItem.Click, WaitingForCancellationCheckedInToolStripMenuItem.Click, UnsuccessfulToolStripMenuItem.Click, SuccessfulToolStripMenuItem.Click, SelectedCheckedInToolStripMenuItem.Click, ParticipatingInTournamentToolStripMenuItem.Click, DroppedToolStripMenuItem.Click, CancelledToolStripMenuItem.Click, AppliedToolStripMenuItem.Click, AdvanceElectedToolStripMenuItem.Click, AbsentOnDayOfEventToolStripMenuItem.Click
@@ -1191,6 +1290,17 @@ No change in value will have any effect."",""Required""")
         ' Change the Option too
         My.Settings.PlayerNameFull = Not My.Settings.PlayerNameFull
         My.Settings.Save()
+
+    End Sub
+
+    Private Sub AddPlayerToTournamentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddPlayerToTournamentToolStripMenuItem.Click
+        ' This should change the selected player to be added.
+
+        Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
+        lstTournTeams(index).Status = 10
+
+        ' Rebuild the list after the change.
+        BuildTournamentList()
 
     End Sub
 End Class
