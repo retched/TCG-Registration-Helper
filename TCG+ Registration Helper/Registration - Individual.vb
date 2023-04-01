@@ -203,8 +203,6 @@ Public Class frmIndividual
 
             BuildTournamentList()
 
-
-
             ' Go back to entry.
             txtMemberNo.Focus()
 
@@ -1206,8 +1204,10 @@ No change in value will have any effect."",""Required""")
                 lstTournTeams(index).Status = 11
         End Select
 
+        dgvPlayers.CurrentRow.Cells("dgcStatus").Value = _status(lstTournTeams(index).Status)
         ' Rebuild the tournament list as needed
-        BuildTournamentList()
+        ' BuildTournamentList()
+
     End Sub
 
     Private Sub DeletePlayerFromTournamentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeletePlayerFromTournamentToolStripMenuItem.Click
@@ -1299,8 +1299,20 @@ No change in value will have any effect."",""Required""")
         Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
         lstTournTeams(index).Status = 10
 
-        ' Rebuild the list after the change.
-        BuildTournamentList()
+        dgvPlayers.CurrentRow.Cells("dgcStatus").Value = _status(10)
 
+        ' Rebuild the list after the change.
+        'BuildTournamentList()
+
+    End Sub
+
+    Private Sub DropPlayerFromTournamentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DropPlayerFromTournamentToolStripMenuItem.Click
+        Dim index As Integer = dgvPlayers.CurrentRow.Cells("dgcListIndex").Value
+        lstTournTeams(index).Status = 11
+
+        dgvPlayers.CurrentRow.Cells("dgcStatus").Value = _status(11)
+
+        ' Rebuild the list after the change.
+        'BuildTournamentList()
     End Sub
 End Class

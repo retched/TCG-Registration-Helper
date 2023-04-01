@@ -23,12 +23,12 @@ Partial Class frmIndividual
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnAddPlayer = New System.Windows.Forms.Button()
@@ -122,6 +122,7 @@ Partial Class frmIndividual
         Me.tsmiPlayerName = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddPlayerToTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaitingListShufflerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DropPlayerFromTournamentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -459,14 +460,14 @@ Partial Class frmIndividual
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvPlayers.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPlayers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgvPlayers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcListIndex, Me.dgcSelect, Me.dgcIndex, Me.dgcTeamId, Me.dgcMembershipNo, Me.dgcNickname, Me.dgcStatus})
         Me.dgvPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
@@ -744,9 +745,9 @@ Partial Class frmIndividual
         '
         'cmsTournamentList
         '
-        Me.cmsTournamentList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiPlayerName, Me.AddPlayerToTournamentToolStripMenuItem, Me.ToolStripSeparator4, Me.ChangeMembershipNumberToolStripMenuItem, Me.ChangeTeamIDToolStripMenuItem, Me.DeletePlayerFromTournamentToolStripMenuItem, Me.ChangePlayerStatusToToolStripMenuItem})
+        Me.cmsTournamentList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiPlayerName, Me.AddPlayerToTournamentToolStripMenuItem, Me.DropPlayerFromTournamentToolStripMenuItem, Me.ToolStripSeparator4, Me.ChangeMembershipNumberToolStripMenuItem, Me.ChangeTeamIDToolStripMenuItem, Me.DeletePlayerFromTournamentToolStripMenuItem, Me.ChangePlayerStatusToToolStripMenuItem})
         Me.cmsTournamentList.Name = "cmsTournamentList"
-        Me.cmsTournamentList.Size = New System.Drawing.Size(272, 142)
+        Me.cmsTournamentList.Size = New System.Drawing.Size(272, 186)
         '
         'ChangeMembershipNumberToolStripMenuItem
         '
@@ -856,8 +857,8 @@ Partial Class frmIndividual
         '
         'dgcIndex
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgcIndex.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgcIndex.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgcIndex.FillWeight = 25.0!
         Me.dgcIndex.HeaderText = "#"
         Me.dgcIndex.Name = "dgcIndex"
@@ -865,8 +866,8 @@ Partial Class frmIndividual
         '
         'dgcTeamId
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgcTeamId.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgcTeamId.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgcTeamId.FillWeight = 75.0!
         Me.dgcTeamId.HeaderText = "Team ID#"
         Me.dgcTeamId.Name = "dgcTeamId"
@@ -874,9 +875,9 @@ Partial Class frmIndividual
         '
         'dgcMembershipNo
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Courier New", 9.75!)
-        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Courier New", 9.75!)
+        Me.dgcMembershipNo.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgcMembershipNo.FillWeight = 80.0!
         Me.dgcMembershipNo.HeaderText = "Membership Number"
         Me.dgcMembershipNo.Name = "dgcMembershipNo"
@@ -884,8 +885,8 @@ Partial Class frmIndividual
         '
         'dgcNickname
         '
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcNickname.DefaultCellStyle = DataGridViewCellStyle11
         Me.dgcNickname.FillWeight = 140.0!
         Me.dgcNickname.HeaderText = "Nickname (Player Name)"
         Me.dgcNickname.Name = "dgcNickname"
@@ -893,8 +894,8 @@ Partial Class frmIndividual
         '
         'dgcStatus
         '
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgcStatus.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgcStatus.DefaultCellStyle = DataGridViewCellStyle12
         Me.dgcStatus.FillWeight = 120.0!
         Me.dgcStatus.HeaderText = "Status"
         Me.dgcStatus.Name = "dgcStatus"
@@ -928,6 +929,13 @@ Partial Class frmIndividual
         Me.WaitingListShufflerToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.WaitingListShufflerToolStripMenuItem.Text = "&Build Tournament Pools"
         Me.WaitingListShufflerToolStripMenuItem.Visible = False
+        '
+        'DropPlayerFromTournamentToolStripMenuItem
+        '
+        Me.DropPlayerFromTournamentToolStripMenuItem.Image = Global.retched.TCGRegManager.My.Resources.Resources.red_cross_mark
+        Me.DropPlayerFromTournamentToolStripMenuItem.Name = "DropPlayerFromTournamentToolStripMenuItem"
+        Me.DropPlayerFromTournamentToolStripMenuItem.Size = New System.Drawing.Size(271, 22)
+        Me.DropPlayerFromTournamentToolStripMenuItem.Text = "Drop Player from Tournament"
         '
         'frmIndividual
         '
@@ -1062,4 +1070,5 @@ Partial Class frmIndividual
     Friend WithEvents AddPlayerToTournamentToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents WaitingListShufflerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DropPlayerFromTournamentToolStripMenuItem As ToolStripMenuItem
 End Class
