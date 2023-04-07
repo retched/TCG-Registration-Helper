@@ -8,7 +8,7 @@
 
     Public Property SearchHelper As String
         Get
-            Return LastName & ", " & FirstName & ", " & MembershipName
+            Return (LastName & " " & FirstName & " " & MembershipName).Trim
         End Get
         Set(value As String)
 

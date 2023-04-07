@@ -5,10 +5,10 @@
         {3, "Waiting list"},
         {4, "Unsuccessful"},
         {5, "Cancelled"},
-        {6, "Selected + Checked In"},
-        {7, "Waiting for Cancellation + Checked In"},
-        {8, "Absent on Day of Event"},
-        {9, "Advance Elected"},
+        {6, "Successful + Checked In"},
+        {7, "Waiting list + Checked In"},
+        {8, "Absent from the event"},
+        {9, "Advance Successful"},
         {10, "Participating in Tournament"},
         {11, "Dropped"}
     }
@@ -22,7 +22,7 @@
         {6, "Floor Judge"}
     }
 
-    Public _infraction As Dictionary(Of Integer, String) = New Dictionary(Of Integer, String) From {
+    Public _infrac As New Dictionary(Of Integer, String) From {
         {1, "Failing to Observe Game Rules"},
         {2, "Forgetting to Resolve Automatic Actions"},
         {3, "Looking at Unnecessary Cards"},
@@ -67,7 +67,7 @@
         {19, 4},
         {20, 4}
     }
-    Public _penalty As Dictionary(Of Integer, String) = New Dictionary(Of Integer, String) From {
+    Public _pen As Dictionary(Of Integer, String) = New Dictionary(Of Integer, String) From {
         {0, "Caution"},
         {1, "Warning"},
         {2, "Game Loss"},

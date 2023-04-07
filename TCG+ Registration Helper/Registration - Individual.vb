@@ -633,7 +633,7 @@ Public Class frmIndividual
             txtCSVFileName = FileName
 
             Using csvDoc As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(FileName, False)
-                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"",""Deck Recipe - 1"", ""SMS Auth""")
+                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"",""Deck Recipe - 1"",""SMS Auth""")
                 csvDoc.WriteLine("""Required
 ※Please set the value to 0 for new registrations."",""Optional
 ※Required for team competitions only"",""Uneditable
@@ -698,7 +698,7 @@ No change in value will have any effect."",""Required
             Dim FileName As String = SaveFileDialogCSV.FileName
 
             Using csvDoc As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(FileName, False)
-                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"", ""Deck Recipe - 1"", ""SMS Auth""")
+                csvDoc.WriteLine("""Team ID"",""Team Name"",""Win Point"",""Status"",""Bye Count"",""Membership Number - 1"",""Player Name - 1"",""Seat Order - 1"",""Memo"", ""Deck Recipe - 1"",""SMS Auth""")
                 csvDoc.WriteLine("""Required
 ※Please set the value to 0 for new registrations."",""Optional
 ※Required for team competitions only"",""Uneditable
@@ -803,7 +803,8 @@ No change in value will have any effect."",""Required""")
                                                                                          New XElement("PlayerFirstName", team.PlayerA.FirstName),
                                                                                          New XElement("PlayerLastName", team.PlayerA.LastName),
                                                                                          New XElement("SeatOrder", "A"),
-                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe)))))
+                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe),
+                                                                                         New XElement("SMSAuth", team.SMSAuth)))))
             Next
             'tournament.Add(playerNode)
 
@@ -891,7 +892,8 @@ No change in value will have any effect."",""Required""")
                                                                                          New XElement("PlayerFirstName", team.PlayerA.FirstName),
                                                                                          New XElement("PlayerLastName", team.PlayerA.LastName),
                                                                                          New XElement("SeatOrder", "A"),
-                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe)))))
+                                                                                         New XElement("DeckRecipe", team.PlayerA.DeckRecipe),
+                                                                                         New XElement("SMSAuth", team.SMSAuth)))))
             Next
             'tournament.Add(playerNode)
 
@@ -1063,13 +1065,22 @@ No change in value will have any effect."",""Required""")
             ' status of that player with the incoming file.
 
             For Each player In lstFileData
-                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID))
+                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID And p.PlayerA.MembershipNumber <> "GUEST99999"))
+
+                Dim altIndex As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID And p.PlayerA.MembershipNumber <> "GUEST99999"))
+
+                Dim teamIDSearch As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.TeamID = player.TeamID And p.TeamID <> "0"))
 
                 If index <> -1 Then
                     If lstTournTeams(index).Status < player.Status Then
                         lstTournTeams(index).Status = player.Status
                         lstTournTeams(index).TeamID = player.TeamID
                     End If
+
+                ElseIf altIndex <> -1 And (player.PlayerA.MembershipNumber <> "GUEST99999" Or player.PlayerA.MembershipNumber <> "0000000986") Then
+                    lstTournTeams(altIndex).TeamID = player.TeamID
+                    lstTournTeams(altIndex).Status = player.Status
+
                 Else
                     lstTournTeams.Add(player)
                 End If
@@ -1093,13 +1104,22 @@ No change in value will have any effect."",""Required""")
             ' status of that player with the incoming file.
 
             For Each player In lstFileData
-                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID))
+                Dim index As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID And p.PlayerA.MembershipNumber <> "GUEST99999"))
+
+                Dim altIndex As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = player.PlayerA.MembershipNumber And p.TeamID = player.TeamID And p.PlayerA.MembershipNumber <> "GUEST99999"))
+
+                Dim teamIDSearch As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.TeamID = player.TeamID And p.TeamID <> "0"))
 
                 If index <> -1 Then
                     If lstTournTeams(index).Status < player.Status Then
                         lstTournTeams(index).Status = player.Status
                         lstTournTeams(index).TeamID = player.TeamID
                     End If
+
+                ElseIf altIndex <> -1 And (player.PlayerA.MembershipNumber <> "GUEST99999" Or player.PlayerA.MembershipNumber <> "0000000986") Then
+                    lstTournTeams(altIndex).TeamID = player.TeamID
+                    lstTournTeams(altIndex).Status = player.Status
+
                 Else
                     lstTournTeams.Add(player)
                 End If
@@ -1311,6 +1331,46 @@ No change in value will have any effect."",""Required""")
         lstTournTeams(index).Status = 11
 
         dgvPlayers.CurrentRow.Cells("dgcStatus").Value = _status(11)
+
+        ' Rebuild the list after the change.
+        'BuildTournamentList()
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        ' This should add the selected player on to the current tournament roster
+
+        ' See if the player is already on the tournament list.
+        Dim intListSearch As Integer = lstTournTeams.IndexOf(lstTournTeams.Find(Function(p) p.PlayerA.MembershipNumber = lbSearchResults.SelectedItem.MembershipNumber.ToString))
+
+        If intListSearch <> -1 Then
+            Dim rowIndex As Integer = -1
+
+            lstTournTeams(intListSearch).Status = 10
+
+            Dim row As DataGridViewRow = dgvPlayers.Rows.Cast(Of DataGridViewRow)().Where(Function(r) r.Cells("dgcMembershipNo").Value.ToString().Equals(lbSearchResults.SelectedItem.MembershipNumber.ToString)).First()
+
+            dgvPlayers.Rows(row.Index).Cells("dgcStatus").Value = _status(10)
+        Else
+
+            lstTournTeams.Add(New TournamentTeam() With {
+                        .PlayerA = New PlayerInfo() With {
+                            .FirstName = lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).FirstName,
+                            .LastName = lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).LastName,
+                            .MembershipName = lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).MembershipName,
+                            .MembershipNumber = lstPlayers.Find(Function(x) x.MembershipNumber = lbSearchResults.SelectedValue).MembershipNumber,
+                            .SeatOrder = "A"},
+                        .PlayerB = New PlayerInfo(),
+                        .PlayerC = New PlayerInfo(),
+                        .ByeRounds = 0,
+                        .Status = 10,
+                        .TeamID = 0
+                      })
+
+            BuildTournamentList()
+
+        End If
+
+        dgvPlayers.CurrentRow.Cells("dgcStatus").Value = _status(10)
 
         ' Rebuild the list after the change.
         'BuildTournamentList()

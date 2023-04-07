@@ -62,7 +62,7 @@ Partial Class frmPenalties
         Me.dgvPenalties.Name = "dgvPenalties"
         Me.dgvPenalties.RowHeadersVisible = False
         Me.dgvPenalties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPenalties.Size = New System.Drawing.Size(792, 311)
+        Me.dgvPenalties.Size = New System.Drawing.Size(792, 333)
         Me.dgvPenalties.TabIndex = 0
         '
         'dgcPenaltyID
@@ -112,7 +112,7 @@ Partial Class frmPenalties
         'btnAddPenalty
         '
         Me.btnAddPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnAddPenalty.Location = New System.Drawing.Point(181, 327)
+        Me.btnAddPenalty.Location = New System.Drawing.Point(181, 351)
         Me.btnAddPenalty.Name = "btnAddPenalty"
         Me.btnAddPenalty.Size = New System.Drawing.Size(109, 25)
         Me.btnAddPenalty.TabIndex = 1
@@ -123,7 +123,7 @@ Partial Class frmPenalties
         '
         Me.btnEditPenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnEditPenalty.Enabled = False
-        Me.btnEditPenalty.Location = New System.Drawing.Point(295, 327)
+        Me.btnEditPenalty.Location = New System.Drawing.Point(295, 351)
         Me.btnEditPenalty.Name = "btnEditPenalty"
         Me.btnEditPenalty.Size = New System.Drawing.Size(109, 25)
         Me.btnEditPenalty.TabIndex = 2
@@ -134,7 +134,7 @@ Partial Class frmPenalties
         '
         Me.btnDeletePenalty.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnDeletePenalty.Enabled = False
-        Me.btnDeletePenalty.Location = New System.Drawing.Point(409, 327)
+        Me.btnDeletePenalty.Location = New System.Drawing.Point(409, 351)
         Me.btnDeletePenalty.Name = "btnDeletePenalty"
         Me.btnDeletePenalty.Size = New System.Drawing.Size(109, 25)
         Me.btnDeletePenalty.TabIndex = 3
@@ -145,7 +145,7 @@ Partial Class frmPenalties
         '
         Me.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnClose.Location = New System.Drawing.Point(523, 327)
+        Me.btnClose.Location = New System.Drawing.Point(523, 351)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(109, 25)
         Me.btnClose.TabIndex = 4

@@ -96,7 +96,8 @@
                 cboStaffPosition.SelectedValue = staffInfo.StaffPosition
             End If
         Else
-            cboStaffMember.SelectedIndex = 0
+
+            If lstPlayers.Count <> 0 Then cboStaffMember.SelectedIndex = 0
 
 
         End If

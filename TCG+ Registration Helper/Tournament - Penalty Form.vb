@@ -62,7 +62,7 @@
             Dim playerInfo As PlayerInfo = lstTournPlayers.Find(Function(x) x.MembershipNumber = penalty.PlayerNumber)
             Dim staffInfo As TournamentStaff = lstStaff.Find(Function(x) x.MembershipNumber = penalty.JudgeNumber)
             ' For every penalty add in a new row.
-            dgvPenalties.Rows.Add(lstPenalties.IndexOf(penalty), playerInfo.SummaryName, _infraction.Item(penalty.InfractionType), _penalty.Item(penalty.PenaltyType), penalty.RoundNumber, staffInfo.SummaryName, penalty.Notes)
+            dgvPenalties.Rows.Add(lstPenalties.IndexOf(penalty), playerInfo.SummaryName, _infrac.Item(penalty.InfractionType), _pen.Item(penalty.PenaltyType), penalty.RoundNumber, staffInfo.SummaryName, penalty.Notes)
         Next
 
         dgvPenalties.ClearSelection()
@@ -91,8 +91,8 @@
 
             frmEditPenalty.nudRound.Value = selectedPenalty.RoundNumber
 
-            frmEditPenalty.cboInfraction.SelectedValue = selectedPenalty.InfractionType
-            frmEditPenalty.cboPenalty.SelectedValue = selectedPenalty.PenaltyType
+            frmEditPenalty.Infraction = selectedPenalty.InfractionType
+            frmEditPenalty.Penalty = selectedPenalty.PenaltyType
 
             frmEditPenalty.txtPenaltyNotes.Text = selectedPenalty.Notes
 

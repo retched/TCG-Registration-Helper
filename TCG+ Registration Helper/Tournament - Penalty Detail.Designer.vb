@@ -137,6 +137,7 @@ Partial Class frmPenaltyDetail
         '
         'txtPenaltyNotes
         '
+        Me.txtPenaltyNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPenaltyNotes.Location = New System.Drawing.Point(113, 248)
         Me.txtPenaltyNotes.Multiline = True
         Me.txtPenaltyNotes.Name = "txtPenaltyNotes"
