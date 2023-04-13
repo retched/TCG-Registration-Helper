@@ -34,7 +34,7 @@
         ChildForm.MdiParent = Me
 
         m_ChildFormNumber += 1
-        'ChildForm.Text = ChildForm.Text
+        ChildForm.Text = ChildForm.Text
 
         ChildForm.Show()
     End Sub
@@ -90,7 +90,7 @@
                         ChildForm.txtCSVFileName = FileName
 
                         m_ChildFormNumber += 1
-                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+                        ChildForm.Text = ChildForm.Text
 
                         ChildForm.Show()
                     Case 2 ' Load Duos
@@ -103,7 +103,7 @@
                         ChildForm.txtCSVFileName = FileName
 
                         m_ChildFormNumber += 1
-                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+                        ChildForm.Text = ChildForm.Text
 
                         ChildForm.Show()
 
@@ -117,7 +117,8 @@
                         ChildForm.txtCSVFileName = FileName
 
                         m_ChildFormNumber += 1
-                        ChildForm.Text = "(" & m_ChildFormNumber & ") " & ChildForm.Text
+
+                        ChildForm.Text = ChildForm.Text & " - " & OpenFileDialogCSV.SafeFileName
 
                         ChildForm.Show()
                     Case Else ' If there is no valid row, something wrong... back out.
@@ -196,12 +197,6 @@
         End If
     End Sub
 
-    Private Sub BandaiTCGTournamentPolicyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BandaiTCGTournamentPolicyToolStripMenuItem.Click
-        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
-            LaunchWebsite("https://world.digimoncard.com/event/online_event/pdf/tournament_rules.pdf?210604")
-        End If
-    End Sub
-
     Sub LaunchWebsite(strWebpageURL As String)
 
         Using Process.Start(New ProcessStartInfo(strWebpageURL) With {.UseShellExecute = True})
@@ -238,10 +233,41 @@
     Private Sub MasterPlayerRosterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MasterPlayerRosterToolStripMenuItem.Click
         Dim frmPlayerDatabase As New frmMasterPlayerList
         frmPlayerDatabase.MdiParent = Me
-        frmPlayerDatabase.Show()
 
         m_ChildFormNumber += 1
 
+        frmPlayerDatabase.Show()
+    End Sub
 
+    Private Sub ONEPIECECardGameEnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ONEPIECECardGameEnglishToolStripMenuItem.Click
+        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy for ONE PIECE." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
+            LaunchWebsite("https://en.onepiece-cardgame.com/pdf/tournament_rules_manual.pdf")
+        End If
+    End Sub
+
+    Private Sub DIGIMONCardGameEnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIGIMONCardGameEnglishToolStripMenuItem.Click
+        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy for DIGIMON." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
+            LaunchWebsite("https://world.digimoncard.com/event/online_event/pdf/tournament_rules.pdf")
+        End If
+    End Sub
+
+    Private Sub DRAGONBALLSUPERCardGameEnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DRAGONBALLSUPERCardGameEnglishToolStripMenuItem.Click
+        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy for DRAGON BALL SUPER." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
+            LaunchWebsite("https://www.dbs-cardgame.com/pdf/event/tournament-rules-manual.pdf")
+        End If
+    End Sub
+
+    Private Sub BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem.Click
+        If MessageBox.Show("You are going to be directed to the Bandai TCG's webpage to view the Official Tournament Policy for BATTLE SPIRITS SAGA." & Environment.NewLine & Environment.NewLine & "As a reminder, this software is NOT official software released by Bandai.", "Directing you to Bandai's Home Page...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) = DialogResult.OK Then
+            LaunchWebsite("https://battlespirits-saga.com/pdf/bss_tournament_rules_manual.pdf")
+        End If
+    End Sub
+
+    Private Sub WindowToolStripMenuItem_DropDownOpening(sender As Object, e As EventArgs) Handles WindowToolStripMenuItem.DropDownOpening
+        If Me.ActiveMdiChild IsNot Nothing Then
+            Dim activeChild As Form = Me.ActiveMdiChild
+            ActivateMdiChild(Nothing)
+            ActivateMdiChild(activeChild)
+        End If
     End Sub
 End Class
