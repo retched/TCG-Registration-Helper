@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/retched/TCG-Registration-Manager"><img src="https://i.imgur.com/d0BV0vR.png" alt="TCG+ Registration Helper"></a>
+  <a href="https://github.com/retched/TCG-Registration-Manager"><img src="https://i.imgur.com/dB7Zz4J.png" alt="TCG+ Registration Helper"></a>
   <br>
   TCG+ Registration Helper
   <br>
@@ -25,33 +25,23 @@
   <a href="#more-links">More Links</a>
 </p>
 
-## Author's Note - Software is no longer the only option
-This software was originally made to aid tournament organizer's TCG+ activities relating to player management. Namely, same day registration without having to fuss with searching for the tournament in TCG+. 
-
-As of April 2023, Bandai TCG+ has been modified to allow for in-person, last-minute registration of a player by using a feature on the player's TCG+ app. So this software is, in part, partially redundant. However, this software will continue to be maintained on the interim as the CSV import function is still available on TCG+ and provides an alternative to keying in random TOTP membership numbers (that may not sync correctly). Additionally, this software still has a pretty decent function for reporting and recording tournament penalties.
-
-I encourage all tournament organizers to review the material made available to them in the TCG+ dashboard and learn the new registration process going forward.
-
-
-## Example usage of software
-![Sample Usage of TCG+ Registration Helper](https://i.imgur.com/sPmKnHZ.gif)
+![enter image description here](https://i.imgur.com/sPmKnHZ.gif)
 
 ## Key Features
 
-* Lessens the hassle of making your players pre-register for all TCG+ events. Instead allows you to create a CSV import file for uploading to the website which will register the players.
-* Keeps track of any penalties that are being issued during the tournament.
-  - Includes assigning staff to certain roles and maintaining a staff roster.
-* Create Sign In sheets for keeping track of pre-registered players. _(Planned function coming in a later edition.)_
-* Create a randomized list of players who will who separated off of one roster and registered to another.
+* Lessens the hassle of making your players pre-register for all TCG+ events. Instead allows you to create a CSV import file for uploading to the website.
+* Keep track of any penalties that are being issued during the tournament.
+  - Includes assigning staff to certain roles.
+* Create Sign In sheets for keeping track of pre-registered players.
 
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) installed on your computer. Additionally, to build the executable you will need [Visual Studio 2022](https://visualstudio.microsoft.com/). (Any version of Visual Studio 2022 should do fine. Some editions of earlier Visual Studio should also be fine, but the `.sln` file is only available for Visual Studio 2022.)
+To clone and run this application, you'll need [Git](https://git-scm.com) installed on your computer. Additionally, to build the executable you will need [Visual Studio 2022](https://visualstudio.microsoft.com/). (Any version of Visual Studio 2022 should do fine.)
 
-Once installed or built, launch the program from a "safe" location. (ie. No anti-virus sandboxes and not from a protected directory (like Program Files). This is due to the program asking for elevated rights.)
+Once installed or built, launch the program from a "safe" location. (ie. No anti-virus sandboxes and not from a protected directory (like Program Files).)
 
-For more details on the operation of the software, read the enclosed README PDF.
+For more details on the operation, read the enclosed README PDF.
 
 ## Download
 
@@ -90,13 +80,13 @@ Be sure that when you are making your pull request that you mention that specifi
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 See `LICENSE.txt` for the full license.
 
-### More Links
+More Links
+---
+
 * [retchedlive.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp; Personal website and web blog
 * GitHub [@retched](https://github.com/retched) &nbsp;&middot;&nbsp; Public projects and open sourced.
 * GitLab [@retched](https://gitlab.com/retched) &nbsp;&middot;&nbsp; Private repositories
 * Twitter [@retched](https://twitter.com/retched) &nbsp;&middot;&nbsp; Random musings
 * Twitch  [@retched](https://twitch.tv/retched) &nbsp;&middot;&nbsp; Live coding, paired programming, video games.
 
-Source Code: 
-
-`Copyright © 2022-2023, Paul Williams, All rights reserved.`
+Source Code: Copyright © 2022-2023, Paul Williams, All rights reserved.

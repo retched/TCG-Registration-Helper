@@ -56,10 +56,6 @@ Partial Class frmMainMenu
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BandaiTCGTournamentPolicyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ONEPIECECardGameEnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DIGIMONCardGameEnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DRAGONBALLSUPERCardGameEnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SoftwareOperatingManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialogCSV = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogXML = New System.Windows.Forms.OpenFileDialog()
@@ -230,31 +226,31 @@ Partial Class frmMainMenu
         'CascadeToolStripMenuItem
         '
         Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CascadeToolStripMenuItem.Text = "&Cascade"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileVerticalToolStripMenuItem.Text = "Tile &Vertical"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "Tile &Horizontal"
         '
         'ArrangeIconsToolStripMenuItem
         '
         Me.ArrangeIconsToolStripMenuItem.Name = "ArrangeIconsToolStripMenuItem"
-        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ArrangeIconsToolStripMenuItem.Text = "&Arrange Icons"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(147, 6)
         '
         'HelpToolStripMenuItem
         '
@@ -265,34 +261,9 @@ Partial Class frmMainMenu
         '
         'BandaiTCGTournamentPolicyToolStripMenuItem
         '
-        Me.BandaiTCGTournamentPolicyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ONEPIECECardGameEnglishToolStripMenuItem, Me.DIGIMONCardGameEnglishToolStripMenuItem, Me.DRAGONBALLSUPERCardGameEnglishToolStripMenuItem, Me.BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem})
         Me.BandaiTCGTournamentPolicyToolStripMenuItem.Name = "BandaiTCGTournamentPolicyToolStripMenuItem"
         Me.BandaiTCGTournamentPolicyToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.BandaiTCGTournamentPolicyToolStripMenuItem.Text = "&Bandai TCG Tournament Policy"
-        '
-        'ONEPIECECardGameEnglishToolStripMenuItem
-        '
-        Me.ONEPIECECardGameEnglishToolStripMenuItem.Name = "ONEPIECECardGameEnglishToolStripMenuItem"
-        Me.ONEPIECECardGameEnglishToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
-        Me.ONEPIECECardGameEnglishToolStripMenuItem.Text = "ONE PIECE Card Game (English)"
-        '
-        'DIGIMONCardGameEnglishToolStripMenuItem
-        '
-        Me.DIGIMONCardGameEnglishToolStripMenuItem.Name = "DIGIMONCardGameEnglishToolStripMenuItem"
-        Me.DIGIMONCardGameEnglishToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
-        Me.DIGIMONCardGameEnglishToolStripMenuItem.Text = "DIGIMON Card Game (English)"
-        '
-        'DRAGONBALLSUPERCardGameEnglishToolStripMenuItem
-        '
-        Me.DRAGONBALLSUPERCardGameEnglishToolStripMenuItem.Name = "DRAGONBALLSUPERCardGameEnglishToolStripMenuItem"
-        Me.DRAGONBALLSUPERCardGameEnglishToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
-        Me.DRAGONBALLSUPERCardGameEnglishToolStripMenuItem.Text = "DRAGON BALL SUPER Card Game (English)"
-        '
-        'BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem
-        '
-        Me.BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem.Name = "BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem"
-        Me.BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem.Size = New System.Drawing.Size(301, 22)
-        Me.BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem.Text = "BATTLE SPIRITS SAGA Card Game (English)"
         '
         'SoftwareOperatingManualToolStripMenuItem
         '
@@ -363,8 +334,4 @@ Partial Class frmMainMenu
     Friend WithEvents BandaiTCGTournamentPolicyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SoftwareOperatingManualToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MasterPlayerRosterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ONEPIECECardGameEnglishToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DIGIMONCardGameEnglishToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DRAGONBALLSUPERCardGameEnglishToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BATTLESPIRITSSAGACardGameEnglishToolStripMenuItem As ToolStripMenuItem
 End Class

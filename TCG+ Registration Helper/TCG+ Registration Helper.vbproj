@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>retched.TCGRegManager.My.MyApplication</StartupObject>
     <RootNamespace>retched.TCGRegManager</RootNamespace>
-    <AssemblyName>TCG+ Registration Helper</AssemblyName>
+    <AssemblyName>TCG+ Registration Manager</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>

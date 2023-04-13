@@ -556,7 +556,7 @@ Public Class frmIndividual
                             ' Can't delete the team, make an error
                             lstErrors.Add(lstTournTeams(intListIndex))
 
-                            ' Instead of deleting them, change the player to "Absent from the event".
+                            ' Instead of deleting them, change the player to "Absent on Day of Event".
                             lstTournTeams(intListIndex).Status = 8
                         End If
 
@@ -573,7 +573,7 @@ Public Class frmIndividual
                     Next
 
 
-                    MessageBox.Show(String.Format("Deleted {0} players from the tournament roster." & Environment.NewLine & Environment.NewLine & "But {1} player(s) could not be deleted. Either the player pre-registered or was enrolled through TCG+. To remove these players from the pairings, this player was set to ""Absent from the event""." & Environment.NewLine & Environment.NewLine & "Players withdrawn:" & Environment.NewLine & strErrors, intCount - lstErrors.Count, lstErrors.Count), "Deleted Players", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(String.Format("Deleted {0} players from the tournament roster." & Environment.NewLine & Environment.NewLine & "But {1} player(s) could not be deleted and were dropped instead. Either the player pre-registered or was enrolled through TCG+. To remove these players from the pairings, this player was set to ""Absent on Day of Event""." & Environment.NewLine & Environment.NewLine & "Players withdrawn:" & Environment.NewLine & strErrors, intCount - lstErrors.Count, lstErrors.Count), "Deleted Players", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show(String.Format("Succesfully deleted {0} players from tournament roster.", intCount), "Deleted players with no errors", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
@@ -585,11 +585,7 @@ Public Class frmIndividual
             Dim intLstID As Integer = dgvPlayers.SelectedRows(0).Cells(0).Value
 
             If lstTournTeams(intLstID).TeamID <> 0 Then
-                MessageBox.Show("Cannot delete this player." & Environment.NewLine & Environment.NewLine & "Either the player pre-registered or was enrolled through the TCG+ app. This player will instead be marked as ""Absent from the Event"".", "Cannot delete pre-registered player", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                ' Set the player to "Absent from the Event" instead.
-
-                lstTournTeams(intLstID).Status = "8"
+                MessageBox.Show("Cannot delete this player." & Environment.NewLine & Environment.NewLine & "Either the player pre-registered or was enrolled through the TCG+ app. To remove this player from the pairings, set their status to ANYTHING but ""Participating in Tournament"".", "Cannot delete pre-registered player", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 lstTournTeams.RemoveAt(intLstID)
             End If
@@ -648,9 +644,9 @@ No change in value will have any effect."",""Required
 4:Unsuccessful
 5:Cancelled
 6:Selected + Checked In
-7:Waiting list + Checked In
-8:Absent from the event
-9:Advance Successful
+7:Waiting for Cancellation + Checked In
+8:Absent on Day of Event
+9:Advance Elected
 10:Participating in Tournament
 11:Dropped"",""0: No Round Bye
 1: 1 Round Bye
@@ -680,13 +676,10 @@ No change in value will have any effect."",""Required
             tslFileName.Text = "File Name: " & txtCSVFileName
             tslFileName.Visible = True
 
-            Me.Text = "Individual Registration" & " - " & Path.GetFileName(txtCSVFileName)
-
-
             My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtCSVFileName)
             My.Settings.Save()
             'MessageBox.Show("Last Path Used: " & Path.GetDirectoryName(txtCSVFileName))
-            MessageBox.Show(Me, "CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
@@ -716,9 +709,9 @@ No change in value will have any effect."",""Required
 4:Unsuccessful
 5:Cancelled
 6:Selected + Checked In
-7:Waiting list + Checked In
-8:Absent from the event
-9:Advance Successful
+7:Waiting for Cancellation + Checked In
+8:Absent on Day of Event
+9:Advance Elected
 10:Participating in Tournament
 11:Dropped"",""0: No Round Bye
 1: 1 Round Bye
@@ -748,12 +741,10 @@ No change in value will have any effect."",""Required""")
             tslFileName.Text = "File Name: " & txtCSVFileName
             tslFileName.Visible = True
 
-            Me.Text = "Individual Registration" & " - " & Path.GetFileName(txtCSVFileName)
-
             My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtCSVFileName)
             My.Settings.Save()
             'MessageBox.Show("Last Path Used: " & Path.GetDirectoryName(txtCSVFileName))
-            MessageBox.Show(Me, "CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("CSV Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtCSVFileName, "CSV Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
@@ -850,11 +841,9 @@ No change in value will have any effect."",""Required""")
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
 
-            Me.Text = "Individual Registration" & " - " & Path.GetFileName(txtXMLFileName)
-
             My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtXMLFileName)
             My.Settings.Save()
-            MessageBox.Show(Me, "XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -941,11 +930,9 @@ No change in value will have any effect."",""Required""")
             tslFileName.Text = "File Name: " & txtXMLFileName
             tslFileName.Visible = True
 
-            Me.Text = "Individual Registration" & " - " & Path.GetFileName(txtXMLFileName)
-
             My.Settings.LastUsedDirectory = Path.GetDirectoryName(txtXMLFileName)
             My.Settings.Save()
-            MessageBox.Show(Me, "XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("XML Export Complete." & Environment.NewLine & Environment.NewLine & "File Saved to:" & Environment.NewLine & txtXMLFileName, "XML Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
